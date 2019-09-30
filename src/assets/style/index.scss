@@ -8,6 +8,11 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
+p {
+  margin: 0;
+  height: 0;
+}
+
 label {
   font-weight: 700;
 }
@@ -17,11 +22,16 @@ html {
   box-sizing: border-box;
 }
 
-ul li {
-    list-style: none;
+ul {
+  padding: 0;
+  margin: 0;
+} 
+li {
+  list-style: none;
 }
 
 #app {
+  min-width: 1200px;
   height: 100%;
 }
 
