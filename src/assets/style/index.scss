@@ -104,3 +104,9 @@ div:focus {
     height: 0;
   }
 }
+
+
+// 重置element-ui style
+.el-header, .el-main, .el-footer {
+  padding: 0;
+}

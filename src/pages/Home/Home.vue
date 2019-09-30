@@ -1,55 +1,9 @@
 <template>
-  <el-container>
-    <el-header>
-      <!-- <HeaderGuide /> -->
-      <!-- logo -->
-      <span class="header-logo">
-        <img src="../../assets/images/logo.png" alt />
-      </span>
-      <!-- 顶部菜单 -->
-      <div class="header-menus">
-        <el-menu
-          :default-active="activeIndex2"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          background-color="#424242"
-          text-color="#fff"
-          active-text-color="rgb(29, 137, 228)"
-        >
-          <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="2">关于</el-menu-item>
-          <el-submenu index="3">
-            <template slot="title">设计服务</template>
-            <el-menu-item index="3-1">logo设计</el-menu-item>
-            <el-menu-item index="3-2">VI设计</el-menu-item>
-            <el-menu-item index="3-3">结构设计</el-menu-item>
-            <el-menu-item index="3-4">产品效果图</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="4">包装印刷</el-menu-item>
-          <el-submenu index="5">
-            <template slot="title">特种材料</template>
-            <el-menu-item index="5-1">云膜材料</el-menu-item>
-            <el-menu-item index="5-2">全印模</el-menu-item>
-            <el-menu-item index="5-3">镭射</el-menu-item>
-            <el-menu-item index="5-4">猫眼</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="6">需求大厅</el-menu-item>
-        </el-menu>
-      </div>
-      <div class="header-operates">
-        <el-button type="text" size="small" style="color:#fff;">登录</el-button>
-        <el-button type="text" size="small" style="color:#fff;">注册</el-button>
-        <el-button size="small" type="primary">立即发布</el-button>
-      </div>
-      <!-- 操作按钮 -->
-    </el-header>
+  <el-container direction="vertical">
+    <HeaderGuide />
     <el-main>
       <!-- 轮播 -->
-      <el-carousel height="1020px" :interval="5000" arrow="always">
-        <!-- <el-carousel-item v-for="item in 4" :key="item">
-          <h3>{{ item }}</h3>
-        </el-carousel-item> -->
+      <!-- <el-carousel height="1020px" :interval="5000" arrow="always">
         <el-carousel-item>
           <img src="./images/banner1.png" alt="">
         </el-carousel-item>
@@ -58,8 +12,13 @@
         </el-carousel-item>
         <el-carousel-item>
           <img src="./images/banner3.png" alt="">
+          <div class="operate-btns">
+            <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
+            <el-button type="primary">服务商入驻</el-button>
+          </div>
         </el-carousel-item>
-      </el-carousel>
+      </el-carousel> -->
+      <HeaderCarousel />
       <!-- 材料介绍 -->
       <el-row type="flex" class="products" justify="center">
         <el-col :span="6">
@@ -369,25 +328,14 @@
         <img src="./images/service_map.jpg" alt="">
       </div>
     </el-main>
-    <el-footer height="87px">
-      <div class="footer-guide">
-        <div class="footer-link clearFix">
-          <ul>
-            <a class="footer-item" href="javascript:"><li>加入我们</li></a>
-            <a class="footer-item" href="javascript:"><li>合作洽谈</li></a>
-            <a class="footer-item" href="javascript:"><li>隐私政策</li></a>
-            <a class="footer-item" href="javascript:"><li>网站地图</li></a>
-          </ul>
-        </div>
-        <div class="footer-decleared">上海天臣集团 版权所有</div>
-      </div>
-    </el-footer>
+    <FooterGuide />
   </el-container>
 </template>
 
 <script>
-// import HeaderGuide from '@/components/HeaderGuide/HeaderGuide'
-// import FooterGuide from '@/components/FooterGuide/FooterGuide'
+import HeaderGuide from '@/components/HeaderGuide/HeaderGuide'
+import FooterGuide from '@/components/FooterGuide/FooterGuide'
+import HeaderCarousel from '@/components/Carousel/HeaderCarousel'
 export default {
   name: "Home",
   data() {
@@ -404,11 +352,12 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     }
+  },
+  components: {
+    HeaderGuide,
+    FooterGuide,
+    HeaderCarousel
   }
-  // components: {
-  //   HeaderGuide,
-  //   FooterGuide
-  // }
 };
 </script>
 
@@ -441,51 +390,9 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/vars.scss';
 .el-container {
-  padding: 0;
-  // 顶部导航
-  .el-header {
-    position:fixed; 
-    top:0; 
-    z-index:999;
-    width:100%;
-    padding: 0;
-    overflow: hidden;
-    background-color: #424242;
-    opacity: .9;
-    line-height: 60px;
-    .header-logo {
-      float: left;
-      width: auto;
-      height: 100%;
-      display: inline-block;
-      padding: 0 20px;
-      background-color: rgb(255, 249, 250);
-      img {
-        vertical-align: middle;
-      }
-    }
-    .header-menus {
-      float: left;
-    }
-    .header-operates {
-      float: right;
-      padding-right: 55px;
-    }
-  }
   // 中间内容
   .el-main {
-    padding: 0;
-    // 轮播
-    .el-carousel__item {
-      background-color: #99a9bf;
-      h3 {color: #475669;
-        font-size: 18px;
-        opacity: 0.75;
-        line-height: 300px;
-        text-align: center;
-        margin: 0;
-      }
-    }
+    width: 100%;
     // 产品介绍
     .products {
       color: $blue;
@@ -739,31 +646,6 @@ export default {
       img {
         width: 100%;
       }
-    }
-  }
-  // 底部导航
-  .el-footer {
-    padding-left: 0;
-    padding-right: 0;
-    .footer-guide {
-      width: 100%;
-      height: 87px;
-      background-color: $fontGray;
-      font-size: 12px;
-      text-align: center;
-      color: #fff;
-        .footer-link {
-          display: inline-block;
-          margin: 0 auto;
-          .footer-item {
-            float: left;
-            padding: 24px 68px 18px;
-            color: #fff;
-            &:hover {
-              color: $blue;
-            }
-          }
-        }
     }
   }
 }
