@@ -1,5 +1,5 @@
 <template>
-  <el-contanier>
+  <el-container direction="vertical">
     <HeaderGuide />
     <el-main>
       <el-row class="banner">
@@ -8,86 +8,92 @@
           <el-button type="primary">服务商入驻</el-button>
         </div>
       </el-row>
-      <!-- 需求动态 -->
-      <div class="demand-dynamic">
-        <el-button type="text">需求动态 ></el-button>
-        <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
+      <!-- 会员介绍 -->
+      <div class="member-intro">
+        <h1>会员介绍</h1>
+        <el-row type="flex" class="member-row-items" :gutter="20" justify="center">
           <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
+            <ul class="member-item">
+              <li><img src="./images/shell.png" alt=""></li>
+              <li>终端客户</li>
+              <li>入驻天臣产业互联网的会员，可享受线上发布需求的基础权益。</li>
+              <li><el-divider>终端客户权限</el-divider></li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
               <li>
-                <img src="./images/shell.png" alt />
-              </li>
-              <li>包装设计</li>
-              <li>
-                项目预算：
-                <span class="red">￥100000</span>
-              </li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
+                <el-button type="primary" size="small">立即入驻</el-button>
               </li>
             </ul>
           </el-col>
           <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
+            <ul class="member-item">
+              <li><img src="./images/shell.png" alt=""></li>
+              <li>终端客户</li>
+              <li>入驻天臣产业互联网的会员，可享受线上发布需求的基础权益。</li>
+              <li><el-divider>终端客户权限</el-divider></li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
               <li>
-                <img src="./images/shell.png" alt />
-              </li>
-              <li>包装设计</li>
-              <li>
-                项目预算：
-                <span class="red">￥100000</span>
-              </li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li>
-                <img src="./images/shell.png" alt />
-              </li>
-              <li>包装设计</li>
-              <li>
-                项目预算：
-                <span class="red">￥100000</span>
-              </li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
+                <el-button type="primary" size="small">立即入驻</el-button>
               </li>
             </ul>
           </el-col>
           <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
+            <ul class="member-item">
+              <li><img src="./images/shell.png" alt=""></li>
+              <li>终端客户</li>
+              <li>入驻天臣产业互联网的会员，可享受线上发布需求的基础权益。</li>
+              <li><el-divider>终端客户权限</el-divider></li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
               <li>
-                <img src="./images/shell.png" alt />
+                <el-button type="primary" size="small">立即入驻</el-button>
               </li>
-              <li>包装设计</li>
+            </ul>
+          </el-col>
+          <el-col :span="5">
+            <ul class="member-item">
+              <li><img src="./images/shell.png" alt=""></li>
+              <li>终端客户</li>
+              <li>入驻天臣产业互联网的会员，可享受线上发布需求的基础权益。</li>
+              <li><el-divider>终端客户权限</el-divider></li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
+              <li>技术服务费率30%</li>
               <li>
-                项目预算：
-                <span class="red">￥100000</span>
-              </li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
+                <el-button type="primary" size="small">立即入驻</el-button>
               </li>
             </ul>
           </el-col>
         </el-row>
       </div>
+      <!-- 入驻流程 -->
+      <div class="into-process">
+        <h1>入驻流程</h1>
+        <div class="processes">
+          <img src="./images/into_process.jpg" alt="">
+        </div>
+      </div>
     </el-main>
-  </el-contanier>
+    <FooterGuide />
+  </el-container>
 </template>
 
 <script>
 import HeaderGuide from "@/components/HeaderGuide/HeaderGuide";
+import FooterGuide from "@/components/FooterGuide/FooterGuide";
 export default {
   name: "Label",
   components: {
-    HeaderGuide
+    HeaderGuide,
+    FooterGuide
   }
 };
 </script>
@@ -115,68 +121,106 @@ export default {
       }
     }
   }
-      // 需求动态
-    .demand-dynamic {
-      width: 100%;
-      text-align: center;
-      min-height: 700px;
-      color: rgb(79, 105, 221);
-      box-sizing: border-box;
-      padding-top: 37px;
-      padding-bottom: 37px;
-      overflow-x: hidden;
-      >.el-button{
-        margin-bottom: 20px;
-        font-size: 30px;
-        font-weight: 600;
-        color: rgb(79, 105, 221);
-      }
-      .dynamic-row-items {
-        .dynamic-item {
-          height: 253px;
-          box-sizing: border-box;
-          border: solid 2px rgb(79, 105, 221);
-          background: #fff;
-          margin-bottom: 20px;
-          padding: 28px 15px 10px;
-          font-size: 18px;
-          // <ul class="service-item">
-          //         <li><img src="./images/gowin.png" alt=""></li>
-          //         <li>专注品牌策略与视觉设计</li>
-          //         <li>革文营销策划</li>
-          //         <p class="line"></p>
-          //         <li>
-          //           <el-button type="primary">了解详情 ></el-button>
-          //         </li>
-          li:nth-of-type(1) {
-            font-size: 20px;
-            font-weight: 600;
-          }
-          li:nth-of-type(2) img{
-            width: 100%;
-          }
-          li:nth-of-type(3) {
-            font-weight: 600;
-            padding-top: 25px;
-            font-size: 16px;
-          }
-          li:nth-of-type(4) {
-            padding-top: 35px;
-            padding-bottom: 20px;
-            font-size: 14px;
-            color: $fontGray;
-            .red {
-              font-size: 30px;
-              color: rgb(230, 0, 19);
+  // 会员介绍
+  .member-intro {
+    width: 100%;
+    min-height: 575px;
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow-x: hidden;
+    >h1{
+      margin-bottom: 30px;
+      width: 183px;
+      font-size: 24px;
+      font-weight: 600;
+      color: $blue;
+      text-align: left;
+      margin-left: 8.5%;
+      padding-bottom: 12px;
+      border-bottom: solid 2px $blue;
+      border-radius: 0;
+    }
+    .member-row-items {
+      .member-item {
+        min-height: 434px;
+        box-sizing: border-box;
+        border: solid 1px #d2d2d2;
+        text-align: center;
+        font-size: 14px;
+        line-height: 30px;
+        color: $fontGray;
+        li:nth-of-type(1) {
+          height: 92px;
+          padding-top: 24px;
+          padding-bottom: 16px;
+          background-color: $blue;
+        }
+        li:nth-of-type(2){
+          font-size: 24px;
+          background-color: $blue;
+          color: #fff;
+          padding-bottom: 35px;
+        }
+        li:nth-of-type(3) {
+          font-size: 12px;
+          color: $blue;
+          background-color: #dde8fd;
+          padding: 10px 12px;
+          text-align: left;
+          line-height: 1.2;
+        }
+        li:nth-of-type(4) {
+          padding: 30px 50px 10px;
+          text-align: center;
+          .el-divider {
+            line-height: 1.2;
+            background-color: $fontGray;
+            margin: 0;
+            .el-divider__text {
+              font-size: 14px;
+              color: $fontGray;
+              font-weight: 600;
+              padding: 0 5px;
+              min-width: 95px;
             }
           }
-          li:nth-of-type(5) {
-            .el-button {
-              background: rgb(79, 105, 221);
-            }
+        }
+        li:last-child {
+          margin-top: 16px;
+          .el-button {
+            background-color: #f85c5d;
+            border-color: #f85d5d;
           }
         }
       }
     }
+  }
+  // 入驻流程
+  .into-process {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow-x: hidden;
+    >h1{
+      margin-bottom: 30px;
+      width: 183px;
+      font-size: 24px;
+      font-weight: 600;
+      color: $blue;
+      text-align: left;
+      margin-left: 8.5%;
+      padding-bottom: 12px;
+      border-bottom: solid 2px $blue;
+      border-radius: 0;
+    }
+    .processes {
+      margin: 30px 8.5%;
+      img {
+        width: 100%;
+      }
+    }
+  }
 }
 </style>

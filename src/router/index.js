@@ -17,6 +17,10 @@ export default new Router({
     {
       path: '/label',
       component: () => import('@/pages/Label/Label')
-    }
+    },
+    {
+      path: '/hall',
+      component: () => import('@/pages/Hall/Hall')
+    },
   ]
 })

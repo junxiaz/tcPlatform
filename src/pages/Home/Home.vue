@@ -382,7 +382,6 @@ export default {
         height: 6px;
         margin-left: calc(15.5% - 50px);
       }
-
     }
   }
 </style>

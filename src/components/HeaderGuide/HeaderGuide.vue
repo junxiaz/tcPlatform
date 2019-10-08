@@ -75,8 +75,8 @@ export default {
   opacity: .9;
   line-height: 60px;
   .header-logo {
-    float: left;
     width: auto;
+    float: left;
     height: 100%;
     display: inline-block;
     padding: 0 20px;
