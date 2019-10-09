@@ -9,10 +9,10 @@
         </div>
       </el-row>
       <!-- 会员介绍 -->
-      <div class="member-intro">
+      <div class="member-intro w1220">
         <h1>会员介绍</h1>
         <el-row type="flex" class="member-row-items" :gutter="20" justify="center">
-          <el-col :span="5">
+          <el-col :span="6">
             <ul class="member-item">
               <li><img src="./images/shell.png" alt=""></li>
               <li>终端客户</li>
@@ -27,7 +27,7 @@
               </li>
             </ul>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="6">
             <ul class="member-item">
               <li><img src="./images/shell.png" alt=""></li>
               <li>终端客户</li>
@@ -42,7 +42,7 @@
               </li>
             </ul>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="6">
             <ul class="member-item">
               <li><img src="./images/shell.png" alt=""></li>
               <li>终端客户</li>
@@ -57,7 +57,7 @@
               </li>
             </ul>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="6">
             <ul class="member-item">
               <li><img src="./images/shell.png" alt=""></li>
               <li>终端客户</li>
@@ -75,7 +75,7 @@
         </el-row>
       </div>
       <!-- 入驻流程 -->
-      <div class="into-process">
+      <div class="into-process w1220">
         <h1>入驻流程</h1>
         <div class="processes">
           <img src="./images/into_process.jpg" alt="">
@@ -123,7 +123,6 @@ export default {
   }
   // 会员介绍
   .member-intro {
-    width: 100%;
     min-height: 575px;
     box-sizing: border-box;
     padding-top: 30px;
@@ -136,7 +135,7 @@ export default {
       font-weight: 600;
       color: $blue;
       text-align: left;
-      margin-left: 8.5%;
+      // margin-left: 8.5%;
       padding-bottom: 12px;
       border-bottom: solid 2px $blue;
       border-radius: 0;
@@ -198,7 +197,6 @@ export default {
   }
   // 入驻流程
   .into-process {
-    width: 100%;
     box-sizing: border-box;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -210,7 +208,6 @@ export default {
       font-weight: 600;
       color: $blue;
       text-align: left;
-      margin-left: 8.5%;
       padding-bottom: 12px;
       border-bottom: solid 2px $blue;
       border-radius: 0;

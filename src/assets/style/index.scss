@@ -31,7 +31,7 @@ li {
 }
 
 #app {
-  min-width: 1200px;
+  // min-width: 1330px;
   height: 100%;
 }
 
@@ -109,4 +109,12 @@ div:focus {
 // 重置element-ui style
 .el-header, .el-main, .el-footer {
   padding: 0;
+}
+.el-container {
+  min-width: 1220px;
+}
+
+.w1220 {
+  width: 1220px;
+  margin: 0 auto;
 }

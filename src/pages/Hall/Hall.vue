@@ -8,218 +8,174 @@
           <el-tabs v-model="activeName">
             <el-tab-pane label="商品需求" name="first">
               <!-- 商品需求 -->
-              <el-row type="flex" class="statu-row-items" justify="center">
-                <el-col :span="20">
-                  <el-form ref="form" size="mini" :model="sizeForm" label-width="155px">
-                    <el-form-item label="活动性质">
-                      <el-checkbox-group v-model="sizeForm.type">
-                        <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
-                        <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
-                        <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
-                      </el-checkbox-group>
-                    </el-form-item>
-                    <el-form-item label="特殊资源">
-                      <el-radio-group v-model="sizeForm.resource">
-                        <el-radio border label="线上品牌商赞助"></el-radio>
-                        <el-radio border label="线下场地免费"></el-radio>
-                      </el-radio-group>
-                    </el-form-item>
-                  </el-form>
-                </el-col>
-              </el-row>
-              <el-row type="flex" class="sort-row-items" justify="center">
-                <el-col :span="20">
-                  <el-radio-group v-model="radio1" @change="sortChange" size="mini">
-                    <el-radio-button label="上海">综合</el-radio-button>
-                    <el-radio-button label="北京">
-                      北京
-                      <i class="el-icon-arrow-down"></i>
-                    </el-radio-button>
-                    <el-radio-button label="广州">
-                      广州
-                      <i class="el-icon-arrow-down"></i>
-                    </el-radio-button>
-                  </el-radio-group>
-                  <!-- <el-select
-                    class="map-select"
-                    v-model="value"
-                    placeholder="全国"
-                    style="width:100px; margin-left:40px;"
-                    size="mini"
-                  >
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
-                  </el-select> -->
-                  <div class="map">
-                      <img src="./images/map.png" alt="">
-                  <el-select
-                    class="map-select"
-                    v-model="value"
-                    placeholder="全国"
-                    size="mini"
-                  >
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
-                  </el-select>
-                  </div>
-                  <div style="margin-top: 15px;">
-                    <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-                        <el-select v-model="select" slot="prepend" placeholder="请选择">
-                        <el-option label="餐厅名" value="1"></el-option>
-                        <el-option label="订单号" value="2"></el-option>
-                        <el-option label="用户电话" value="3"></el-option>
-                        </el-select>
-                        <el-button slot="append" icon="el-icon-search"></el-button>
-                    </el-input>
+              <div class="w1220">
+                <el-row type="flex" class="statu-row-items" justify="center">
+                  <el-col :span="24">
+                    <el-form ref="form" size="mini" :model="sizeForm" label-width="155px">
+                      <el-form-item label="活动性质">
+                        <el-checkbox-group v-model="sizeForm.type">
+                          <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
+                          <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
+                          <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
+                        </el-checkbox-group>
+                      </el-form-item>
+                      <el-form-item label="特殊资源">
+                        <el-radio-group v-model="sizeForm.resource">
+                          <el-radio border label="线上品牌商赞助"></el-radio>
+                          <el-radio border label="线下场地免费"></el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </el-form>
+                  </el-col>
+                </el-row>
+                <el-row type="flex" class="sort-row-items" justify="center">
+                  <el-col :span="24">
+                    <el-radio-group v-model="radio1" @change="sortChange" size="small">
+                      <el-radio-button label="上海">综合</el-radio-button>
+                      <el-radio-button label="北京">
+                        北京
+                        <i class="el-icon-arrow-down"></i>
+                      </el-radio-button>
+                      <el-radio-button label="广州">
+                        广州
+                        <i class="el-icon-arrow-down"></i>
+                      </el-radio-button>
+                    </el-radio-group>
+                    <!-- <el-select
+                      class="map-select"
+                      v-model="value"
+                      placeholder="全国"
+                      style="width:100px; margin-left:40px;"
+                      size="mini"
+                    >
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select> -->
+                    <div class="map">
+                        <img src="./images/map.png" alt="">
+                    <el-select
+                      class="map-select"
+                      v-model="value"
+                      placeholder="全国"
+                      size="small"
+                    >
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
                     </div>
-                </el-col>
-              </el-row>
+                    <div style="float:right;">
+                      <el-input placeholder="请输入内容" size="small" class="input-with-select">
+                          <el-button slot="append">搜索</el-button>
+                      </el-input>
+                      </div>
+                  </el-col>
+                </el-row>
+              </div>
 
               <!-- <el-form-item label="活动名称">
                 <el-input></el-input>
               </el-form-item>-->
               <!-- <el-button size="mini" v-for="tag in tags" :key="tag.name"> {{tag.name}}</el-button> -->
-              <div class="demand-dynamic">
-                <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                </el-row>
-                <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                  <el-col :span="5">
-                    <ul class="dynamic-item">
-                      <li>茅台飞天酒包装设计</li>
-                      <li>
-                        <img src="./images/line_xuqiu.png" alt />
-                      </li>
-                      <li>包装设计</li>
-                      <li>
-                        项目预算：
-                        <span class="red">￥100000</span>
-                      </li>
-                      <li>
-                        <el-button type="primary" size="small">了解详情</el-button>
-                      </li>
-                    </ul>
-                  </el-col>
-                </el-row>
+              <div class="demand">
+                <div class="w1220">
+                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="center">
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="audited">已审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="completed">已完成</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                  </el-row>
+                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="center">
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                    <el-col :span="6">
+                      <ul class="demand-items">
+                        <li>金剑南包装设计</li>
+                        <li>产品包装<span class="reviewing">待审核</span></li>
+                        <li>需求地区：襄阳</li>
+                        <li>截止时间：2019-10-09</li>
+                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
+                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                      </ul>
+                    </el-col>
+                  </el-row>
+                  <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="50">
+                  </el-pagination>
+                </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="服务需求" name="second">配置管理</el-tab-pane>
@@ -281,6 +237,9 @@ export default {
   methods: {
     sortChange() {
       console.log("1");
+    },
+    format(percentage) {
+      return percentage === 100 ? '满' : `${percentage}%`;
     }
   },
   components: {
@@ -337,11 +296,16 @@ export default {
 //       display: none;
 //     }
 //   }
+  .input-with-select .el-input-group__append {
+    background-color: rgb(30, 136, 229);
+    color: #fff;
+  }
   .map {
-    height: 28px;
-    width: 100px;
+    height: 32px;
+    width: 95px;
+    padding-left: 5px;
     border: 1px solid #e0e0e0;
-    line-height: 28px;
+    line-height: 32px;
     text-align: center;
     display: inline-block;
     vertical-align: top;
@@ -354,8 +318,6 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
       img {
-        width: 9px;
-        height: 13px;
         vertical-align: middle;
       }
       .el-select {
@@ -374,6 +336,12 @@ export default {
             display: none;
         }
       }
+  }
+  .el-pagination.is-background .btn-prev, .el-pagination.is-background .btn-next, .el-pagination.is-background .el-pager li {
+    background-color: #fff;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background: #ec6941;
   }
 }
 </style>
@@ -396,60 +364,88 @@ export default {
       }
     }
     // 需求
-    .demand-dynamic {
+    .demand {
       width: 100%;
-      text-align: center;
-      min-height: 700px;
-      color: rgb(79, 105, 221);
+      min-height: 755px;
+      background-color: rgb(243, 248, 253);
       box-sizing: border-box;
-      padding-top: 37px;
-      padding-bottom: 37px;
+      padding-top: 30px;
       overflow-x: hidden;
-      .dynamic-row-items {
-        .dynamic-item {
-          height: 253px;
+      .demand-row-items {
+        .demand-items {
+          height: 316px;
           box-sizing: border-box;
-          border: solid 2px rgb(79, 105, 221);
+          border: solid 1px #c7d3de;
           background: #fff;
           margin-bottom: 20px;
-          padding: 28px 15px 10px;
-          font-size: 18px;
-          // <ul class="service-item">
-          //         <li><img src="./images/gowin.png" alt=""></li>
-          //         <li>专注品牌策略与视觉设计</li>
-          //         <li>革文营销策划</li>
-          //         <p class="line"></p>
-          //         <li>
-          //           <el-button type="primary">了解详情 ></el-button>
-          //         </li>
+          font-size: 14px;
+          color: $fontGray;
           li:nth-of-type(1) {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
+            border-left: solid 6px $blue;
+            height: 21px;
+            line-height: 21px;
+            padding-left: 14px;
+            margin: 20px 0;
           }
-          li:nth-of-type(2) img {
-            width: 100%;
-          }
-          li:nth-of-type(3) {
-            font-weight: 600;
-            padding-top: 25px;
-            font-size: 16px;
-          }
-          li:nth-of-type(4) {
-            padding-top: 35px;
-            padding-bottom: 20px;
-            font-size: 14px;
-            color: $fontGray;
-            .red {
-              font-size: 30px;
-              color: rgb(230, 0, 19);
+          li:nth-of-type(2) {
+            padding: 0 20px;
+            height: 30px;
+            line-height: 30px;
+            span {
+              width: 100px;
+              color: #fff;
+              display: inline-block;
+              text-align: center;
+              border-radius: 4px;
+              margin-left: 15px;
+            }
+            .reviewing {
+              background-color: #f85d5d; //待审核
+            }
+            .audited {
+              background-color: #32b16c; //已审核
+            }
+            .completed {
+              background-color: #00b7ee; //已完成
             }
           }
+          li:nth-of-type(3) {
+            padding: 20px;
+            padding-bottom: 0;
+            border-top: solid 1px #c7d3de;
+            margin-top: 15px;
+            line-height: 36px;
+          }
+          li:nth-of-type(4) {
+            line-height: 36px;
+            padding: 0 20px;
+          }
           li:nth-of-type(5) {
-            .el-button {
-              background: rgb(79, 105, 221);
+            line-height: 36px;
+            padding: 0 20px;
+            .el-progress {
+              display: inline-block;
+              min-width: 146px;
+            }
+          }
+          li:nth-of-type(6) {
+            border-top: solid 1px #c7d3de;
+            text-align: center;
+            margin-top: 28px;
+            .el-link {
+              position: relative;
+              bottom: 0;
+              font-size: 18px;
+              height: 52px;
+              line-height: 52px;
             }
           }
         }
+      }
+      .el-pagination {
+        text-align: center;
       }
     }
   }

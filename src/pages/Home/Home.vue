@@ -2,65 +2,51 @@
   <el-container direction="vertical">
     <HeaderGuide />
     <el-main>
-      <!-- 轮播 -->
-      <!-- <el-carousel height="1020px" :interval="5000" arrow="always">
-        <el-carousel-item>
-          <img src="./images/banner1.png" alt="">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="./images/banner2.jpg" alt="">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="./images/banner3.png" alt="">
-          <div class="operate-btns">
-            <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
-            <el-button type="primary">服务商入驻</el-button>
-          </div>
-        </el-carousel-item>
-      </el-carousel> -->
       <HeaderCarousel />
       <!-- 材料介绍 -->
-      <el-row type="flex" class="products" justify="center">
-        <el-col :span="6">
-          <div class="product">
-            <a class="product-type" href="#">
-              <img src="./images/material_icon.png" alt="">
-              <h1>特种材料 ></h1>
-            </a>
-            <ul class="product-items">
-              <li>云膜</li>
-              <li>全印模</li>
-              <li>镭射</li>
-            </ul>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="product">
-            <a class="product-type" href="#">
-              <img src="./images/material_icon.png" alt="">
-              <h1>特种材料 ></h1>
-            </a>
-            <ul class="product-items">
-              <li>云膜</li>
-              <li>全印模</li>
-              <li>镭射</li>
-            </ul>
-          </div>
-        </el-col>
-        <el-col :span="3">
-          <div class="product">
-            <a class="product-type" href="#">
-              <img src="./images/material_icon.png" alt="">
-              <h1>特种材料 ></h1>
-            </a>
-            <ul class="product-items">
-              <li>云膜</li>
-              <li>全印模</li>
-              <li>镭射</li>
-            </ul>
-          </div>
-        </el-col>
-      </el-row>
+      <div class="products-wrap">
+        <el-row type="flex" class="products w1220" justify="center">
+          <el-col :span="8">
+            <div class="product">
+              <a class="product-type" href="#">
+                <img src="./images/material_icon.png" alt="">
+                <h1>特种材料 ></h1>
+              </a>
+              <ul class="product-items">
+                <li>云膜</li>
+                <li>全印模</li>
+                <li>镭射</li>
+              </ul>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="product">
+              <a class="product-type" href="#">
+                <img src="./images/material_icon.png" alt="">
+                <h1>特种材料 ></h1>
+              </a>
+              <ul class="product-items">
+                <li>云膜</li>
+                <li>全印模</li>
+                <li>镭射</li>
+              </ul>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="product">
+              <a class="product-type" href="#">
+                <img src="./images/material_icon.png" alt="">
+                <h1>特种材料 ></h1>
+              </a>
+              <ul class="product-items">
+                <li>云膜</li>
+                <li>全印模</li>
+                <li>镭射</li>
+              </ul>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
       <!-- 金牌合作商 -->
       <div class="gold-partner">
         <div class="gold-partner-title">
@@ -96,9 +82,9 @@
         <h4>服务12000+客户，沉淀2500+案例</h4>
         <div class="service-types">
           <el-tabs :stretch="true" v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="用户管理" name="first">
+            <el-tab-pane class="w1220" label="用户管理" name="first">
               <el-row type="flex" class="service-row-items" :gutter="20" justify="center">
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -109,7 +95,7 @@
                     </li>
                   </ul>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -120,7 +106,7 @@
                     </li>
                   </ul>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -133,7 +119,7 @@
                 </el-col>
               </el-row>
               <el-row type="flex" class="service-row-items" :gutter="20" justify="center">
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -144,7 +130,7 @@
                     </li>
                   </ul>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -155,7 +141,7 @@
                     </li>
                   </ul>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="8">
                   <ul class="service-item">
                     <li><img src="./images/gowin.png" alt=""></li>
                     <li>专注品牌策略与视觉设计</li>
@@ -180,119 +166,122 @@
       <!-- 需求动态 -->
       <div class="demand-dynamic">
         <el-button type="text">需求动态 ></el-button>
-        <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-        </el-row>
-        <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-          <el-col :span="5">
-            <ul class="dynamic-item">
-              <li>茅台飞天酒包装设计</li>
-              <li><img src="./images/line_xuqiu.png" alt=""></li>
-              <li>包装设计</li>
-              <li>项目预算：<span class="red">￥100000</span></li>
-              <li>
-                <el-button type="primary" size="small">了解详情</el-button>
-              </li>
-            </ul>
-          </el-col>
-        </el-row>
+        <div class="w1220">
+          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+            <el-col :span="6">
+              <ul class="dynamic-item">
+                <li>茅台飞天酒包装设计</li>
+                <li><img src="./images/line_xuqiu.png" alt=""></li>
+                <li>包装设计</li>
+                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>
+                  <el-button type="primary" size="small">了解详情</el-button>
+                </li>
+              </ul>
+            </el-col>
+          </el-row>
+        </div>
       </div>
       <!-- 企业支持 -->
       <div class="company-support">
         <el-button type="text">企业支持 ></el-button>
         <h4>帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！</h4>
+        <div class="w1220">
           <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
                 <li>提供互联网技术解决方案，订单全流程</li>
               </ul>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
                 <li>提供互联网技术解决方案，订单全流程</li>
               </ul>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
@@ -301,21 +290,21 @@
             </el-col>
           </el-row>
           <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
                 <li>提供互联网技术解决方案，订单全流程</li>
               </ul>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
                 <li>提供互联网技术解决方案，订单全流程</li>
               </ul>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <ul class="support-item">
                 <li><img src="./images/support1.png" alt=""></li>
                 <li>技术支持</li>
@@ -323,6 +312,7 @@
               </ul>
             </el-col>
           </el-row>
+        </div>  
       </div>
       <div class="service-map">
         <img src="./images/service_map.jpg" alt="">
@@ -393,25 +383,29 @@ export default {
   .el-main {
     width: 100%;
     // 产品介绍
-    .products {
-      color: $blue;
+    .products-wrap {
+      width: 100%;
       background-color: #f6f6f6;
-      .product {
-        padding-top: 37px;
-        padding-bottom: 20px;
-        .product-type {
-          img {
-            padding-left: 20px;
+      .products {
+        color: $blue;
+        .product {
+          padding-top: 37px;
+          padding-bottom: 20px;
+          padding-left: 146px;
+          .product-type {
+            img {
+              padding-left: 20px;
+            }
+            h1 {
+              font-size: 30px;
+            }
           }
-          h1 {
-            font-size: 30px;
-          }
-        }
-        .product-items {
-          li{
-            font-size: 18px;
-            color: $fontGray;
-            line-height: 48px;
+          .product-items {
+            li{
+              font-size: 18px;
+              color: $fontGray;
+              line-height: 48px;
+            }
           }
         }
       }
