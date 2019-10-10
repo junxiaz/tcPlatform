@@ -22,5 +22,9 @@ export default new Router({
       path: '/hall',
       component: () => import('@/pages/Hall/Hall')
     },
+    {
+      path: '/demand',
+      component: () => import('@/pages/Demand/Demand')
+    },
   ]
 })
