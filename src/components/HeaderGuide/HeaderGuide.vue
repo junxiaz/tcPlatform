@@ -5,7 +5,7 @@
       <img src="../../assets/images/logo.png" alt />
     </span>
     <!-- 顶部菜单 -->
-    <div class="header-menus">
+    <!-- <div class="header-menus">
       <el-menu
         :default-active="activeIndex2"
         class="el-menu-demo"
@@ -34,7 +34,8 @@
         </el-submenu>
         <el-menu-item index="6">需求大厅</el-menu-item>
       </el-menu>
-    </div>
+    </div> -->
+
     <div class="header-operates">
       <el-button type="text" size="small" style="color:#fff;">登录</el-button>
       <el-button type="text" size="small" style="color:#fff;">注册</el-button>
@@ -51,7 +52,8 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      activeName: 'first'
+      activeName: '1',
+      // menus: this.$store.state.menusModule.menus
     }
   },
   methods: {

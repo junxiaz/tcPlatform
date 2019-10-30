@@ -8,15 +8,28 @@ import ElementUI from 'element-ui'
 import '../theme/index.css'
 import './assets/style/index.scss'
 import 'normalize.css' // a modern alternative to CSS resets
+import store from './store'
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
+Vue.use(ElementUI);
+
+/*
+* v-has
+*/
+
+Vue.directive('has', {
+  inserted: function (el, binding) {
+    if (Vue.prototype.$_has && !Vue.prototype.$_has(binding.value)) {
+      el.parentNode.removeChild(el);
+    }
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: { App },
-  template: '<App/>',
-  router
+  render: h => h(App),
+  router,
+  store
 })
