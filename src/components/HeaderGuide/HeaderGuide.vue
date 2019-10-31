@@ -5,36 +5,32 @@
       <img src="../../assets/images/logo.png" alt />
     </span>
     <!-- 顶部菜单 -->
-    <!-- <div class="header-menus">
+    <div class="header-menus">
+      <!--导航菜单-->
       <el-menu
-        :default-active="activeIndex2"
+        :default-active="$route.path"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         background-color="#424242"
         text-color="#fff"
         active-text-color="rgb(29, 137, 228)"
+        router
       >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">关于</el-menu-item>
-        <el-submenu index="3">
-          <template slot="title">设计服务</template>
-          <el-menu-item index="3-1">logo设计</el-menu-item>
-          <el-menu-item index="3-2">VI设计</el-menu-item>
-          <el-menu-item index="3-3">结构设计</el-menu-item>
-          <el-menu-item index="3-4">产品效果图</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="4">包装印刷</el-menu-item>
-        <el-submenu index="5">
-          <template slot="title">特种材料</template>
-          <el-menu-item index="5-1">云膜材料</el-menu-item>
-          <el-menu-item index="5-2">全印模</el-menu-item>
-          <el-menu-item index="5-3">镭射</el-menu-item>
-          <el-menu-item index="5-4">猫眼</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="6">需求大厅</el-menu-item>
+        <template v-for="(menu,index) in menuData">
+          <template v-if="menu.children">
+            <el-submenu :key="index" :index="menu.path">
+              <template slot="title">{{menu.name}}</template>
+              <el-menu-item v-for="(subMenu, i) in menu.children" :key="i" :index="i">
+                {{subMenu.name}}
+              </el-menu-item>
+            </el-submenu>
+          </template>
+          <template v-else>
+            <el-menu-item :index="menu.path" :key="index">{{menu.name}}</el-menu-item>
+          </template>
+        </template>
       </el-menu>
-    </div> -->
+    </div>
 
     <div class="header-operates">
       <el-button type="text" size="small" style="color:#fff;">登录</el-button>
@@ -42,27 +38,55 @@
       <el-button size="small" type="primary">立即发布</el-button>
     </div>
     <!-- 操作按钮 -->
+  <router-view></router-view>
   </el-header>
 </template>
 
 <script>
+import Vue from 'vue';
+import instance from '@/api';
+import AllRoutesData from '@/router/userTerminal.js';
+import * as util from '@/assets/js/util.js';
+import {headerMenus} from '@/router/userTerminal.js'
 export default {
   name: 'HeanderGuide',
   data() {
     return {
-      activeIndex: '1',
-      activeIndex2: '1',
-      activeName: '1',
-      // menus: this.$store.state.menusModule.menus
+      menus: this.$store.state.menusModule.menus,
+      menuData: []
     }
   },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClick(tab, event) {
-      console.log(tab, event);
+  computed: {
+    activeMenu: function () {
+      return this.$route.name
     }
+  },
+  methods : {
+    initMenu() {
+      for(let i in headerMenus) {
+        this.menuData.push(headerMenus[i])
+      }
+      // for(let i in this.$router.options.routes) {
+      //       let root = this.$router.options.routes[i]
+      //       if(root.hidden)
+      //           continue
+      //       let children = []
+      //       for(let j in root.children) {
+      //           let item = root.children[j]
+      //           if(item.hidden)
+      //               continue
+      //           children.push(item)
+      //       }
+
+      //       // if(children.length < 1)
+      //       //    continue
+      //       this.menuData.push(root)
+      //       root.children = children
+      //   }
+    }
+  },
+  created: function() {
+    this.initMenu()
   }
 }
 </script>

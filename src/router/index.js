@@ -1,45 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import {headerMenus ,userTerminal} from "./userTerminal.js";
 
 Vue.use(Router);
 
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/',
-//       redirect: '/home',
-//       component: () => import('@/pages/Home/Home')
-//     },
-//     {
-//       path: '/home',
-//       component: () => import('@/pages/Home/Home')
-//     },
-//     {
-//       path: '/label',
-//       component: () => import('@/pages/Label/Label')
-//     },
-//     {
-//       path: '/hall',
-//       component: () => import('@/pages/Hall/Hall')
-//     },
-//     {
-//       path: '/demand',
-//       component: () => import('@/pages/Demand/Demand')
-//     },
-//   ]
-// })
-
 let baseRoute = [
-  {
-    path: '/',
-    name: '布局',
-    component: rb => require(['../pages/Common/Abstract.vue'], rb)
-  }, 
-  {
-    path: '/home',
-    name: '首页',
-    component: rb => require(['../pages/Home/Home.vue'], rb)
-  }, 
+  // {
+  //   path: '/',
+  //   name: '布局',
+  //   component: rb => require(['../pages/Common/Abstract.vue'], rb)
+  // }, 
+  // {
+  //   path: '/home',
+  //   name: '首页',
+  //   hide: true,
+  //   component: rb => require(['../pages/Home/Home.vue'], rb)
+  // }, 
   {
     path: '/login',
     name: '登录',
@@ -61,10 +37,8 @@ let router = new Router({
   routes: baseRoute
 });
 
-// router.beforeEach((to, from, next) => {
-//   let routeName = to.meta.name || to.name;
-//   window.document.title = (routeName ? routeName + ' - ' : '') + '天臣';
-//   next();
-// })
+// 初始化菜单路由以及用户端其他路由
+router.addRoutes(headerMenus)
+router.addRoutes(userTerminal)
 
 export default router;

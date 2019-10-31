@@ -7,7 +7,7 @@ let menus = [
         type: "button",
         isExpanded: false,
         isSelected: false,
-        subMenu: [
+        subMenus: [
             { id: 21, level: 2, name: '简介', type: "link", url: "/detail/tutorial" },
             { id: 22, level: 2, name: '英雄编辑器', type: "link", url: "/detail/toh-pt1" },
             { id: 23, level: 2, name: '主从结构', type: "link", url: "/detail/toh-pt2" },
@@ -24,7 +24,7 @@ let menus = [
         type: "button",
         isExpanded: false,
         isSelected: false,
-        subMenu: [
+        subMenus: [
             { id: 31, level: 2, name: '架构', type: "link", url: "/detail/architecture" },
             {
                 id: 32,
@@ -33,7 +33,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { id: 321, level: 3, name: '显示数据', type: "link", url: "/detail/displaying-data" },
                     { id: 322, level: 3, name: '模板语法', type: "link", url: "/detail/template-syntax" },
                     { id: 323, level: 3, name: '生命周期钩子', type: "link", url: "/detail/lifecycle-hooks" },
@@ -53,7 +53,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { name: '用户输入', type: "link", url: "/detail/user-input" },
                     { name: '模板驱动表单', type: "link", url: "/detail/forms" },
                     { name: '表单验证', type: "link", url: "/detail/form-validation" },
@@ -69,7 +69,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { id: 341, level: 3, name: 'NgModule', type: "link", url: "/detail/ngmodule" },
                     { id: 342, level: 3, name: 'NgModule 常见问题', type: "link", url: "/detail/ngmodule-faq" }
                 ]
@@ -81,7 +81,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { id: 361, level: 3, name: '依赖注入', type: "link", url: "/detail/dependency-injection" },
                     { id: 362, level: 3, name: '多级注入器', type: "link", url: "/detail/hierarchical-dependency-injection" },
                     { id: 363, level: 3, name: 'DI 实例技巧', type: "link", url: "/detail/dependency-injection-in-action" }
@@ -100,7 +100,7 @@ let menus = [
         type: "button",
         isExpanded: false,
         isSelected: false,
-        subMenu: [
+        subMenus: [
             { id: 41, level: 2, name: '国际化（i18n）', type: "link", url: "/detail/i18n" },
             { id: 42, level: 2, name: '语言服务', type: "link", url: "/detail/language-service" },
             { id: 43, level: 2, name: '安全', type: "link", url: "/detail/security" },
@@ -111,7 +111,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { id: 441, level: 3, name: '搭建本地开发环境', type: "link", url: "/detail/setup" },
                     { id: 442, level: 3, name: '搭建方式剖析', type: "link", url: "/detail/setup-systemjs-anatomy" },
                     { id: 443, level: 3, name: '浏览器支持', type: "link", url: "/detail/browser-support" },
@@ -129,7 +129,7 @@ let menus = [
                 type: "button",
                 isExpanded: false,
                 isSelected: false,
-                subMenu: [
+                subMenus: [
                     { id: 451, level: 3, name: '从 AngularJS 升级', type: "link", url: "/detail/upgrade" },
                     { id: 452, level: 3, name: '升级速查表', type: "link", url: "/detail/ajs-quick-reference" }
                 ]
@@ -153,7 +153,7 @@ function setExpand(source, url) {
                 source[i].isExpanded = true; // 设置为展开
                 startExpand.push(source[i]);
                 // 递归下一级菜单，以此类推
-                setExpand(source[i].subMenu, url);
+                setExpand(source[i].subMenus, url);
             }
             break;
         }
