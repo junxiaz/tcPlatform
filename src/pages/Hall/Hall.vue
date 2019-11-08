@@ -260,7 +260,7 @@ export default {
       line-height: 60px;
     }
     .el-tabs__nav {
-      transform: translateX(-50%);
+      transform: translateX(-50%)!important;
       left: 50%;
     }
   }

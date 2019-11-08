@@ -8,7 +8,6 @@ import ElementUI from 'element-ui'
 import '../theme/index.css'
 import './assets/style/index.scss'
 import 'normalize.css' // a modern alternative to CSS resets
-import store from './store'
 
 Vue.config.productionTip = false
 
@@ -31,5 +30,4 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router,
-  store
 })

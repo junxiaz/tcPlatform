@@ -12,10 +12,8 @@ let headerMenus = [
     {
         path: '/design',
         name: '设计服务',
-        component: rb => require(['../pages/Common/404.vue'], rb),
-        component: rb => require(['../pages/Common/404.vue'], rb),
         children: [
-            { path: '', name: 'logo设计', component: rb => require(['../pages/Common/404.vue'], rb) },
+            { path: '/design/1', name: 'logo设计', component: rb => require(['../pages/Common/404.vue'], rb) },
             { path: '', name: 'VI设计', component: rb => require(['../pages/Common/404.vue'], rb) },
             { path: '', name: '机构设计', component: rb => require(['../pages/Common/404.vue'], rb) },
             { path: '', name: '产品效果图', component: rb => require(['../pages/Common/404.vue'], rb) },
@@ -24,6 +22,7 @@ let headerMenus = [
     {
         path: '/package',
         name: '包装印刷',
+        component: rb => require(['../pages/Common/404.vue'], rb),
         // component: rb => require(['../pages//.vue'], rb)
     },
     {
@@ -47,8 +46,9 @@ let headerMenus = [
 let userTerminal = [
     {
         path: '/',
-        name: 'buju',
-        component: (resolve) => require(['@/pages/Common/Abstract.vue'], resolve),
+        redirect: '/home',
+        name: '首页',
+        component: rb => require(['../pages/Home/Home.vue'], rb)
     },
     {
         path: '/home',
@@ -58,19 +58,16 @@ let userTerminal = [
     {
         path: '/label',
         name: '提交需求',
-        meta: {
-            name: '天臣-提交需求'
-        },
-        component: () => import('@/pages/Label/Label')
+        component: rb => require(['../pages/Label/Label.vue'], rb)
     },
     {
         path: '/hall',
         name: '需求大厅',
-        component: () => import('@/pages/Hall/Hall')
+        component: rb => require(['../pages/Hall/Hall.vue'], rb)
     },
     {
         path: '/demand',
-        component: () => import('@/pages/Demand/Demand')
+        component: rb => require(['../pages/Demand/Demand.vue'], rb)
     },
 ]
 

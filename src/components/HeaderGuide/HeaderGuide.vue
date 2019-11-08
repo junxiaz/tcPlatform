@@ -1,9 +1,9 @@
 <template>
   <el-header>
     <!-- logo -->
-    <span class="header-logo">
+    <router-link class="header-logo" to="/home">
       <img src="../../assets/images/logo.png" alt />
-    </span>
+    </router-link>
     <!-- 顶部菜单 -->
     <div class="header-menus">
       <!--导航菜单-->
@@ -20,7 +20,7 @@
           <template v-if="menu.children">
             <el-submenu :key="index" :index="menu.path">
               <template slot="title">{{menu.name}}</template>
-              <el-menu-item v-for="(subMenu, i) in menu.children" :key="i" :index="i">
+              <el-menu-item v-for="(subMenu, i) in menu.children" :key="i" :index="subMenu.path">
                 {{subMenu.name}}
               </el-menu-item>
             </el-submenu>
@@ -45,14 +45,11 @@
 <script>
 import Vue from 'vue';
 import instance from '@/api';
-import AllRoutesData from '@/router/userTerminal.js';
-import * as util from '@/assets/js/util.js';
 import {headerMenus} from '@/router/userTerminal.js'
 export default {
   name: 'HeanderGuide',
   data() {
     return {
-      menus: this.$store.state.menusModule.menus,
       menuData: []
     }
   },
@@ -66,23 +63,6 @@ export default {
       for(let i in headerMenus) {
         this.menuData.push(headerMenus[i])
       }
-      // for(let i in this.$router.options.routes) {
-      //       let root = this.$router.options.routes[i]
-      //       if(root.hidden)
-      //           continue
-      //       let children = []
-      //       for(let j in root.children) {
-      //           let item = root.children[j]
-      //           if(item.hidden)
-      //               continue
-      //           children.push(item)
-      //       }
-
-      //       // if(children.length < 1)
-      //       //    continue
-      //       this.menuData.push(root)
-      //       root.children = children
-      //   }
     }
   },
   created: function() {
