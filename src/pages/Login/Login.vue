@@ -37,7 +37,7 @@
                   <el-form-item>
                     <el-input placeholder="请输入您的密码" prefix-icon="el-icon-lock"></el-input>
                   </el-form-item>
-                  <el-form-item style="backfround:#f00;">
+                  <el-form-item>
                     <el-select v-model="types" placeholder="请选择客户类型" prefix-icon="el-icon-lock">
                       <el-option label="公司" value="company"></el-option>
                       <el-option label="个人" value="private"></el-option>
@@ -144,7 +144,6 @@ export default {
       }
     }
   }
-
   .login-form .el-form-item:nth-of-type(1) {
     margin-top: 56px;
   }
@@ -183,6 +182,7 @@ export default {
   }
   .register-form .el-form-item:nth-of-type(5) {
     margin: 0;
+    margin-top: 10px;
   }
 }
 </style>
@@ -204,7 +204,7 @@ export default {
     margin: 80px 0 87px;
     overflow: hidden;
     .login-main {
-      background: #fff url(./imgs/background.png) center center / cover
+      background: #fff url(./imgs/background.png) center calc(50% - 7px) / cover
         no-repeat;
       height: 100%;
       position: relative;
@@ -221,11 +221,9 @@ export default {
           position: absolute;
           top: 50%;
           left: 100%;
-          transform: translate(-500px, -250px);
+          transform: translate(-500px, -260px);
           background: #fff;
           border-radius: 6px;
-          .login-form {
-          }
         }
       }
     }
