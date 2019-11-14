@@ -1,30 +1,32 @@
 <template>
   <div id="seller-home">
-    <!-- 商家----我的首页 -->
+    <!-- 商家端----我的首页 -->
 
     <!-- 企业信息 -->
-    <div id="enterpriseInfo" class="bg padding">
-      <vnotes title="企业信息"></vnotes>
+    <div id="enterpriseInfo" class="bg sell-padding">
+      <vnotes title="企业信息" subtitle="完善企业设置" color="#409efe" cursor="pointer"
+              @toPath="handleToPath('/seller/enterpriseSet')"></vnotes>
 
-      <el-row class="mt20">
-        <el-col :span="3">
-          <div class="logo"></div>
-        </el-col>
+      <div class="mt20 logoInfo clearfix">
+        <div class="logo">
+          <img src="./head_portrait.png" alt="">
+        </div>
 
-        <el-col :span="21">
+        <div class="logo-desc">
           <h4>天臣集团</h4>
-          <p class="slogan">banner标语：让天下没有假货</p>
+          <p class="slogan over">banner标语：让天下没有假货</p>
           <p class="address">
             所属行业：防伪安全
             <span>地址：上海市松江区光华路509号</span>
           </p>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
 
     <!-- 我的订单 -->
-    <div class="myOrder bg padding mt20">
-      <vnotes title="我的订单"/>
+    <div class="myOrder bg sell-padding mt20">
+      <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer" 
+              @toPath="handleToPath('/seller/myOrder')"/>
 
       <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="mt20 myTable"
                 :header-cell-style="{background:'#647787',color:'#fff'}">
@@ -96,33 +98,48 @@ export default {
     handleCurrentChange(val){
       this.currentPage = val;
     },
+
+    handleToPath(path){
+      this.$router.push(path)
+    }
   }
 
 }
 </script>
 
 <style lang="scss" scoped>
-  .padding{padding:10px 30px 10px 40px;}
-
   #seller-home{
     #enterpriseInfo{
 
-      .logo{
-        width:80px;height:80px;
-        border-radius: 50%;
-        border:1px solid #d2d2d2;
-      }
-      h4{margin:0;font:900 16px/1 "";}
-      p.slogan{
-        height:42px;
-        font: 14px/3 "";
-      }
-      p.address{
-        font:14px/1 "";
-        span{
-          margin-left:30px;
+      .logoInfo{        
+        .logo{
+          float: left;
+          width:125px;
+          img{          
+            display: block;
+            width:125px;height:126px;
+            object-fit: cover;
+          }
         }
+        .logo-desc{
+          float: left;margin:18px 0 0 27px;
+          width:700px;color:#2E2E2E;
+          h4{margin:0;font:900 18px/1 "";}
+          p.slogan{
+            height:54px;
+            font: 14px/54px "";
+          }
+          p.address{
+            height:20px;
+            font:14px/20px "";
+            span{
+              margin-left:46px;
+            }
+          }
+        }
+
       }
+
     }
   }
 </style>

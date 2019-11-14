@@ -52,11 +52,35 @@ export default {
 <style lang="scss" scoped>
   ul.myMenu{
     background:#fff;
-    border-right:0;
+    border-right:0; 
+    overflow: hidden;
+    >li{
+      height:45px;
+      font:16px/45px "";
+
+      i{height:20px;vertical-align: middle;margin-right:19px;}
+      .el-icon-my-home{        
+        background: url('./imgs/home_nor.png') no-repeat center;
+      }
+      .el-icon-my-demand{        
+        background: url('./imgs/needs_nor.png') no-repeat center;
+      }
+      .el-icon-my-order{        
+        background: url('./imgs/order_nor.png') no-repeat center;
+      }
+      .el-icon-my-enterprise{        
+        background: url('./imgs/enterprise_nor.png') no-repeat center;
+      }
+
+      
+
+
+    }
     >li.is-active{
       color:#fff;
       background:#409EFF;
     }
+    
     
   }
 </style>

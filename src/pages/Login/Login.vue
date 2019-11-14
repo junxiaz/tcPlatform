@@ -1,9 +1,9 @@
 <template>
   <el-container direction="vertical" class="wrap">
     <IndexHeader class="header-home">
-      <router-link slot="home" to="/home">
+      <!-- <router-link slot="home" to="/home">
         <i class="el-icon-house"></i>首页
-      </router-link>
+      </router-link> -->
     </IndexHeader>
     <el-main class="content">
       <div class="login-main">

@@ -9,6 +9,8 @@ import '../theme/index.css'
 import './assets/style/index.scss'
 import 'normalize.css' // a modern alternative to CSS resets
 
+import 'babel-polyfill';//ie浏览器显示问题
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);

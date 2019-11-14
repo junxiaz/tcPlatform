@@ -6,7 +6,10 @@
         <span>天臣互联网平台</span>
       </el-col>
       <el-col :span="12" algin="right" class="right">
-        <slot name="home"></slot>
+        <template v-if="this.$route.path == '/login'">
+          <i class="el-icon-house"></i>首页
+        </template>
+        <el-button style="color: #1e88e5">发布需求</el-button>
       </el-col>
     </el-row>
   </el-header>
@@ -42,6 +45,12 @@ export default {
       }
       &.right {
         text-align: right;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        i {
+          margin-right: 7px;
+        }
       }
     }
   }

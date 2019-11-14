@@ -6,16 +6,25 @@
       <vHeader/>
     </el-header>
 
-    <el-container class="w1220">
+    <el-container>
       <!-- 导航 -->
-      <el-aside>
+      <!-- <el-aside>
         <sideNav/>
-      </el-aside>
+      </el-aside> -->
 
       <!-- 内容区域 -->
-      <el-main>
+      <!-- <el-main>
         <router-view></router-view>
-      </el-main>
+      </el-main> -->
+      <div class="w1220">
+        <el-aside>
+          <sideNav/>
+        </el-aside>
+
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </div>
     </el-container>
 
     <!-- 尾部 -->
@@ -45,26 +54,23 @@ export default {
   >section{
     background:#F6F6F6;
     >header.el-header{
-      height: 90px !important;
+      height: 110px !important;
+      #top,#vheader{padding-left: calc(100vw - 100%);}
     }
 
     >section.el-container{
-      padding:30px 0 80px;
-      >aside.el-aside{
-        width:220px !important;
+      padding:30px 0 127px;margin-left: calc(100vw - 100%);
+      >div>aside.el-aside{
+        width:220px !important;float:left;height:100%;
       }
-      >main{
-        margin-left:20px;
+      >div>main{
+        float:left;width: 983px !important;padding:0;margin-left:17px;overflow-x: hidden;        
       }
     }
 
     >footer{
-      position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      margin:0 auto;
-      z-index: 10;
+      height: 87px !important;background:#2E2E2E;color:#fff;
+      position:fixed; bottom:0; left:0; right:0; margin:0 auto; z-index: 10;       
     }
   }
 }

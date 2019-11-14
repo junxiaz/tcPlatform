@@ -31,14 +31,13 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-  #foots{
-    background:#2E2E2E;
-    color:#fff;
-    font:14px/30px "";  
-    
-    .foots-t{
-      .el-link.el-link--default{color:#fff}
-    }
+<style lang="scss" scoped>
+#foots{       
+  height:87px;
+  font:14px/30px "";  
+  
+  .foots-t{
+    .el-link.el-link--default{color:#fff}
   }
+}
 </style>

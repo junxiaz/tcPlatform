@@ -3,7 +3,7 @@
     <!-- 顶部组件 -->
     <el-row class="w1220">      
       <el-col :span="12" align="left">
-        <i class="el-icon-s-home"></i>
+        <i :style="{'backgroundImage':'url('+homeImg+')'}" class="el-icon-my-home" ></i>
         <span style="margin-left:5px;">Hello，欢迎来到天臣产业互联网平台！</span>
       </el-col>
 
@@ -20,6 +20,11 @@
 // import {handleConfirm} from '../../../public/js'
 export default {
   name:"top",
+  data(){
+    return {
+      homeImg: require('@/assets/images/home_nor.png'),
+    }
+  },
   methods:{
     signout(){
       // handleConfirm('确认退出登录吗？','warning').then(res => {
@@ -38,6 +43,15 @@ export default {
     height:30px;
     background:#fff;
     color:#666;
-    font:14px/30px "";      
+    font:12px/30px "";   
+    .el-icon-my-home{
+      width:14px;height:16px;display: inline-block;
+      background-repeat: no-repeat;
+      background-position: center 0;
+      background-size:100%;
+      line-height:30px;
+      vertical-align:middle;
+    } 
+
   }
 </style>

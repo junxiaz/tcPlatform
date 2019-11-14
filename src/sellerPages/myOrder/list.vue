@@ -1,29 +1,29 @@
 <template>
-  <div id="myOrder" class="bg padding">
-    <!-- 商家----我的订单 -->
+  <div id="myOrder" class="bg sell-padding">
+    <!-- 商家端----我的订单 -->
       <vnotes title="我的订单"/>
 
       <el-form :inline="true" :model="searchForm" ref="searchForm"
-                class="demo-form-inline mt20">
+                class="demo-form-inline" style="margin-top:14px;">
         <el-form-item label="需求编号">
-          <el-input v-model="searchForm.id" size="mini" class="nobr" style="width:120px;"></el-input>
+          <el-input v-model="searchForm.id" size="medium" class="nobr" style="width:140px;"></el-input>
         </el-form-item>
         <el-form-item label="发布时间">
           <el-date-picker 
             v-model="searchForm.timer" type="daterange" 
-            size="mini" class="nobr" style="width:200px;"
-            format="yyyy.MM.dd" value-format="yyyy-MM-dd"
-            range-separator="—" start-placeholder="开始日期" end-placeholder="结束日期">
+            size="medium" class="nobr dateIpt" style="width:190px;"
+            format="yyyy.MM.dd" value-format="yyyy.MM.dd"
+            range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="金额">
-          <el-input v-model="searchForm.minMoney" size="mini" class="nobr" style="width:80px;"></el-input>
-          <span style="color:#d2d2d2"> - </span>
-          <el-input v-model="searchForm.maxMoney" size="mini" class="nobr" style="width:80px;"></el-input>
+          <el-input v-model="searchForm.minMoney" size="medium" class="nobr" style="width:80px;"></el-input>
+          <span style="color:#d2d2d2"> ~ </span>
+          <el-input v-model="searchForm.maxMoney" size="medium" class="nobr" style="width:80px;"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="danger" size="mini" @click="searchBtn('searchForm')">查询</el-button>
+          <el-button type="danger" size="medium" @click="searchBtn('searchForm')" style="width:90px;">查询</el-button>
         </el-form-item>
       </el-form>
 
@@ -107,13 +107,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .padding{padding:10px 40px;}
-
   #myOrder{
     
     form.el-form{      
       .el-form-item{
-        margin-right:30px;
+        margin-right:35px;       
+        
+      }     
+      .el-form-item:last-child{
+        margin-right:0px;
       }
     }
 

@@ -12,7 +12,7 @@
           <i class="el-icon-s-home"></i>
           首页
         </span>
-        <el-button v-else type="text" @click="signout">退出登录</el-button>
+        <el-button v-else @click="signout" size="mini">免费发布需求</el-button>
       </el-col>
       
     </el-row>
@@ -41,18 +41,17 @@ export default {
 <style scoped lang="scss">
   #vheader{
     background:#409EFF;
-    height:60px;
+    height:80px;
     color:#fff;
-    line-height: 60px;
+    line-height: 80px;
     .logo{
-      height:60px;
+      height:80px;
       img{display: inline-block;vertical-align: middle;}
-    }
-
-    
+    }    
       
     button{
-      color:#fff;font-size:16px;
+      color:#409EFF;font:16px/26px "";
+      width:134px;height:42px;border-radius: 8px;
     }
   }
 </style>
