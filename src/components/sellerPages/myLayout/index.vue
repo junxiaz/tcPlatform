@@ -38,7 +38,8 @@
 import top from "@/components/sellerPages/top"
 import vHeader from "@/components/sellerPages/vHeader"
 import sideNav from "@/components/sellerPages/sideNav"
-import vfoot from "@/components/sellerPages/vfooter"
+// import vfoot from "@/components/sellerPages/vfooter"
+import vfoot from "@/components/FooterGuide/FooterGuide.vue"
 export default {
   components:{
     top,

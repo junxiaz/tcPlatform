@@ -8,16 +8,17 @@
                 label-width="110px" class="demo-ruleForm mt30">
 
         <el-form-item label="封面信息" class="upload-item" required>
-          <el-upload class="upload-demo" ref="upload"
-            action="#" :limit="1" :on-exceed="handleExceed"
+          <el-upload class="upload-demo" ref="uploadLogo"
+            action="https://jsonplaceholder.typicode.com/posts/" :limit="1" :on-exceed="handleExceed"
             accept=".jpg,.jpeg,.png,.gif,.JPG,.JPEG,.PNG,.GIF"
             :before-upload="beforeUpload"
             :on-success="handleSuccess"
             :on-remove="handleRemove"
-            :file-list="fileList" list-type="picture">
-
-            <img src="./uploadlogo.png" class="uploadImg" slot="trigger" alt="">
-            <el-checkbox v-model="baseForm.noLogo" 
+            :file-list="fileList" list-type="picture-card">
+                      
+            <img src="./imgs/uploadlogo.png" class="uploadImg" slot="trigger" alt="" v-if="!baseForm.noLogo">
+            <img src="./imgs/head_portrait.png" class="uploadImg" slot="trigger" v-else>  
+            <el-checkbox v-model="baseForm.noLogo" @change="checkLogo"
               style="margin-left:16px;font:12px/1 '';vertical-align: top;color:#7D7D7D">
               暂无logo
             </el-checkbox>
@@ -177,7 +178,41 @@ export default {
     //文件上传成功时的钩子
     handleSuccess(res,file,fileList){
       console.log("文件上传成功时的钩子",res,file,fileList);
-      console.log("上传成功后的fileList",this.fileList)
+      // console.log("上传成功后的fileList",this.fileList); 
+      //按需求将 res 或者 file 或者 fileList 的数据保存到fileList中
+      this.fileList = fileList;
+     
+     if(this.baseForm.noLogo){
+        this.$confirm("如果有logo，那么请先取消选择“暂无logo”选项，然后上传", '提示', {
+          confirmButtonText: '没有logo',
+          cancelButtonText: '有logo',
+          type: 'warning'
+        }).then(() => {
+          //没有logo
+          this.$refs.uploadLogo.clearFiles();
+        }).catch(() =>{
+          //有logo
+          this.baseForm.noLogo = false;
+        })
+      }
+    },
+
+    //判断“暂无logo”这个选择框的状态
+    checkLogo(){
+      //如果this.fileList.length !=0 ,表示已经上传了logo
+      if(this.fileList.length !=0 ){
+        this.$confirm("确定要取消本次上传的logo么？", '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          //确定取消上传的logo
+          this.$refs.uploadLogo.clearFiles();
+        }).catch(() =>{
+          //保留
+          this.baseForm.noLogo = false;
+        })
+      }
     },
 
     //文件列表移除文件时
@@ -191,20 +226,20 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if(formName === 'baseForm'){
+            //判断logo是否上传
             if(this.fileList.length === 0 && this.baseForm.noLogo === false){
-              // this.$message.warning(`无logo时,请选择“暂无logo”选项`);
               this.$message({
                 showClose: true,
-                message: '警告哦，这是一条警告消息',
+                message: '无logo时,请选择“暂无logo”选项',
                 type: 'warning',
                 duration: 0
               });
             } else {
-
+              console.log(this.baseForm);
             }
           }
           else{
-            
+            console.log(this.enterpriseForm);
           }
 
         } else {
@@ -213,6 +248,7 @@ export default {
         }
       });
     },
+
   }
 }
 </script>

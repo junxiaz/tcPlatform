@@ -73,6 +73,10 @@ let userTerminal = [
         path: '/release',
         component: rb => require(['../pages/Release/Release.vue'], rb)
     },
+    {
+        path: '/register',
+        component: rb => require(['../pages/Register/Register.vue'], rb)
+    },
 ]
 
 export {

@@ -119,13 +119,16 @@ div:focus { outline: none;}
       margin:0;
       .upload-demo{
         position: relative;
+        >.el-upload--picture-card{
+          border:0;width:140px;height:140px;
+        }
         >div.el-upload__tip{
           margin:0;
         }
         >ul.el-upload-list{
           position: absolute;top:0;left:0;
           >li.el-upload-list__item{
-            width:140px;height:140px;margin:0;padding-top:0;padding-left:80px;border-radius:0;
+            width:140px;height:140px;margin:0;padding-top:0;border-radius:0;
             >img{width:140px;height:140px;object-fit: cover;}
             >a.el-upload-list__item-name{display: none;}
             >i.el-icon-close{
@@ -146,8 +149,9 @@ div:focus { outline: none;}
 
 // 商家端---我的订单时间控件
 #myOrder form.el-form .dateIpt span.el-range-separator{
-  width:20px !important;color:#B3B3B3;
+  width:16px !important;color:#B3B3B3;padding:0 !important;
 }
+#myOrder form.el-form .dateIpt input{background:none !important;}
 
 // 设置表头和每一行的高度
 .myTable.el-table td,.myTable.el-table th{padding:0;height:36px;}
