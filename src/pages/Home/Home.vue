@@ -47,6 +47,60 @@
           </el-col>
         </el-row>
       </div>
+      <div class="nums-wrap">
+        <div class="w1220">
+          <el-row :gutter="33" type="flex" justify="center" class="nums-top">
+            <el-col :span="6">
+              <div class="num">
+                <img src="./images/users.png" alt="">
+                <p>1234</p>
+                <span>注册用户数</span>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="num">
+                <img src="./images/users.png" alt="">
+                <p>1234</p>
+                <span>注册用户数</span>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="num">
+                <img src="./images/users.png" alt="">
+                <p>1234</p>
+                <span>注册用户数</span>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="num">
+                <img src="./images/users.png" alt="">
+                <p>1234</p>
+                <span>注册用户数</span>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="33" class="nums-bottom">
+            <el-col :span="12">
+              <el-row class="num">
+                <el-col :span="10"><img src="./images/turnover.png" alt=""></el-col>
+                <el-col :span="14">
+                  <p>2222</p>
+                  <span>成交金额</span>
+                </el-col>
+              </el-row>
+            </el-col>
+            <el-col :span="12">
+              <el-row class="num">
+                <el-col :span="10"><img src="./images/turnover.png" alt=""></el-col>
+                <el-col :span="14">
+                  <p>2222</p>
+                  <span>成交金额</span>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
       <!-- 金牌合作商 -->
       <div class="gold-partner">
         <div class="gold-partner-title">
@@ -410,6 +464,43 @@ export default {
         }
       }
     }
+    // 数量展示
+    .nums-wrap {
+      width: 100%;
+      background-color: rgb(241, 243, 255);
+      padding: 20px 0;
+      .num {
+        background-color: #fff;
+        text-align: center;
+        p {
+          font-size: 42px;
+          padding-top: 11px;
+          padding-bottom: 15px;
+        }
+      }
+      .nums-top {
+        padding-bottom: 20px;
+        .num {
+          padding: 31px 0;
+        }
+      }
+      .nums-bottom {
+        .num {
+          padding: 26px 0;
+          .el-col:nth-of-type(1) {
+            text-align: right;
+          }
+          .el-col:nth-of-type(2) {
+            text-align: center;
+            margin-left: -100px;
+            p {
+              padding-top: 0px;
+              padding-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
     // 金牌合作商
     .gold-partner {
       text-align: center;
@@ -475,14 +566,6 @@ export default {
             padding: 60px 28px 25px;
             font-size: 18px;
             color: $fontGray;
-            // <ul class="service-item">
-            //         <li><img src="./images/gowin.png" alt=""></li>
-            //         <li>专注品牌策略与视觉设计</li>
-            //         <li>革文营销策划</li>
-            //         <p class="line"></p>
-            //         <li>
-            //           <el-button type="primary">了解详情 ></el-button>
-            //         </li>
             li:nth-of-type(2) {
               padding: 16px 0;
             }
