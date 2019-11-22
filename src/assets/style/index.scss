@@ -24,10 +24,10 @@ ul {
 li { list-style: none;}
 
 #app {
-  // min-width: 1330px;
+  min-width: 1220px;
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
 }
 
 
@@ -94,7 +94,7 @@ div:focus { outline: none;}
   padding: 0;
   margin: 0;
 }
-.el-container {
+.el-container:not(#internet-container) {
   min-width: 1220px;
   padding: 0;
   margin: 0;
@@ -159,6 +159,7 @@ div:focus { outline: none;}
 .w1220 {
   width: 1220px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .bg{background:#fff;}
@@ -166,5 +167,4 @@ div:focus { outline: none;}
 .mt30{margin-top:30px;}
 .nobr,.nobr>input{border-radius: 0;}
 .sell-padding{padding: 15px 32px 30px;}
-
 

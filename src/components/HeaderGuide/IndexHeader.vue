@@ -25,6 +25,7 @@ export default {
 @import "@/assets/style/vars.scss";
 .header {
   background: $blue;
+  min-width: 1220px;
   height: 80px !important;
   .w1220 {
     font-size: 16px;

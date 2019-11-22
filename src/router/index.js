@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import sellerPages from './sellerPages'
+import sellerPages from './sellerPages'
 import {headerMenus ,userTerminal} from "./userTerminal.js";
 
 Vue.use(Router);
@@ -21,7 +21,7 @@ let baseRoute = [
     name: '找不到页面',
     component: rb => require(['../pages/Common/404.vue'], rb)
   },
-  // sellerPages
+  sellerPages
 ];
 
 let router = new Router({

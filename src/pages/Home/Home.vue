@@ -1,5 +1,5 @@
 <template>
-  <el-container direction="vertical">
+  <el-container style="overflow:hidden" direction="vertical">
     <HeaderGuide />
     <el-main>
       <HeaderCarousel />
@@ -433,6 +433,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/vars.scss';
 .el-container {
+  overflow: hidden;
   // 中间内容
   .el-main {
     width: 100%;

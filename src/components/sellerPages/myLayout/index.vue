@@ -6,7 +6,7 @@
       <vHeader/>
     </el-header>
 
-    <el-container>
+    <el-container id="internet-container">
       <!-- 导航 -->
       <!-- <el-aside>
         <sideNav/>
@@ -59,8 +59,9 @@ export default {
       #top,#vheader{padding-left: calc(100vw - 100%);}
     }
 
-    >section.el-container{
-      padding:30px 0 127px;margin-left: calc(100vw - 100%);
+    >section.el-container#internet-container{
+      // padding:30px 0 127px;margin-left: calc(100vw - 100%);
+      margin:30px 0 127px;padding-left:calc(100vw - 100%);
       >div>aside.el-aside{
         width:220px !important;float:left;height:100%;
       }

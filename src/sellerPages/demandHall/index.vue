@@ -1,12 +1,12 @@
 <template>
-  <myLayout/>
+  <!-- <myLayout/> -->
 </template>
 
 <script>
-import myLayout from '@/components/sellerPages/myLayout'
+// import myLayout from '@/components/sellerPages/myLayout'
 export default {
   components:{
-    myLayout
+    // myLayout
   }
 
 }

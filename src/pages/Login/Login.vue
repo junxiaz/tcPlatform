@@ -1,5 +1,5 @@
 <template>
-  <el-container direction="vertical" class="wrap">
+  <el-container direction="vertical" class="wrap" style="height: 100%!important;">
     <IndexHeader class="header-home">
       <!-- <router-link slot="home" to="/home">
         <i class="el-icon-house"></i>首页
