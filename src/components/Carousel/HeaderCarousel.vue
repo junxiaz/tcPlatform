@@ -3,39 +3,13 @@
     <el-carousel-item v-for="item in imgUrls" :key="item.id">
       <img :src="item.idView" alt @load="imgLoad" ref="bannerHeight"/>
       <div class="operate-btns" v-if="item.id == 3">
-        <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
+        <router-link to="/release">
+          <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
+        </router-link>
         <el-button type="primary">服务商入驻</el-button>
       </div>
     </el-carousel-item>
-    <!--<el-carousel-item>
-      <img src="./images/banner1.png" alt @load="imgLoad" ref="bannerHeight"/>
-    </el-carousel-item>
-     <el-carousel-item>
-      <img src="./images/banner2.jpg" alt @load="imgLoad" ref="bannerHeight" />
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="./images/banner3.png" alt @load="imgLoad" ref="bannerHeight" />
-      <div class="operate-btns">
-        <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
-        <el-button type="primary">服务商入驻</el-button>
-      </div>
-    </el-carousel-item> -->
   </el-carousel>
-  <!-- <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item>
-      <img src="./images/banner1.png" alt />
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="./images/banner2.jpg" alt />
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="./images/banner3.png" alt />
-      <div class="operate-btns">
-        <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
-        <el-button type="primary">服务商入驻</el-button>
-      </div>
-    </el-carousel-item>
-  </el-carousel> -->
 </template>
 
 <script>
@@ -54,7 +28,9 @@ export default {
   methods: {
     imgLoad() {
       this.$nextTick(() => {
-        this.bannerHeight = this.$refs.bannerHeight[0].height - 2
+        // 获取窗口宽度*图片的比例，定义页面初始的轮播图高度
+        this.bannerHeight = document.body.clientHeight
+
       })
     }
   },
@@ -62,7 +38,6 @@ export default {
     this.imgLoad();
     window.addEventListener('resize', () => {
       this.bannerHeight = this.$refs.bannerHeight[0].height - 2
-      this.imgLoad()
     })
   }
 }

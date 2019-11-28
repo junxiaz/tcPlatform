@@ -6,95 +6,38 @@
       <!-- 材料介绍 -->
       <div class="products-wrap">
         <el-row type="flex" class="products w1220" justify="center">
-          <el-col :span="8">
+          <el-col :span="8" v-for="(product, index) in products" :key="index">
             <div class="product">
               <a class="product-type" href="#">
-                <img src="./images/material_icon.png" alt="">
-                <h1>特种材料 ></h1>
+                <img :src="product.icon" alt="">
+                <h1>{{product.title}} ></h1>
               </a>
               <ul class="product-items">
-                <li>云膜</li>
-                <li>全印模</li>
-                <li>镭射</li>
-              </ul>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="product">
-              <a class="product-type" href="#">
-                <img src="./images/material_icon.png" alt="">
-                <h1>特种材料 ></h1>
-              </a>
-              <ul class="product-items">
-                <li>云膜</li>
-                <li>全印模</li>
-                <li>镭射</li>
-              </ul>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="product">
-              <a class="product-type" href="#">
-                <img src="./images/material_icon.png" alt="">
-                <h1>特种材料 ></h1>
-              </a>
-              <ul class="product-items">
-                <li>云膜</li>
-                <li>全印模</li>
-                <li>镭射</li>
+                <li v-for="(item, index) in product.list" :key="index">{{item.title}}</li>
               </ul>
             </div>
           </el-col>
         </el-row>
       </div>
+      <!-- 数据展示 -->
       <div class="nums-wrap">
         <div class="w1220">
           <el-row :gutter="33" type="flex" justify="center" class="nums-top">
-            <el-col :span="6">
+            <el-col :span="6" v-for="(item, index) in nums" :key="index" v-if="index<4">
               <div class="num">
-                <img src="./images/users.png" alt="">
-                <p>1234</p>
-                <span>注册用户数</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="num">
-                <img src="./images/users.png" alt="">
-                <p>1234</p>
-                <span>注册用户数</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="num">
-                <img src="./images/users.png" alt="">
-                <p>1234</p>
-                <span>注册用户数</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="num">
-                <img src="./images/users.png" alt="">
-                <p>1234</p>
-                <span>注册用户数</span>
+                <img :src="item.src" alt="">
+                <p>{{item.num}}</p>
+                <span>{{item.title}}</span>
               </div>
             </el-col>
           </el-row>
           <el-row :gutter="33" class="nums-bottom">
-            <el-col :span="12">
+            <el-col :span="12"  v-for="(item, index) in nums" :key="index" v-if="index>=4">
               <el-row class="num">
-                <el-col :span="10"><img src="./images/turnover.png" alt=""></el-col>
+                <el-col :span="10"><img :src="item.src" alt=""></el-col>
                 <el-col :span="14">
-                  <p>2222</p>
-                  <span>成交金额</span>
-                </el-col>
-              </el-row>
-            </el-col>
-            <el-col :span="12">
-              <el-row class="num">
-                <el-col :span="10"><img src="./images/turnover.png" alt=""></el-col>
-                <el-col :span="14">
-                  <p>2222</p>
-                  <span>成交金额</span>
+                  <p>{{item.num}}</p>
+                  <span>{{item.title}}</span>
                 </el-col>
               </el-row>
             </el-col>
@@ -103,27 +46,24 @@
       </div>
       <!-- 金牌合作商 -->
       <div class="gold-partner">
-        <div class="gold-partner-title">
-          <h1>金牌合作商</h1>
-          <h4>天臣互联网产业平台合作伙伴</h4>
-          <div class="gold-partner-items">
-            <el-col :span="6" v-for="(o, index) in 5" :key="index" style="height:100%;">
-              <el-card style="height:100%;" :body-style="{ padding: '0px', height: '100%' }">
-                <img style="height:100%" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <!-- <div style="padding: 14px;">
-                  <span>好吃的汉堡</span>
-                  <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                  </div>
-                </div> -->
-              </el-card>
-            </el-col>
-          </div>
-          <div class="change-btns">
-            <el-button circle><-</el-button>
-            <el-button circle>-></el-button>
-          </div>
+        <Title title="金牌合作商" titleColor="#1e88e5" subTitle="天臣互联网产业平台合作伙伴" subTitleColor="rgb(46,46,46)"></Title>
+        <div class="gold-partner-items">
+          <el-col :span="6" v-for="(o, index) in 5" :key="index" style="height:100%;">
+            <el-card style="height:100%;" :body-style="{ padding: '0px', height: '100%' }">
+              <img style="height:100%" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <!-- <div style="padding: 14px;">
+                <span>好吃的汉堡</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button">操作按钮</el-button>
+                </div>
+              </div> -->
+            </el-card>
+          </el-col>
+        </div>
+        <div class="change-btns">
+          <el-button circle><-</el-button>
+          <el-button circle>-></el-button>
         </div>
       </div>
       <!-- 发布需求按钮 -->
@@ -132,8 +72,7 @@
       </div>
       <!-- 服务商大厅 -->
       <div class="service-hall">
-        <el-button type="text">服务商大厅 ></el-button>
-        <h4>服务12000+客户，沉淀2500+案例</h4>
+        <Title title="服务商大厅 >" titleColor="#fff" subTitle="服务12000+客户，沉淀2500+案例" subTitleColor="#fff" link="/release"></Title>
         <div class="service-types">
           <el-tabs :stretch="true" v-model="activeName" @tab-click="handleClick">
             <el-tab-pane class="w1220" label="用户管理" name="first">
@@ -219,7 +158,7 @@
       </div>
       <!-- 需求动态 -->
       <div class="demand-dynamic">
-        <el-button type="text">需求动态 ></el-button>
+        <Title title="需求动态 >" titleColor="#4f69dd"></Title>
         <div class="w1220">
           <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
             <el-col :span="6">
@@ -317,8 +256,7 @@
       </div>
       <!-- 企业支持 -->
       <div class="company-support">
-        <el-button type="text">企业支持 ></el-button>
-        <h4>帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！</h4>
+        <Title title="企业支持 >" titleColor="#f85d5d" subTitle="帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！" subTitleColor="#2e2e2e"></Title>
         <div class="w1220">
           <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
             <el-col :span="8">
@@ -380,13 +318,27 @@
 import HeaderGuide from '@/components/HeaderGuide/HeaderGuide'
 import FooterGuide from '@/components/FooterGuide/FooterGuide'
 import HeaderCarousel from '@/components/Carousel/HeaderCarousel'
+import Title from '@/components/Title/Title'
 export default {
   name: "Home",
   data() {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      activeName: 'first'
+      activeName: 'first',
+      products: [  //特种材料
+        {icon: '/static/images/material_icon.png', title: '特种材料', list: [{title: '云膜'}, {title: '全印模'}, {title: '镭射'},]},
+        {icon: '/static/images/print_icon.png', title: '包装印刷', list: [{title: '酒类'}, {title: '烟类'}, {title: '化妆品'},]},
+        {icon: '/static/images/design_icon.png', title: '设计服务', list: [{title: 'LOGO设计'}, {title: '包装设计'}, {title: '产品效果图'},]},
+      ],
+      nums: [  //数据展示
+        {src: '/static/images/users.png', title: '注册用户数', num: '1234'},
+        {src: '/static/images/server.png', title: '入驻服务商数', num: '1234'},
+        {src: '/static/images/demand.png', title: '发布需求数', num: '1234'},
+        {src: '/static/images/order.png', title: '订单成交数', num: '1234'},
+        {src: '/static/images/turnover.png', title: '成交金额', num: '1234'},
+        {src: '/static/images/escrow.png', title: '托管金额', num: '1234'},
+      ],
     };
   },
   methods: {
@@ -400,7 +352,8 @@ export default {
   components: {
     HeaderGuide,
     FooterGuide,
-    HeaderCarousel
+    HeaderCarousel,
+    Title
   }
 };
 </script>
@@ -506,19 +459,7 @@ export default {
     .gold-partner {
       text-align: center;
       background: #fff;
-      .gold-partner-title {
-        h1 {
-          font-size: 30px;
-          color: $blue;
-        }
-        h4 {
-          font-size: 14px;
-          color: $fontGray;
-          font-weight: 100;
-        }
-      }
       .gold-partner-items {
-        margin-top: 10px;
         margin-bottom: 20px;
         overflow: hidden;
         width: 100%;
@@ -541,21 +482,9 @@ export default {
       text-align: center;
       min-height: 935px;
       box-sizing: border-box;
-      padding-top: 37px;
+      // padding-top: 37px;
       padding-bottom: 37px;
       background: url(./images/service_hall_bg.png) no-repeat;
-      >.el-button{
-        font-size: 30px;
-        font-weight: 600;
-        color: #fffbf7;
-      }
-      >h4 {
-        font-size: 14px;
-        font-weight: 500;
-        color: #fff;
-        margin-top: 10px;
-        margin-bottom: 6px;
-      }
       // 服务商列表
       .service-types {
         .service-row-items {
@@ -607,37 +536,22 @@ export default {
     .demand-dynamic {
       width: 100%;
       text-align: center;
-      min-height: 700px;
+      min-height: 698px;
       color: rgb(79, 105, 221);
       box-sizing: border-box;
-      padding-top: 37px;
       padding-bottom: 37px;
       overflow-x: hidden;
-      background: url(./images/demand_dynamic_bg.png) no-repeat;
-      >.el-button{
-        margin-bottom: 20px;
-        font-size: 30px;
-        font-weight: 600;
-        color: rgb(79, 105, 221);
-      }
+      background: url(./images/demand_dynamic_bg.png) no-repeat center center;
       // 服务商列表
       .dynamic-row-items {
         .dynamic-item {
-          height: 253px;
+          min-height: 253px;
           box-sizing: border-box;
           border: solid 2px rgb(79, 105, 221);
           background: #fff;
           margin-bottom: 20px;
           padding: 28px 15px 10px;
           font-size: 18px;
-          // <ul class="service-item">
-          //         <li><img src="./images/gowin.png" alt=""></li>
-          //         <li>专注品牌策略与视觉设计</li>
-          //         <li>革文营销策划</li>
-          //         <p class="line"></p>
-          //         <li>
-          //           <el-button type="primary">了解详情 ></el-button>
-          //         </li>
           li:nth-of-type(1) {
             font-size: 20px;
             font-weight: 600;
@@ -674,21 +588,8 @@ export default {
       text-align: center;
       min-height: 512px;
       box-sizing: border-box;
-      padding-top: 37px;
       background: #fdf8f8;
       overflow-x: hidden;
-      >.el-button{
-        font-size: 30px;
-        font-weight: 600;
-        color: rgb(248, 93, 93);
-      }
-      >h4 {
-        font-size: 14px;
-        font-weight: 500;
-        color: $fontGray;
-        margin-top: 0;
-        margin-bottom: 30px;
-      }
       .support-row-items {
         .support-item {
           height: 190px;

@@ -7,11 +7,6 @@ Vue.use(Router);
 
 let baseRoute = [
   {
-    path: '/login',
-    name: '登录',
-    component: rb => require(['../pages/Login/Login.vue'], rb)
-  },
-  {
     path: '/401',
     name: '权限不足',
     component: rb => require(['../pages/Common/401.vue'], rb)
