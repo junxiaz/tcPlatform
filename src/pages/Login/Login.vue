@@ -1,10 +1,6 @@
 <template>
   <el-container direction="vertical" class="wrap" style="height: 100%!important;">
-    <IndexHeader class="header-home">
-      <!-- <router-link slot="home" to="/home">
-        <i class="el-icon-house"></i>首页
-      </router-link> -->
-    </IndexHeader>
+    <IndexHeader class="header-home"></IndexHeader>
     <el-main class="content">
       <div class="login-main">
         <div class="w1220">
@@ -13,45 +9,44 @@
             <el-tabs v-model="activeName">
               <!-- 登录 -->
               <el-tab-pane label="登录" name="login">
-                <el-form status-icon ref="loginForm" class="login-form reset-form">
-                  <el-form-item>
-                    <el-input placeholder="请输入您的账号" prefix-icon="el-icon-user"></el-input>
+                <el-form status-icon ref="loginForm" :model="loginForm" :rules="rules" class="login-form reset-form">
+                  <el-form-item prop="mobile">
+                    <el-input placeholder="请输入您的账号" v-model="loginForm.mobile" prefix-icon="el-icon-user"></el-input>
                   </el-form-item>
-                  <el-form-item>
-                    <el-input placeholder="请输入您的密码" prefix-icon="el-icon-lock"></el-input>
+                  <el-form-item prop="pwd">
+                    <el-input placeholder="请输入您的密码" v-model="loginForm.pwd" type="password" prefix-icon="el-icon-lock"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button type="text">忘记密码？</el-button>
                   </el-form-item>
                   <el-form-item>
-                    <el-button type="primary">提交</el-button>
+                    <el-button type="primary" @click="loginOrRegister('loginForm')">提交</el-button>
                   </el-form-item>
                 </el-form>
               </el-tab-pane>
               <!-- 注册 -->
-              <el-tab-pane label="注册" name="register">
-                <el-form status-icon ref="registerForm" class="register-form reset-form">
-                  <el-form-item>
-                    <el-input placeholder="请输入您的账号" prefix-icon="el-icon-user"></el-input>
+              <el-tab-pane label="注册" mobile="register">
+                <el-form status-icon ref="registerForm" :rules="rules" :model="registerForm" class="register-form reset-form">
+                  <el-form-item prop="mobile">
+                    <el-input placeholder="请输入您的账号" v-model="registerForm.mobile" prefix-icon="el-icon-user"></el-input>
                   </el-form-item>
-                  <el-form-item>
-                    <el-input placeholder="请输入您的密码" prefix-icon="el-icon-lock"></el-input>
+                  <el-form-item prop="pwd">
+                    <el-input placeholder="请输入您的密码" type="password" v-model="registerForm.pwd" prefix-icon="el-icon-lock"></el-input>
                   </el-form-item>
-                  <el-form-item>
-                    <el-select v-model="types" placeholder="请选择客户类型" prefix-icon="el-icon-lock">
-                      <el-option label="公司" value="company"></el-option>
-                      <el-option label="个人" value="private"></el-option>
+                  <el-form-item prop="userType">
+                    <el-select v-model="registerForm.userType" placeholder="请选择客户类型" prefix-icon="el-icon-lock">
+                      <el-option v-for="item in userType" :key="item.userType" :label="item.userTypeName" :value="item.userType"></el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item>
                     <el-button type="text">忘记密码？</el-button>
                   </el-form-item>
                   <el-form-item>
-                    <el-checkbox v-model="checked">我已阅读并同意</el-checkbox>
+                    <el-checkbox ref="checkRule" v-model="registerForm.checkRule">我已阅读并同意</el-checkbox>
                     <el-button type="text" id="tips">《天臣产业互联网平台》</el-button>
                   </el-form-item>
                   <el-form-item>
-                    <el-button type="primary">提交</el-button>
+                    <el-button type="primary" @click="loginOrRegister('registerForm')">提交</el-button>
                   </el-form-item>
                 </el-form>
               </el-tab-pane>
@@ -67,14 +62,76 @@
 <script>
 import IndexHeader from "@/components/HeaderGuide/IndexHeader";
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
+import md5 from 'js-md5';
 export default {
   name: "Login",
   data() {
     return {
       activeName: "login",
-      types: "",
-      checked: false,
+      userType: [],
+      loginForm: {
+        mobile: '',
+        pwd: '',
+      },
+      registerForm: {
+        mobile: '',
+        pwd: '',
+        userType: '',
+        checkRule: false,
+      },
+      rules: {
+        mobile: [
+          { required: true, message: "请输入账号", trigger: "blur" }
+        ],
+        pwd: [
+          { required: true, message: "请输入密码", trigger: "blur" }
+        ],
+        userType: [
+          { required: true, message: "请选择客户类型", trigger: "blur" }
+        ],
+      }
     };
+  },
+  methods: {    
+    // 获取注册用户类型
+    reqUserType() {
+      this.$api.user.userType().then(res=> {
+        this.userType = res.list
+      })
+    },
+    // 登录或注册页面
+    loginOrRegister(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          if (formName == "registerForm") {
+            if(this.registerForm.checkRule) {
+              const pwd = md5(this.registerForm.pwd).toLocaleUpperCase();
+              let registerData = JSON.parse(JSON.stringify(this.registerForm))
+              registerData.pwd = pwd
+              this.$api.user.register(registerData).then(res => {
+                this.$router.push('/register')
+              })
+            } else {
+              this.$message({
+                type: 'warning',
+                message: "请在注册前仔细阅读平台规则并同意"
+              });
+              this.$refs['checkRule'].focus = true;
+            }
+          } else if (formName == "loginForm") {
+            const pwd = md5(this.loginForm.pwd).toLocaleUpperCase();
+            const loginData = JSON.parse(JSON.stringify(this.loginForm))
+            loginData.pwd = pwd
+            this.$api.user.login(loginData).then(res => {
+              this.$router.push('/seller/home')
+            })
+          }
+        }
+      });
+    }
+  },
+  mounted() {
+    this.reqUserType()
   },
   components: {
     IndexHeader,

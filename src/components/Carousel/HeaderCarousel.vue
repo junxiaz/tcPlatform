@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :interval="5000" arrow="always" :height="bannerHeight+ 'px'">
+  <el-carousel class="header-carousel" :interval="5000" arrow="always" :height="bannerHeight+ 'px'">
     <el-carousel-item v-for="item in imgUrls" :key="item.id">
       <img :src="item.idView" alt @load="imgLoad" ref="bannerHeight"/>
       <div class="operate-btns" v-if="item.id == 3">
@@ -43,9 +43,17 @@ export default {
 }
 </script>
 
-<style>
-.el-carousel__item img {
-  width: 100%;
+<style lang="scss">
+.header-carousel {
+  .el-carousel__item img {
+    width: 100%;
+  }
+  .el-carousel__button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgb(140, 140, 140)
+  }
 }
 </style>
 

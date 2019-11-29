@@ -49,21 +49,14 @@
         <Title title="金牌合作商" titleColor="#1e88e5" subTitle="天臣互联网产业平台合作伙伴" subTitleColor="rgb(46,46,46)"></Title>
         <div class="gold-partner-items">
           <el-col :span="6" v-for="(o, index) in 5" :key="index" style="height:100%;">
-            <el-card style="height:100%;" :body-style="{ padding: '0px', height: '100%' }">
-              <img style="height:100%" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-              <!-- <div style="padding: 14px;">
-                <span>好吃的汉堡</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">操作按钮</el-button>
-                </div>
-              </div> -->
+            <el-card style="height:100%; text-algn:center;" :body-style="{ padding: '0px', height: '100%' }">
+              <img style="height:100%; margin:0 auto;" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
             </el-card>
           </el-col>
         </div>
         <div class="change-btns">
-          <el-button circle><-</el-button>
-          <el-button circle>-></el-button>
+          <el-button circle>←</el-button>
+          <el-button circle>→</el-button>
         </div>
       </div>
       <!-- 发布需求按钮 -->
@@ -259,48 +252,11 @@
         <Title title="企业支持 >" titleColor="#f85d5d" subTitle="帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！" subTitleColor="#2e2e2e"></Title>
         <div class="w1220">
           <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="8">
+            <el-col :span="8" v-for="(support, index) in supports" :key="index">
               <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
-              </ul>
-            </el-col>
-            <el-col :span="8">
-              <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
-              </ul>
-            </el-col>
-            <el-col :span="8">
-              <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
-              </ul>
-            </el-col>
-          </el-row>
-          <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="8">
-              <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
-              </ul>
-            </el-col>
-            <el-col :span="8">
-              <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
-              </ul>
-            </el-col>
-            <el-col :span="8">
-              <ul class="support-item">
-                <li><img src="./images/support1.png" alt=""></li>
-                <li>技术支持</li>
-                <li>提供互联网技术解决方案，订单全流程</li>
+                <li><img :src="support.icon" alt=""></li>
+                <li>{{support.title}}</li>
+                <li>{{support.subTitle}}</li>
               </ul>
             </el-col>
           </el-row>
@@ -339,6 +295,14 @@ export default {
         {src: '/static/images/turnover.png', title: '成交金额', num: '1234'},
         {src: '/static/images/escrow.png', title: '托管金额', num: '1234'},
       ],
+      supports: [  //企业支持
+        {icon: '/static/images/support1.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+      ]
     };
   },
   methods: {
@@ -359,11 +323,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .el-carousel__button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
   // 服务商列表
   .service-types {
     .el-tabs {
@@ -464,6 +423,16 @@ export default {
         overflow: hidden;
         width: 100%;
         height: 480px;
+      }
+      .change-btns {
+        .el-button {
+          padding: 2px 5px 8px;
+          border-width: 2px;
+          font-weight: 900;
+          font-size: 28px;
+          vertical-align: middle;
+          background-color: #fdf8f8;
+        }
       }
     }
     // 发布需求

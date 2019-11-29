@@ -8,6 +8,10 @@ import ElementUI from 'element-ui'
 import '../theme/index.css'
 import './assets/style/index.scss'
 import 'normalize.css' // a modern alternative to CSS resets
+import store from './store' // 导入vuex文件
+import api from './api' // 导入api接口
+
+Vue.prototype.$api = api; // 将api挂载到vue的原型上
 
 import 'babel-polyfill';//ie浏览器显示问题
 
