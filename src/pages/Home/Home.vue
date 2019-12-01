@@ -252,7 +252,16 @@
         <Title title="企业支持 >" titleColor="#f85d5d" subTitle="帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！" subTitleColor="#2e2e2e"></Title>
         <div class="w1220">
           <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="8" v-for="(support, index) in supports" :key="index">
+            <el-col :span="8" v-if="index < 3" v-for="(support, index) in supports" :key="index">
+              <ul class="support-item">
+                <li><img :src="support.icon" alt=""></li>
+                <li>{{support.title}}</li>
+                <li>{{support.subTitle}}</li>
+              </ul>
+            </el-col>
+          </el-row>
+          <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
+            <el-col :span="8" v-if="index >= 3" v-for="(support, index) in supports" :key="index">
               <ul class="support-item">
                 <li><img :src="support.icon" alt=""></li>
                 <li>{{support.title}}</li>
@@ -297,11 +306,11 @@ export default {
       ],
       supports: [  //企业支持
         {icon: '/static/images/support1.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: '/static/images/support2.png', title: '费用可控', subTitle: '价格透明，费用清晰' },
+        {icon: '/static/images/support3.png', title: '品类齐全', subTitle: '超过1500余种云膜产品，包装耗材等订制品' },
+        {icon: '/static/images/support4.png', title: '全国服务', subTitle: '服务范围覆盖300多个城市和1600个县城' },
+        {icon: '/static/images/support5.png', title: '服务保障', subTitle: '先行赔付，仓储物流代运营' },
+        {icon: '/static/images/support6.png', title: '设计师团队', subTitle: '7*24小时服务不间断，专属团队低价护航' },
       ]
     };
   },

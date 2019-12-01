@@ -28,9 +28,7 @@ export default {
   methods: {
     imgLoad() {
       this.$nextTick(() => {
-        // 获取窗口宽度*图片的比例，定义页面初始的轮播图高度
-        this.bannerHeight = document.body.clientHeight
-
+        this.bannerHeight = this.$refs.bannerHeight[0].height - 2
       })
     }
   },
