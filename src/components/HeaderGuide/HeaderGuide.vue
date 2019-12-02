@@ -33,18 +33,16 @@
     </div>
 
     <div class="header-operates">
-      <router-link to="/login" style="padding-right:24px;">
-        <el-button type="text" size="small" class="login-register" to="/login">登录</el-button>
+      <router-link to="/login/login" style="padding-right:24px;">
+        <el-button type="text" size="small" class="login-register-btn">登录</el-button>
       </router-link>
-      <router-link to="/login" style="padding-right: 38px;">
-        <el-button type="text" size="small" class="login-register">注册</el-button>
+      <router-link to="/login/register" style="padding-right: 38px;">
+        <el-button type="text" size="small" class="login-register-btn">注册</el-button>
       </router-link>
       <router-link to="/release">
         <el-button size="small" type="primary">立即发布</el-button>
       </router-link>
     </div>
-    <!-- 操作按钮 -->
-  <!-- <router-view></router-view> -->
   </el-header>
 </template>
 
@@ -105,7 +103,7 @@ export default {
   .header-operates {
     float: right;
     padding-right: 55px;
-    .login-register {
+    .login-register-btn {
       color: #fff;
       &:hover {
         color: #1e88e5;

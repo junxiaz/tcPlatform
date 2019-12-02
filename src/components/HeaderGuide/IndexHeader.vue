@@ -6,10 +6,12 @@
         <span>天臣互联网平台</span>
       </el-col>
       <el-col :span="12" algin="right" class="right">
-        <template v-if="this.$route.path == '/login'">
-          <i class="el-icon-house"></i>首页
+        <template v-if="this.$route.path != '/login'">
+          <router-link to="/home">
+            <i class="el-icon-house"></i>首页
+          </router-link>
         </template>
-        <el-button style="color: #1e88e5">发布需求</el-button>
+        <el-button v-else style="color: #1e88e5">发布需求</el-button>
       </el-col>
     </el-row>
   </el-header>

@@ -27,7 +27,12 @@ let headerMenus = [
 
 let userTerminal = [
     { path: '/',  redirect: '/home' },
-    { path: '/login', name: '登录', component: rb => require(['../pages/Login/Login.vue'], rb) },
+    { path: '/login', name: '登录', component: rb => require(['../pages/Login/Login.vue'], rb),
+      children: [
+        { path: 'login', name: 'login', component: rb => require(['../components/LoginForm/LoginForm.vue'], rb)},
+        { path: 'register', name: 'register', component: rb => require(['../components/LoginForm/LoginForm.vue'], rb) },
+      ]
+    },
     { path: '/label', name: '提交需求', component: rb => require(['../pages/Label/Label.vue'], rb) },
     { path: '/demand', component: rb => require(['../pages/Demand/Demand.vue'], rb) },
     { path: '/release', component: rb => require(['../pages/Release/Release.vue'], rb) },
