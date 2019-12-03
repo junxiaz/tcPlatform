@@ -27,7 +27,7 @@ let headerMenus = [
 
 let userTerminal = [
     { path: '/',  redirect: '/home' },
-    { path: '/login', name: '登录', component: rb => require(['../pages/Login/Login.vue'], rb),
+    { path: '/login', redirect: '/login/login', name: '登录', component: rb => require(['../pages/Login/Login.vue'], rb),
       children: [
         { path: 'login', name: 'login', component: rb => require(['../components/LoginForm/LoginForm.vue'], rb)},
         { path: 'register', name: 'register', component: rb => require(['../components/LoginForm/LoginForm.vue'], rb) },

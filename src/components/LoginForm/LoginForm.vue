@@ -53,6 +53,18 @@ import md5 from 'js-md5';
 export default {
   name: "Login",
   data() {
+    let checkPhone = (rule, value, callback) => {
+      const reg =/^[1][3-9][0-9]{9}$/;
+      if (value == '' || value == undefined || value == null) {
+        callback();
+      } else {
+        if ((!reg.test(value)) && value != '') {
+          callback(new Error('请输入正确的手机号码'));
+        } else {
+          callback();
+        }
+      }
+    }
     return {
       activeName: "",
       userType: [],
@@ -68,7 +80,8 @@ export default {
       },
       rules: {
         account: [
-          { required: true, message: "请输入账号", trigger: "blur" }
+          { required: true, message: "请输入账号", trigger: "blur" },
+          { validator: checkPhone, trigger: 'blur' }
         ],
         pwd: [
           { required: true, message: "请输入密码", trigger: "blur" }
@@ -117,6 +130,12 @@ export default {
             loginData.pwd = pwd
             this.$api.user.login(loginData).then(res => {
               this.$router.push('/seller/home')
+              // sessionStorage.setItem('userName', res.)
+              // if(res.checkStatus) {
+              //   this.$router.push('/seller/home')
+              // } else {
+              //   this.$router.push('/register')
+              // }
             })
           }
         }

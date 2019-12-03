@@ -2,7 +2,7 @@
   <div class="title">
     <el-button v-if="link == ''|| link == undefined" :style="{color: titleColor}" type="text">{{title}}</el-button>
     <router-link v-else :to="link">
-      <el-button :style="{color: titleColor}" type="text">服务商大厅 ></el-button>
+      <el-button :style="{color: titleColor}" type="text">{{title}}</el-button>
     </router-link>
     <h4 v-if="subTitle != '' || subTitle != ''" :style="{color: subTitleColor}">{{subTitle}}</h4>
   </div>    

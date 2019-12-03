@@ -1,50 +1,36 @@
 <template>
   <el-container direction="vertical">
-    <IndexHeader>
-      <router-link slot="home">
-        <i class="el-icon-house"></i>首页
-      </router-link>
-    </IndexHeader>
+    <IndexHeader></IndexHeader>
     <el-main>
       <div class="w1220">
-        <el-row class="title">企业/终端客户/创客注册详情</el-row>
+        <el-row class="title">企业/终端客户/创客认证</el-row>
         <el-divider></el-divider>
-        <el-form ref="form" class="register" :model="form" :rules="rules" label-width="80px">
-          <el-form-item label="用户名">
-            <el-input v-model="form.name"></el-input>
+        <el-form ref="form" class="register" :model="form"  label-width="100px">
+          <el-form-item label="认证类型">
+            <el-radio-group v-model="form.regType">
+              <el-radio :label="0">个人认证</el-radio>
+              <el-radio :label="1">企业认证</el-radio>
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="密码" prop="pass">
-            <el-input type="password" v-model="form.pass" autocomplete="off"></el-input>
-            <div class="el-upload__tip">（8-16位，至少含数字、字母两种组合）</div>
-          </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass">
-            <el-input type="password" v-model="form.checkPass" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="公司名称">
-            <el-input v-model="form.companyName"></el-input>
-          </el-form-item>
-          <el-form-item label="公司地址">
-            <el-input v-model="form.companyAddr"></el-input>
-          </el-form-item>
-          <el-form-item label="所在区域" class="region">
-            <el-select v-model="form.region">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>省
-            <el-select v-model="form.region">
-              <el-option label="区一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>市
-          </el-form-item>
-          <el-form-item label="详细地址">
-            <el-input class="addrs" v-model="form.companyAddr"></el-input>
-          </el-form-item>
-          <el-form-item label="联系人">
-            <el-input v-model="form.companyAddr"></el-input>
-          </el-form-item>
-          <el-form-item label="联系电话">
-            <el-input v-model="form.companyAddr"></el-input>
-          </el-form-item>
+          <template v-if="!form.regType">
+            <el-form-item label="真实姓名">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="身份证号码">
+              <el-input v-model="form.companyName"></el-input>
+            </el-form-item>
+          </template>
+          <template v-else>
+            <el-form-item label="企业名称">
+              <el-input v-model="form.companyName"></el-input>
+            </el-form-item>
+            <el-form-item label="统一信用代码">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="主营业务">
+              <el-input type="textarea" v-model="form.name"></el-input>
+            </el-form-item>
+          </template>
           <el-form-item style="text-align: center;">
             <el-button type="danger" @click="submitForm('form')">立即创建</el-button>
           </el-form-item>
@@ -61,36 +47,14 @@ import FooterGuide from "@/components/FooterGuide/FooterGuide";
 export default {
   name: "Register",
   data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else {
-        if (this.form.checkPass !== "") {
-          this.$refs.form.validateField("checkPass");
-        }
-        callback();
-      }
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
-      } else if (value !== this.form.pass) {
-        callback(new Error("两次输入密码不一致!"));
-      } else {
-        callback();
-      }
-    };
     return {
       form: {
+        regType: 1,
         name: "",
         region: "",
         pass: "",
         checkPass: ""
       },
-      rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }]
-      }
     };
   },
   methods: {
@@ -116,7 +80,14 @@ export default {
 .register {
   .el-input {
     width: 280px;
-    .el-input__inner {
+    .el-input__inner{
+      background-color: rgb(246, 246, 246);
+    }
+  }
+  .el-textarea {
+    width: 380px;
+    .el-textarea__inner{
+      min-height: 60px!important;
       background-color: rgb(246, 246, 246);
     }
   }

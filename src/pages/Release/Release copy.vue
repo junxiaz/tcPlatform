@@ -1,6 +1,6 @@
 <template>
   <el-container direction="vertical">
-    <!-- <Top /> -->
+    <Top />
     <IndexHeader>
       <router-link slot="home">
         <i class="el-icon-house"></i>首页
@@ -27,38 +27,8 @@
                 <el-radio label="3">特种材料</el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="需求标题" class="i-need title-blue" prop="title">
-              <el-input v-model="ruleForm.title"></el-input>
-            </el-form-item>
-            <el-form-item label="需求范围" class="i-need title-blue" prop="region">
-              <el-select v-model="ruleForm.region" placeholder="请选择需求范围">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="需求预算" class="i-need title-blue" prop="budget">
-              <el-input v-model="ruleForm.budget"></el-input>
-            </el-form-item>
-            <el-form-item label="托管资金" class="i-need title-blue" prop="funds">
-              <el-input v-model="ruleForm.funds"></el-input>
-            </el-form-item>
-            <el-form-item label="投标数目" class="i-need title-blue" prop="num">
-              <el-input v-model="ruleForm.num"></el-input>
-            </el-form-item>
-            <el-form-item label="项目周期" class="i-need title-blue" prop="cycle">
-              <el-date-picker
-                v-model="ruleForm.cycle"
-                type="daterange"
-                align="right"
-                unlink-panels
-                value-format="yyyy-MM-dd"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期">
-              </el-date-picker>
-            </el-form-item>
-            <el-form-item label="其他说明" class="i-need title-blue" prop="desc">
-              <el-input type="textregion" v-model="ruleForm.desc"></el-input>
+            <el-form-item label="其他说明" class="title-blue">
+              <el-input type="textarea" v-model="ruleForm.desc"></el-input>
             </el-form-item>
             <el-form-item label="添加附件" class="title-blue">
               <el-upload
@@ -95,45 +65,16 @@ export default {
     return {
       ruleForm: {
         need: "",
-        region: "",
-        budget: '',
-        funds: '',
-        num: '',
-        cycle: '',
         desc: "",
-        fileList: [],
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
         contact: "",
       },
       rules: {
-        need: [
-          { required: true, message: "请选择需要的需求", trigger: "change" }
-        ],
-        title: [
-          { required: true, message: '需求标题不能为空'},
-        ],
-        region: [
-          { required: true, message: '需求范围不能为空'},
-        ],
-        budget: [
-          { required: true, message: '需求预算不能为空'},
-          { type: 'number', message: '需求预算必须为数字'}
-        ],
-        funds: [
-          { required: true, message: '托管资金不能为空'},
-          { type: 'number', message: '托管资金必须为数字'}
-        ],
-        num: [
-          { required: true, message: '投标数目不能为空'},
-          { type: 'number', message: '投标数目必须为数字'}
-        ],
-        cycle: [
-          { required: true, message: '需求周期不能为空'},
-        ],
-        desc: [
-          { required: true, message: '说明不能为空'}
-        ],
         contact: [
           { required: true, message: "请输入联系方式", trigger: "blur" }
+        ],
+        need: [
+          { required: true, message: "请选择需要的需求", trigger: "change" }
         ],
       }
     };
@@ -153,7 +94,7 @@ export default {
   components: {
     IndexHeader,
     FooterGuide,
-    // Top
+    Top
   }
 };
 </script>
@@ -188,7 +129,7 @@ export default {
 .el-input {
   width: 280px;
 }
-.el-textregion textregion {
+.el-textarea textarea {
   width: 310px;
   min-height: 140px!important;
 }

@@ -17,7 +17,7 @@ export default {
   name: 'HeaderCarousel',
   data() {
     return {
-      bannerHeight: '',
+      bannerHeight: '620',
       imgUrls: [
         {id: 1, idView: require('./images/banner1.png')},
         {id: 2, idView: require('./images/banner2.jpg')},
@@ -33,8 +33,9 @@ export default {
     }
   },
   mounted() {
-    this.imgLoad();
+    // this.imgLoad();
     window.addEventListener('resize', () => {
+      // this.imgLoad()
       this.bannerHeight = this.$refs.bannerHeight[0].height - 2
     })
   }

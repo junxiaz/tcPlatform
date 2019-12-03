@@ -33,12 +33,17 @@
     </div>
 
     <div class="header-operates">
-      <router-link to="/login/login" style="padding-right:24px;">
-        <el-button type="text" size="small" class="login-register-btn">登录</el-button>
-      </router-link>
-      <router-link to="/login/register" style="padding-right: 38px;">
-        <el-button type="text" size="small" class="login-register-btn">注册</el-button>
-      </router-link>
+      <template>
+        <router-link to="/login/login" style="padding-right:24px;">
+          <el-button type="text" size="small" class="login-register-btn">登录</el-button>
+        </router-link>
+        <router-link to="/login/register" style="padding-right: 38px;">
+          <el-button type="text" size="small" class="login-register-btn">注册</el-button>
+        </router-link>
+      </template>
+      <template>
+        
+      </template>
       <router-link to="/release">
         <el-button size="small" type="primary">立即发布</el-button>
       </router-link>
