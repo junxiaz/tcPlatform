@@ -7,7 +7,7 @@
       </router-link>
     </IndexHeader>
     <el-main>
-      <div class="w1220">
+      <div class="w1220 release">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>发布需求</el-breadcrumb-item>
@@ -20,45 +20,38 @@
             ref="ruleForm"
             label-width="220px"
           >
-            <el-form-item label="我需要" class="i-need" prop="need">
-              <el-radio-group v-model="ruleForm.need">
-                <el-radio label="1">设计服务</el-radio>
-                <el-radio label="2">包装印刷</el-radio>
-                <el-radio label="3">特种材料</el-radio>
+            <el-form-item label="我需要" class="i-need" prop="demandType">
+              <el-radio-group v-model="ruleForm.demandType">
+                <el-radio v-for="item in demandType" :key="item.demandType" :label="item.demandType">{{item.demandTypeName}}</el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="需求标题" class="i-need title-blue" prop="title">
-              <el-input v-model="ruleForm.title"></el-input>
+            <el-form-item label="需求标题" class="i-need title-blue" prop="demandTitle">
+              <el-input v-model="ruleForm.demandTitle"></el-input>
             </el-form-item>
-            <el-form-item label="需求范围" class="i-need title-blue" prop="region">
-              <el-select v-model="ruleForm.region" placeholder="请选择需求范围">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+            <el-form-item label="需求范围" class="i-need title-blue" prop="provinceId">
+              <el-select v-model="ruleForm.provinceId" placeholder="请选择需求范围">
+                <el-option v-for="item in province" :key="item.id" :label="item.provinceName" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="需求预算" class="i-need title-blue" prop="budget">
-              <el-input v-model="ruleForm.budget"></el-input>
+            <el-form-item label="需求预算" class="i-need title-blue" prop="capitalCount">
+              <el-input v-model.number="ruleForm.capitalCount"></el-input>
             </el-form-item>
-            <el-form-item label="托管资金" class="i-need title-blue" prop="funds">
-              <el-input v-model="ruleForm.funds"></el-input>
+            <el-form-item label="托管资金" class="i-need title-blue" prop="depositCount">
+              <el-input v-model.number="ruleForm.depositCount"></el-input>
             </el-form-item>
-            <el-form-item label="投标数目" class="i-need title-blue" prop="num">
-              <el-input v-model="ruleForm.num"></el-input>
+            <el-form-item label="投标数目" class="i-need title-blue" prop="tenderPlan">
+              <el-input v-model.number="ruleForm.tenderPlan"></el-input>
             </el-form-item>
-            <el-form-item label="项目周期" class="i-need title-blue" prop="cycle">
+            <el-form-item label="项目周期" class="i-need title-blue" prop="endDate">
               <el-date-picker
-                v-model="ruleForm.cycle"
-                type="daterange"
-                align="right"
-                unlink-panels
+                v-model="ruleForm.endDate"
+                type="date"
                 value-format="yyyy-MM-dd"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期">
+                placeholder="结束日期">
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="其他说明" class="i-need title-blue" prop="desc">
-              <el-input type="textregion" v-model="ruleForm.desc"></el-input>
+            <el-form-item label="其他说明" class="i-need title-blue" prop="otherDesc">
+              <el-input type="textarea" v-model="ruleForm.otherDesc"></el-input>
             </el-form-item>
             <el-form-item label="添加附件" class="title-blue">
               <el-upload
@@ -94,61 +87,88 @@ export default {
   data() {
     return {
       ruleForm: {
-        need: "",
-        region: "",
-        budget: '',
-        funds: '',
-        num: '',
-        cycle: '',
-        desc: "",
+        demandType: "",
+        demandTitle: "",
+        provinceId: "",
+        capitalCount: '',
+        depositCount: '',
+        tenderPlan: '',
+        endDate: '',
+        otherDesc: "",
         fileList: [],
         contact: "",
       },
       rules: {
-        need: [
+        demandType: [
           { required: true, message: "请选择需要的需求", trigger: "change" }
         ],
-        title: [
-          { required: true, message: '需求标题不能为空'},
+        demandTitle: [
+          { required: true, message: '需求标题不能为空', trigger: 'blur'},
         ],
-        region: [
-          { required: true, message: '需求范围不能为空'},
+        provinceId: [
+          { required: true, message: '需求范围不能为空', trigger: 'blur'},
         ],
-        budget: [
-          { required: true, message: '需求预算不能为空'},
-          { type: 'number', message: '需求预算必须为数字'}
+        capitalCount: [
+          { required: true, message: '需求预算不能为空', trigger: 'blur'},
+          { type: 'number', message: '需求预算必须为数字', trigger: 'blur'}
         ],
-        funds: [
-          { required: true, message: '托管资金不能为空'},
-          { type: 'number', message: '托管资金必须为数字'}
+        depositCount: [
+          { required: true, message: '托管资金不能为空', trigger: 'blur'},
+          { type: 'number', message: '托管资金必须为数字', trigger: 'blur'}
         ],
-        num: [
-          { required: true, message: '投标数目不能为空'},
-          { type: 'number', message: '投标数目必须为数字'}
+        tenderPlan: [
+          { required: true, message: '投标数目不能为空', trigger: 'blur'},
+          { type: 'number', message: '投标数目必须为数字', trigger: 'blur'}
         ],
-        cycle: [
-          { required: true, message: '需求周期不能为空'},
+        endDate: [
+          { required: true, message: '需求周期不能为空', trigger: 'blur'},
         ],
-        desc: [
-          { required: true, message: '说明不能为空'}
+        otherDesc: [
+          { required: true, message: '说明不能为空', trigger: 'blur'}
         ],
         contact: [
           { required: true, message: "请输入联系方式", trigger: "blur" }
         ],
-      }
+      },
+      demandType: [],
+      province: [],
     };
   },
   methods: {
     submitForm(formcontact) {
       this.$refs[formcontact].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$api.demand.addDemand(this.ruleForm).then(res => {
+            this.$message({
+              message: '恭喜你，需求添加成功',
+              type: 'success'
+            });
+            setTimeout(() => {
+              window.history.back()
+            }, 1000);
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    // 获取需求类型
+    reqDemandType() {
+      this.$api.demand.reqDemandType().then(res => {
+        this.demandType = res.list
+      })
+    },
+    // 获取需求范围
+    reqProvince() {
+      this.$api.demand.reqProvince().then(res => {
+        this.province = res.list
+      })
     }
+  },
+  mounted() {
+    this.reqDemandType()
+    this.reqProvince();
   },
   components: {
     IndexHeader,
@@ -159,6 +179,7 @@ export default {
 </script>
 
 <style lang="scss">
+.release {
 .i-need .el-form-item__label {
   &::before{
     content: ''!important;
@@ -188,19 +209,20 @@ export default {
 .el-input {
   width: 280px;
 }
-.el-textregion textregion {
+.el-textarea .el-textarea__inner {
   width: 310px;
-  min-height: 140px!important;
+  min-height: 100px!important;
 }
 .annex .el-upload-list {
   width: 340px;
+}
 }
 </style>
 <style lang="scss" scoped>
 @import '@/assets/style/vars.scss';
 .el-container {
   background-color: #f6f6f6;
-  .w1220 {
+  .w1220.release {
     .el-breadcrumb {
       padding-top: 51px;
       padding-bottom: 20px;
