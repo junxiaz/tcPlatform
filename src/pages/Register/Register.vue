@@ -5,7 +5,7 @@
       <div class="w1220">
         <el-row class="title">企业/终端客户/创客认证</el-row>
         <el-divider></el-divider>
-        <el-form ref="form" class="register" :model="form"  label-width="100px">
+        <el-form ref="form" class="register" :rules="rules" :model="form" label-width="140px">
           <el-form-item label="认证类型">
             <el-radio-group v-model="form.regType">
               <el-radio :label="0">个人认证</el-radio>
@@ -13,22 +13,34 @@
             </el-radio-group>
           </el-form-item>
           <template v-if="!form.regType">
-            <el-form-item label="真实姓名">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="真实姓名" prop="personForm.userName">
+              <el-input v-model="form.personForm.userName"></el-input>
             </el-form-item>
-            <el-form-item label="身份证号码">
-              <el-input v-model="form.companyName"></el-input>
+            <el-form-item label="身份证号码" prop="personForm.idNumber">
+              <el-input v-model="form.personForm.idNumber"></el-input>
             </el-form-item>
           </template>
           <template v-else>
-            <el-form-item label="企业名称">
-              <el-input v-model="form.companyName"></el-input>
+            <el-form-item label="企业名称" prop="companyForm.enterpriseName">
+              <el-input v-model="form.companyForm.enterpriseName"></el-input>
             </el-form-item>
-            <el-form-item label="统一信用代码">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="统一社会信用代码" prop="companyForm.certificateCode">
+              <el-input v-model="form.companyForm.certificateCode"></el-input>
             </el-form-item>
-            <el-form-item label="主营业务">
-              <el-input type="textarea" v-model="form.name"></el-input>
+            <el-form-item label="企业描述" prop="companyForm.enterpriseDesc">
+              <el-input v-model="form.companyForm.enterpriseDesc"></el-input>
+            </el-form-item>
+            <el-form-item label="企业地址">
+              <el-input v-model="form.companyForm.enterpriseAddress"></el-input>
+            </el-form-item>
+            <el-form-item label="企业官网">
+              <el-input v-model="form.companyForm.enterpriseUrl"></el-input>
+            </el-form-item>
+            <el-form-item label="联系人">
+              <el-input v-model="form.companyForm.enterpriseContecter"></el-input>
+            </el-form-item>
+            <el-form-item label="联系方式">
+              <el-input v-model="form.companyForm.enterpriseTel"></el-input>
             </el-form-item>
           </template>
           <el-form-item style="text-align: center;">
@@ -53,7 +65,41 @@ export default {
         name: "",
         region: "",
         pass: "",
-        checkPass: ""
+        checkPass: "",
+        personForm: {
+          userName: '',
+          idNumber: ''
+        },
+        companyForm: {
+          "enterpriseName": "", //企业名称
+          "certificateCode": "",  //统一社会信用代码
+          "enterpriseDesc": "",  //企业描述
+          "enterpriseAddress": "", //企业地址
+          "enterpriseContecter": "", //联系人
+          "enterpriseTel": "",  //联系方式
+          "enterpriseUrl": "",  //企业官网
+        },
+      },
+      rules: {
+        personForm : {
+          userName: [
+            { required: true, message: "请输入真实姓名", trigger: "blur" }
+          ],
+          idNumber: [
+            { required: true, message: "请输入身份证号", trigger: "blur" }
+          ],
+        },
+        companyForm: {
+          enterpriseName: [
+            { required: true, message: "请输入名称", trigger: "blur" }
+          ],
+          certificateCode: [
+            { required: true, message: "请输入统一社会信用代码", trigger: "blur" }
+          ],
+          enterpriseDesc: [
+            { required: true, message: "请输入企业描述", trigger: "blur" }
+          ],
+        }
       },
     };
   },
@@ -61,13 +107,29 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          if(!this.regType) {
+            this.verifyUserByPerson()
+          } else {
+            this.verifyUserByEnterprise()
+          }
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
-    }
+    },
+    verifyUserByPerson() {
+      this.$api.user.verifyUserByPerson(this.form.personForm).then(res => {
+        this.$router.push('/seller/homes')
+      })
+    },
+    verifyUserByEnterprise() {
+      this.$api.user.verifyUserByEnterprise(this.form.companyForm).then(res => {
+        this.$router.push('/seller/homes')
+      })
+    },
+  },
+  mounted() {
+
   },
   components: {
     IndexHeader,

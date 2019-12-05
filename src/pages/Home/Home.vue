@@ -68,35 +68,13 @@
         <Title title="服务商大厅 >" titleColor="#fff" subTitle="服务12000+客户，沉淀2500+案例" subTitleColor="#fff" link="/release"></Title>
         <div class="service-types">
           <el-tabs :stretch="true" v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane class="w1220" label="用户管理" name="first">
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="center">
-                <el-col :span="8">
+            <el-tab-pane class="w1220" label="印刷企业" name="first">
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
                   <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-                <el-col :span="8">
-                  <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-                <el-col :span="8">
-                  <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
                       <el-button type="primary">了解详情 ></el-button>
@@ -104,34 +82,12 @@
                   </ul>
                 </el-col>
               </el-row>
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="center">
-                <el-col :span="8">
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
                   <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-                <el-col :span="8">
-                  <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-                <el-col :span="8">
-                  <ul class="service-item">
-                    <li><img src="./images/gowin.png" alt=""></li>
-                    <li>专注品牌策略与视觉设计</li>
-                    <li>革文营销策划</li>
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
                       <el-button type="primary">了解详情 ></el-button>
@@ -144,8 +100,8 @@
                 <el-button class="service-entering" type="primary">立即入驻</el-button>
               </el-row>
             </el-tab-pane>
-            <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-            <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+            <el-tab-pane label="设计人员" name="second">设计人员</el-tab-pane>
+            <el-tab-pane label="青年创客" name="third">青年创客</el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -153,94 +109,28 @@
       <div class="demand-dynamic">
         <Title title="需求动态 >" titleColor="#4f69dd"></Title>
         <div class="w1220">
-          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-            <el-col :span="6">
+          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="left">
+            <el-col :span="6" v-for="(item,index) in listNewDemand" :key="item.id" v-if="index<4">
               <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
+                <li>{{item.demandTitle}}</li>
                 <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>{{item.demandTypeDesc}}</li>
+                <li>项目预算：<span class="red">{{item.capitalCount}}</span></li>
                 <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
+                  <el-button type="primary" size="small"  @click="reqOrder(item.id)">了解详情</el-button>
                 </li>
               </ul>
             </el-col>
           </el-row>
-          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="center">
-            <el-col :span="6">
+          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="left">
+            <el-col :span="6" v-for="(item,index) in listNewDemand" :key="item.id" v-if="index>4">
               <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
+                <li>{{item.demandTitle}}</li>
                 <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
+                <li>{{item.demandTypeDesc}}</li>
+                <li>项目预算：<span class="red">{{item.capitalCount}}</span></li>
                 <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="6">
-              <ul class="dynamic-item">
-                <li>茅台飞天酒包装设计</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>包装设计</li>
-                <li>项目预算：<span class="red">￥100000</span></li>
-                <li>
-                  <el-button type="primary" size="small">了解详情</el-button>
+                  <el-button type="primary" size="small"  @click="reqOrder(item.id)">了解详情</el-button>
                 </li>
               </ul>
             </el-col>
@@ -311,7 +201,19 @@ export default {
         {icon: '/static/images/support4.png', title: '全国服务', subTitle: '服务范围覆盖300多个城市和1600个县城' },
         {icon: '/static/images/support5.png', title: '服务保障', subTitle: '先行赔付，仓储物流代运营' },
         {icon: '/static/images/support6.png', title: '设计师团队', subTitle: '7*24小时服务不间断，专属团队低价护航' },
-      ]
+      ],
+      demandParams: {
+        demandStatus: 0,
+        pageNum: 1,
+        pageSize: 8,
+      },
+      clientUserParams: {
+        userType: 1,
+        pageNum: 1,
+        pageSize: 6,
+      },
+      listNewDemand: [],
+      listClientUser: [],
     };
   },
   methods: {
@@ -320,7 +222,26 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event);
-    }
+    },
+    reqListNewDemand() {
+      this.$api.demand.reqListNewDemand(this.demandParams).then(res => {
+        this.listNewDemand = res.datas.records
+      })
+    },
+    reqlistClientUser() {
+      this.$api.user.listClientUser(this.clientUserParams).then(res => {
+        this.listClientUser = res.datas.records
+      })
+    },
+    reqOrder(id) {
+      this.$router.push({
+        path: `/order/${id}`,
+      })
+    },
+  },
+  mounted() {
+    this.reqListNewDemand()
+    this.reqlistClientUser()
   },
   components: {
     HeaderGuide,

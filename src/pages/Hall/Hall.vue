@@ -80,100 +80,38 @@
                 </el-row>
               </div>
 
-              <!-- <el-form-item label="活动名称">
-                <el-input></el-input>
-              </el-form-item>-->
-              <!-- <el-button size="mini" v-for="tag in tags" :key="tag.name"> {{tag.name}}</el-button> -->
               <div class="demand">
                 <div class="w1220">
-                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="center">
-                    <el-col :span="6">
+                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="left">
+                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id" v-if="index<4">
                       <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="audited">已审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="completed">已完成</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                        <li>{{item.demandTitle}}</li>
+                        <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
+                        <li>需求地区：{{item.provinceName}}</li>
+                        <li>截止时间：{{item.endTime}}</li>
+                        <li>投标状态：<el-progress :percentage="(item.tenderReal/item.tenderPlan).toFixed(2)*100" :stroke-width="12"></el-progress></li>
+                        <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
                   </el-row>
-                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="center">
-                    <el-col :span="6">
+                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="left">
+                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id" v-if="index>=4">
                       <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                    <el-col :span="6">
-                      <ul class="demand-items">
-                        <li>金剑南包装设计</li>
-                        <li>产品包装<span class="reviewing">待审核</span></li>
-                        <li>需求地区：襄阳</li>
-                        <li>截止时间：2019-10-09</li>
-                        <li>完成状态：<el-progress :percentage="10" :stroke-width="12" :format="format"></el-progress></li>
-                        <li><el-link type="primary" :underline="false">查看详情</el-link></li>
+                        <li>{{item.demandTitle}}</li>
+                        <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
+                        <li>需求地区：{{item.provinceName}}</li>
+                        <li>截止时间：{{item.endTime}}</li>
+                        <li>投标状态：<el-progress :percentage="(item.tenderReal/item.tenderPlan).toFixed(2)*100" :stroke-width="12"></el-progress></li>
+                        <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
                   </el-row>
                   <el-pagination
                     background
                     layout="prev, pager, next"
-                    :total="50">
+                    :page-size="params.pageSize"  
+                    :total="total"
+                    @current-change="handleCurrentChange">
                   </el-pagination>
                 </div>
               </div>
@@ -231,16 +169,43 @@ export default {
           label: "北京烤鸭北京烤鸭"
         }
       ],
-      value: ""
+      value: "",
+      params: {
+        pageNum: 1,
+        pageSize: 8
+      },
+      total: 0,
+      listData: []
     };
   },
   methods: {
+    //页码
+    handleCurrentChange(val) {
+      this.params.pageNo = val;
+      this.initEasyTable();
+    },
     sortChange() {
       console.log("1");
     },
-    format(percentage) {
-      return percentage === 100 ? '满' : `${percentage}%`;
+    // format(percentage, per, pers) {
+    //   console.log(`${per}/${pers}`)
+    //   return percentage === 100 ? '投标结束' : `${per}/${pers}`;
+    // },
+    reqListDemand() {
+      this.$api.demand.reqListDemand(this.params).then(res => {
+        this.listData = res.datas.records
+        this.total = res.datas.total
+      })
+    },
+    reqOrder(id) {
+      console.log(id)
+      this.$router.push({
+        path: `/order/${id}`,
+      })
     }
+  },
+  mounted() {
+    this.reqListDemand()
   },
   components: {
     HeaderGuide,
@@ -351,6 +316,7 @@ export default {
   // 中间内容
   .el-main {
     width: 100%;
+    margin-top: 60px;
     .demand-hall {
       .demand-types {
         .sort-row-items {
@@ -366,7 +332,7 @@ export default {
     // 需求
     .demand {
       width: 100%;
-      min-height: 755px;
+      min-height: 425px;
       background-color: rgb(243, 248, 253);
       box-sizing: border-box;
       padding-top: 30px;

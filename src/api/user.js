@@ -24,6 +24,16 @@ const user = {
     register(params) {
         return axios.post(`${base.sq}/user/registerClientUser`, params);
     },
+    verifyUserByPerson(params) {
+        return axios.post(`${base.sq}/user/verifyUserByPerson`, params);
+    },
+    verifyUserByEnterprise(params) {
+        return axios.post(`${base.sq}/user/verifyUserByEnterprise`, params);
+    },
+    // 首页 服务商
+    listClientUser(params) {
+        return axios.post(`${base.sq}/user/listClientUser`, params);
+    },
 }
 
 export default user;
