@@ -116,7 +116,7 @@
                 </div>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="服务需求" name="second">配置管理</el-tab-pane>
+            <!-- <el-tab-pane label="服务需求" name="second">配置管理</el-tab-pane> -->
           </el-tabs>
         </div>
       </div>
@@ -172,7 +172,9 @@ export default {
       value: "",
       params: {
         pageNum: 1,
-        pageSize: 8
+        pageSize: 8,
+        token: sessionStorage.getItem('token'),
+        userId: sessionStorage.getItem('userId')
       },
       total: 0,
       listData: []

@@ -6,7 +6,7 @@
         <el-row class="title">企业/终端客户/创客认证</el-row>
         <el-divider></el-divider>
         <el-form ref="form" class="register" :rules="rules" :model="form" label-width="140px">
-          <el-form-item label="认证类型">
+          <el-form-item v-if="userType == 2" label="认证类型">
             <el-radio-group v-model="form.regType">
               <el-radio :label="0">个人认证</el-radio>
               <el-radio :label="1">企业认证</el-radio>
@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       form: {
+        userType: '',
         regType: 1,
         personForm: {
           userId: sessionStorage.getItem('userId'),
@@ -128,8 +129,10 @@ export default {
       })
     },
   },
-  mounted() {
-
+  created() {
+    if(sessionStorage.getItem('userType')) {
+      this.userType = sessionStorage.getItem('userType')
+    }
   },
   components: {
     IndexHeader,

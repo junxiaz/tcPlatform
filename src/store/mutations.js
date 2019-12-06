@@ -6,7 +6,7 @@ export default {
     CHANGE_ACTIVE(state, payload) {
         state.activeIndex = payload;
     },
-    [RECEIVE_USER_INFO](state, { token, userCode, shopCode, userTypeCode,shopName}) {
+    [RECEIVE_USER_INFO](state, { token, userId, shopCode, userTypeCode,shopName}) {
         state.token = token;
         state.userCode = userCode;
         state.userTypeCode = userTypeCode;

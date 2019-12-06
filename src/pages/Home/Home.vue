@@ -23,7 +23,7 @@
       <div class="nums-wrap">
         <div class="w1220">
           <el-row :gutter="33" type="flex" justify="center" class="nums-top">
-            <el-col :span="6" v-for="(item, index) in nums" :key="index" v-if="index<4">
+            <el-col :span="4" v-for="(item, index) in nums" :key="index" v-if="index<6">
               <div class="num">
                 <img :src="item.src" alt="">
                 <p>{{item.num}}</p>
@@ -32,7 +32,7 @@
             </el-col>
           </el-row>
           <el-row :gutter="33" class="nums-bottom">
-            <el-col :span="12"  v-for="(item, index) in nums" :key="index" v-if="index>=4">
+            <el-col :span="12"  v-for="(item, index) in nums" :key="index" v-if="index>=6">
               <el-row class="num">
                 <el-col :span="10"><img :src="item.src" alt=""></el-col>
                 <el-col :span="14">
@@ -48,20 +48,27 @@
       <div class="gold-partner">
         <Title title="金牌合作商" titleColor="#1e88e5" subTitle="天臣互联网产业平台合作伙伴" subTitleColor="rgb(46,46,46)"></Title>
         <div class="gold-partner-items">
-          <el-col :span="6" v-for="(o, index) in 5" :key="index" style="height:100%;">
-            <el-card style="height:100%; text-algn:center;" :body-style="{ padding: '0px', height: '100%' }">
-              <img style="height:100%; margin:0 auto;" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+          <el-col :span="6" v-for="(item, index) in listPartner" :key="index" style="height:100%;">
+            <el-card @mouseenter.native="partnerInfo($event, index)" @mouseleave="isActive=false" ref="partnerInfo" :style="{backgroundImage: 'url(' + item.imgUrl + ')'}" class="partner-card" :body-style="{ padding: '0px', height: '100%'}">
+              <!-- <img style="height:100%; margin:0 auto;" :src="item.imgUrl" class="image"> -->
+              <div class="partner-info" :class="index===isActive?'show': 'hidden'">
+                <p>{{item.enterpriseName}}</p>
+                <p>{{item.enterpriseDesc}}</p>
+                <el-button plain>查看更多 ></el-button>
+              </div>
             </el-card>
           </el-col>
         </div>
         <div class="change-btns">
-          <el-button circle>←</el-button>
-          <el-button circle>→</el-button>
+          <el-button circle @click="pageChange('dec')">←</el-button>
+          <el-button circle @click="pageChange('add')">→</el-button>
         </div>
       </div>
       <!-- 发布需求按钮 -->
       <div class="publish-btn">
-        <el-button type="primary">发布需求</el-button>
+        <router-link to="/release">
+          <el-button type="primary">发布需求</el-button>
+        </router-link>
       </div>
       <!-- 服务商大厅 -->
       <div class="service-hall">
@@ -100,8 +107,71 @@
                 <el-button class="service-entering" type="primary">立即入驻</el-button>
               </el-row>
             </el-tab-pane>
-            <el-tab-pane label="设计人员" name="second">设计人员</el-tab-pane>
-            <el-tab-pane label="青年创客" name="third">青年创客</el-tab-pane>
+            <el-tab-pane class="w1220" label="设计人员" name="second">
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
+                  <ul class="service-item">
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
+                    <p class="line"></p>
+                    <li>
+                      <el-button type="primary">了解详情 ></el-button>
+                    </li>
+                  </ul>
+                </el-col>
+              </el-row>
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
+                  <ul class="service-item">
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
+                    <p class="line"></p>
+                    <li>
+                      <el-button type="primary">了解详情 ></el-button>
+                    </li>
+                  </ul>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-button class="service-more" type="primary">查看更多</el-button>
+                <el-button class="service-entering" type="primary">立即入驻</el-button>
+              </el-row>           
+            </el-tab-pane>
+            <el-tab-pane class="w1220" label="青年创客" name="third">
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
+                  <ul class="service-item">
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
+                    <p class="line"></p>
+                    <li>
+                      <el-button type="primary">了解详情 ></el-button>
+                    </li>
+                  </ul>
+                </el-col>
+              </el-row>
+              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
+                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
+                  <ul class="service-item">
+                    <li><img :src="item.logoUrl" alt=""></li>
+                    <li>{{item.enterpriseDesc}}</li>
+                    <li>{{item.enterpriseName}}</li>
+                    <p class="line"></p>
+                    <li>
+                      <el-button type="primary">了解详情 ></el-button>
+                    </li>
+                  </ul>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-button class="service-more" type="primary">查看更多</el-button>
+                <el-button class="service-entering" type="primary">立即入驻</el-button>
+              </el-row>
+              
+            </el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -186,14 +256,7 @@ export default {
         {icon: '/static/images/print_icon.png', title: '包装印刷', list: [{title: '酒类'}, {title: '烟类'}, {title: '化妆品'},]},
         {icon: '/static/images/design_icon.png', title: '设计服务', list: [{title: 'LOGO设计'}, {title: '包装设计'}, {title: '产品效果图'},]},
       ],
-      nums: [  //数据展示
-        {src: '/static/images/users.png', title: '注册用户数', num: '1234'},
-        {src: '/static/images/server.png', title: '入驻服务商数', num: '1234'},
-        {src: '/static/images/demand.png', title: '发布需求数', num: '1234'},
-        {src: '/static/images/order.png', title: '订单成交数', num: '1234'},
-        {src: '/static/images/turnover.png', title: '成交金额', num: '1234'},
-        {src: '/static/images/escrow.png', title: '托管金额', num: '1234'},
-      ],
+      nums: [],
       supports: [  //企业支持
         {icon: '/static/images/support1.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
         {icon: '/static/images/support2.png', title: '费用可控', subTitle: '价格透明，费用清晰' },
@@ -212,16 +275,57 @@ export default {
         pageNum: 1,
         pageSize: 6,
       },
+      partnerParams: {
+        userType: 0,
+        pageNum: 1,
+        pageSize: 4,
+      },
       listNewDemand: [],
       listClientUser: [],
+      listPartner: [],
+      partnerTotal: '',
+      isActive: false,
+      data: {},
     };
   },
   methods: {
+    pageChange(ope) {
+      if(ope == 'add') {
+        if(this.partnerTotal > this.partnerParams.pageNum) {
+          this.partnerParams.pageNum++
+          this.reqlistPartner()
+        } else {
+          this.$message({
+          message: '不能再加了哦',
+          type: 'warning'
+          });
+        }
+      } else if (ope == 'dec') {
+        if(this.partnerParams.pageNum > 1) {
+          this.partnerParams.pageNum--
+          this.reqlistPartner()
+        } else {
+          this.$message({
+          message: '再减就没有数据了哦',
+          type: 'warning'
+          });
+        }
+      }
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      if(tab.name == 'first') {
+        this.clientUserParams.userType = 1;
+        this.reqlistClientUser()
+      } else if(tab.name == 'second') {
+        this.clientUserParams.userType = 2;
+        this.reqlistClientUser()
+      } else if(tab.name == 'third') {
+        this.clientUserParams.userType = 3;
+        this.reqlistClientUser()
+      } 
     },
     reqListNewDemand() {
       this.$api.demand.reqListNewDemand(this.demandParams).then(res => {
@@ -233,15 +337,44 @@ export default {
         this.listClientUser = res.datas.records
       })
     },
+    reqlistPartner() {
+      this.$api.user.listClientUser(this.partnerParams).then(res => {
+        this.listPartner = res.datas.records
+        this.partnerTotal = Math.ceil(res.datas.total / this.partnerParams.pageSize)
+      })
+    },
+    reqStatistics() {
+      this.$api.user.reqStatistics().then(res => {
+        let data = res.statisticsDTO;
+        this.nums=[ //src: '/static/images/users.png'
+            {"title":"终端用户数",num:data.clientCount,src: '/static/images/endUser.png'},
+            {"title":"印刷企业数",num:data.printingCount,src: '/static/images/printingEnterprise.png'},
+            {"title":"青年创客数",num:data.entrepreneurCount,src: '/static/images/youngPioneer.png'},
+            {"title":"设计人员数",num:data.designerCount,src: '/static/images/designer.png'},
+            {"title":"发布需求数",num:data.releaseDemandCount,src: '/static/images/releaseDemand.png'},
+            {"title":"订单成交数",num:data.transactionOrderCount,src: '/static/images/orderTransaction.png'},
+            {"title":"成交金额",num:data.gmvCount,src: '/static/images/turnover.png'},
+            {"title":"托管金额",num:data.depositCount,src: '/static/images/escrow.png'}
+          ];
+      })
+    },
     reqOrder(id) {
       this.$router.push({
         path: `/order/${id}`,
       })
     },
+    partnerInfo(event, index) {
+      this.isActive = index;
+    },
+    partnerLeave() {
+      this.isActive = false
+    }
   },
   mounted() {
     this.reqListNewDemand()
     this.reqlistClientUser()
+    this.reqlistPartner()
+    this.reqStatistics()
   },
   components: {
     HeaderGuide,
@@ -353,6 +486,40 @@ export default {
         overflow: hidden;
         width: 100%;
         height: 480px;
+        .el-col {
+          position: relative;
+          .partner-card {
+            height:100%; 
+            text-align:center;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            padding: 0;
+            margin: 0;
+            .partner-info {
+              display: none;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              text-align: center;
+              color: #fff;
+              background: rgba($color: #000000, $alpha: .7);
+              box-sizing: border-box;
+              padding-top: 140px;
+              line-height: 3.5;
+              &.show {
+                display: block;
+              }
+              &.hidden {
+                display: none;
+              }
+              .el-button {
+                background: rgba($color: #000000, $alpha: 0);
+                color: #fff;
+              }
+            }
+          }
+        }
       }
       .change-btns {
         .el-button {

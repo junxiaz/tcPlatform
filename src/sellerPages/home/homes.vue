@@ -21,18 +21,26 @@
       </div>
     </div> -->
     <el-row class="bg sell-padding" id="enterprise-top">
-      <el-col :span="12" class="logo clearfix">
+      <el-col :span="10" class="logo clearfix">
         <img :src="imgUrl.noImg" alt="暂无logo" srcset="">
         <div>
-          <h3>欢迎您，150****7349</h3>
+          <h3>欢迎您，{{userInfo.account}}</h3>
           <p><span @click="$router.push('/seller/enterpriseSet')">完善信息</span>，可享受专属客服</p>
         </div>
       </el-col>
-      <el-col :span="12" class="otherInfo clearfix">
+      <el-col :span="7" class="otherInfo clearfix">
         <i></i>
         <div>
           <h4>交易记录</h4>
-          <p><span>1</span>条</p>
+          <p><span>{{userInfo.endDemandCount}}</span>条</p>
+        </div>
+        <!-- <p>交易记录</p> -->
+      </el-col>
+      <el-col :span="7" class="otherInfo clearfix">
+        <i class="working"></i>
+        <div>
+          <h4>待选标数</h4>
+          <p><span>{{userInfo.selectDemandCount}}</span>条</p>
         </div>
         <!-- <p>交易记录</p> -->
       </el-col>
@@ -42,8 +50,9 @@
     <div class="myOrder bg sell-padding mt20">
       <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer" 
               @toPath="handleToPath('/seller/myOrder')"/>
+      
 
-      <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="mt20 myTable"
+      <!-- <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="mt20 myTable"
                 :header-cell-style="{background:'#647787',color:'#fff'}">
 
         <el-table-column type="index" :index="indexMethod" width="50" label="序号" align="center"></el-table-column>
@@ -62,10 +71,10 @@
             <el-link>删除</el-link>
           </template>
         </el-table-column>
-      </el-table>
+      </el-table> -->
       
       <!-- 分页 -->
-      <el-row class="mt20">
+      <!-- <el-row class="mt20">
         <el-col :span="24" align="right">        
           <el-pagination background class="myPagination"
             layout="prev, pager, next"
@@ -74,7 +83,25 @@
             :total="tableData.length">
           </el-pagination>
         </el-col>
-      </el-row>      
+      </el-row>       -->
+      <el-row class="order-items">
+        <el-col :span="6" align="center">
+          <p>{{userInfo.checkDemandCount}}</p>
+          <p>审核中</p>
+        </el-col>
+        <el-col :span="6" align="center">
+          <p>{{userInfo.tenderDemandCount}}</p>
+          <p>投标中</p>
+        </el-col>
+        <el-col :span="6" align="center">
+          <p>{{userInfo.selectDemandCount}}</p>
+          <p>选标中</p>
+        </el-col>
+        <el-col :span="6" align="center">
+          <p>{{userInfo.produceDemandCount}}</p>
+          <p>工作中</p>
+        </el-col>
+      </el-row>
     </div>
 
   </div>
@@ -104,7 +131,8 @@ export default {
       ],
       imgUrl:{
         noImg: require('./imgs/head_portrait.png')
-      }
+      },
+      userInfo: {}
     }
   },
   methods:{
@@ -120,6 +148,15 @@ export default {
     handleToPath(path){
       this.$router.push(path)
     }
+  },
+  mounted() {
+    const params = {
+      token: sessionStorage.getItem('token'),
+      userId: sessionStorage.getItem('userId')
+    }
+    this.$api.user.getUserInfo(params).then(res => {
+      this.userInfo = res.data
+    })
   }
 
 }
@@ -178,10 +215,13 @@ export default {
         height:80px;
         margin-top:20px;
         i{
-          background: url("./imgs/deposit_money.png") no-repeat center;
+          background: url("./imgs/ordering.png") no-repeat center;
           height: 66px;width:66px;
           display: block;
           float: left;
+        }
+        .working {
+          background: url("./imgs/working.png") no-repeat center;
         }
         >div{
           float:left;
@@ -196,6 +236,18 @@ export default {
           margin:20px 0 0 20px;
         }
       }
+
+    }
+  }
+  .order-items {
+    .el-col {
+      padding: 40px;
+      p:nth-of-type(1) {
+        font-size: 48px;
+        color: #67C23A;
+        padding-bottom: 25px;
+      }
+
     }
   }
 </style>

@@ -34,6 +34,12 @@ const user = {
     listClientUser(params) {
         return axios.post(`${base.sq}/user/listClientUser`, params);
     },
+    getUserInfo(params) {
+        return axios.post(`${base.sq}/user/getClientUser`, params);
+    },
+    reqStatistics() {
+        return axios.post(`${base.sq}/statistics/historyStatistics`, {});
+    },
 }
 
 export default user;

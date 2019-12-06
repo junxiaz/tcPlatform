@@ -119,6 +119,7 @@ export default {
                 sessionStorage.setItem('account', registerData.account)
                 sessionStorage.setItem('userId', res.userId)
                 sessionStorage.setItem('token', res.token)
+                sessionStorage.setItem('userType', res.userType)
               })
             } else {
               this.$message({
@@ -136,10 +137,19 @@ export default {
               sessionStorage.setItem('account', loginData.account)
               sessionStorage.setItem('userId', res.userId)
               sessionStorage.setItem('token', res.token)
-              if(res.checkStatus) {
+              sessionStorage.setItem('userType', res.userType)
+              if(res.verifyStatus) {
                 this.$router.push('/seller/home')
+                sessionStorage.setItem('account', registerData.account)
+                sessionStorage.setItem('userId', res.userId)
+                sessionStorage.setItem('token', res.token)
+                sessionStorage.setItem('userType', res.userType)
               } else {
                 this.$router.push('/register')
+                sessionStorage.setItem('account', registerData.account)
+                sessionStorage.setItem('userId', res.userId)
+                sessionStorage.setItem('token', res.token)
+                sessionStorage.setItem('userType', res.userType)
               }
             })
           }

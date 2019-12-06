@@ -33,7 +33,7 @@
     </div>
 
     <div class="header-operates">
-      <template>
+      <template v-if="!this.account">
         <router-link to="/login/login" style="padding-right:24px;">
           <el-button type="text" size="small" class="login-register-btn">登录</el-button>
         </router-link>
@@ -41,8 +41,29 @@
           <el-button type="text" size="small" class="login-register-btn">注册</el-button>
         </router-link>
       </template>
-      <template>
-        
+      <template v-else>
+        <el-popover
+          placement="bottom"
+          width="200"
+          trigger="click">
+          <span class="account" slot="reference">{{account}}</span>
+          <div class="userInfo">
+            <h1>个人信息</h1>
+            <router-link to="/release">
+              <el-button size="small" type="primary">立即发布</el-button>
+            </router-link>
+            <el-row>
+              <el-col :span="12">
+                <router-link to="/seller/home">
+                  <el-link>信息中心</el-link>
+                </router-link>
+              </el-col>
+              <el-col :span="12">
+                <el-link @click="logout">退出登录</el-link>
+              </el-col>
+            </el-row>
+          </div>
+        </el-popover>
       </template>
       <router-link to="/release">
         <el-button size="small" type="primary">立即发布</el-button>
@@ -59,7 +80,8 @@ export default {
   name: 'HeanderGuide',
   data() {
     return {
-      menuData: []
+      menuData: [],
+      account: ''
     }
   },
   computed: {
@@ -72,10 +94,27 @@ export default {
       for(let i in headerMenus) {
         this.menuData.push(headerMenus[i])
       }
+    },
+    logout() {
+      this.$confirm('是否退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('userId')
+        sessionStorage.removeItem('account')
+        this.$router.push('/login');
+      }).catch(() => {
+                  
+      });
     }
   },
-  created: function() {
+  mounted: function() {
     this.initMenu()
+    if(sessionStorage.getItem('account')) {
+      this.account = sessionStorage.getItem('account')
+    }
   }
 }
 </script>
@@ -114,6 +153,22 @@ export default {
         color: #1e88e5;
       }
     }
+    .account {
+      font-size: 14px;
+      color: #fff;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+.userInfo {
+  text-align: center;
+  h1 {
+    text-align: left;
+    font-size: 18px;
+  }
+  .el-row {
+    margin-top: 20px;
   }
 }
 </style>

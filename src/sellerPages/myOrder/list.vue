@@ -27,26 +27,31 @@
         </el-form-item>
       </el-form>
 
-      <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="myTable"
-                :header-cell-style="{background:'#647787',color:'#fff'}">
+      <el-table :data="tableData" border style="width: 100%" 
+              :header-cell-style="{background:'#e0e9ff'}" class="myTable">
 
-        <el-table-column type="index" :index="indexMethod" width="50" label="序号" align="center" fixed="left"></el-table-column>
-        <el-table-column prop="userName" label="需求编号"  align="center"></el-table-column>
-        <el-table-column prop="realName" label="需求预算" align="center"></el-table-column>
-        <el-table-column prop="userType" label="发布时间"  align="center"></el-table-column>
-        <el-table-column label="订单状态" align="center">          
-          <template slot-scope="scope">
-            <span v-if="scope.row.sex == 0">已发货</span>
-            <span v-else>未发货</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="tel" label="已支付" align="center" width="110"></el-table-column>
-        <el-table-column label="操作" align="center" width="100px" fixed="right">
-          <template slot-scope="scope">
-            <el-link>删除</el-link>
-          </template>
-        </el-table-column>
-      </el-table>
+        <el-table-column type="index" :index="indexMethod" width="50" label="序号" align="center" fixed="left"></el-table-column>
+        <el-table-column prop="demandTitle" label="需求标题"  align="center" min-width="120"></el-table-column>
+        <el-table-column prop="provinceName" label="需求范围"  align="center"></el-table-column>
+        <el-table-column prop="capitalCount" label="项目预算"  align="center"></el-table-column>
+        <!-- <el-table-column prop="demandType" label="需求类型" align="center"></el-table-column> -->
+        <el-table-column prop="depositCount" label="托管资金"  align="center"></el-table-column>
+        <el-table-column prop="tenderPlan" label="投标数目" align="center" width="110"></el-table-column>  
+        <!-- <el-table-column prop="filUrl" label="filUrl"  align="center"></el-table-column> -->
+        <el-table-column prop="originatorId" label="发起人"  align="center"></el-table-column>
+        <!-- <el-table-column prop="otherDesc" label="其他说明"  align="center"></el-table-column> -->
+        <el-table-column prop="tenderReal" label="已投标数"  align="center"></el-table-column>
+        <el-table-column prop="winTenderId" label="中标人"  align="center"></el-table-column>
+        <el-table-column prop="startTime" label="创建时间"  align="center" min-width="110"></el-table-column>
+        <el-table-column prop="endTime" label="项目周期" align="center" min-width="110"></el-table-column>  
+        <el-table-column prop="demandStatusDesc" label="状态" align="center" width="110"></el-table-column>       
+        <el-table-column label="操作" align="center" width="180" fixed="right">
+          <template slot-scope="scope">
+            <el-button type="success" size="mini" @click="checkData(scope.row.id)">选标</el-button>
+            <el-button type="danger" size="mini" @click="checkData(scope.row.id)">结单</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       
       <!-- 分页 -->
       <el-row class="mt20">
@@ -71,19 +76,15 @@ export default {
   data(){
     return {      
       params:{
-        pageNo:1,
-        pageSize:10
+        pageNum:1,
+        pageSize:10,
+        token: sessionStorage.getItem('token'),
+        userId: sessionStorage.getItem('userId'),
+        demandStatus: 1
       },
       currentPage:1,
-      // total:12,
-      tableData:[
-        {userName:"木木",realName:"李霞",userType:"终端客户",sex:0,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1},
-        {userName:"木木",realName:"李霞",userType:"印刷企业",sex:1,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:2},
-        {userName:"木木",realName:"李霞",userType:"印刷企业",sex:0,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:2},
-        {userName:"木木",realName:"李霞",userType:"设计师",sex:0,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1},
-        {userName:"木木",realName:"李霞",userType:"设计师",sex:1,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1},
-        {userName:"木木",realName:"李霞",userType:"终端客户",sex:1,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1}
-      ],
+      total: 0,
+      tableData:[],
       searchForm:{}
     }
   },
@@ -100,7 +101,18 @@ export default {
     //搜索
     searchBtn(formName){
       console.log(this.searchForm);
+    },
+
+    // 初始化订单列表
+    initDemand() {
+      this.$api.demand.reqListDemand(this.params).then(res => {
+        this.tableData = res.datas.records
+        this.total = res.total
+      })
     }
+  },
+  mounted() {
+    this.initDemand()
   }
 
 }

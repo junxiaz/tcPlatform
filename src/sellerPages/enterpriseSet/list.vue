@@ -4,10 +4,8 @@
     <div class="baseInfo bg sell-padding">
       <vnotes :title="title"/>
 
-      <el-form :model="baseForm" :rules="baseRules" ref="baseForm" 
-                label-width="110px" class="demo-ruleForm mt30">
-
-        <el-form-item label="封面信息" class="upload-item" required>
+      <el-form :model="userInfo" :rules="baseRules" ref="baseForm" label-width="150px" class="demo-ruleForm mt30">
+        <!-- <el-form-item label="封面信息" class="upload-item" required>
           <el-upload class="upload-demo" ref="uploadLogo"
             action="https://jsonplaceholder.typicode.com/posts/" :limit="1" :on-exceed="handleExceed"
             accept=".jpg,.jpeg,.png,.gif,.JPG,.JPEG,.PNG,.GIF"
@@ -30,34 +28,32 @@
         <el-form-item label="banner标语" prop="banner">
           <el-input v-model="baseForm.banner" maxlength="15" show-word-limit
                     placeholder="请输入大标题，15字以内" style="width:300px;" size="medium"></el-input>
-        </el-form-item>
+        </el-form-item> -->
           
         <!-- 个人信息 -->
-        <!-- <el-form-item label="真实姓名" prop="userName">
-          <el-input v-model="baseForm.userName" placeholder="请输入真实姓名" style="width:300px;" size="medium"></el-input>
-        </el-form-item>
-        <el-form-item label="身份证号" prop="idNumber">
-          <el-input v-model="baseForm.idNumber" placeholder="请输入身份证号" style="width:300px;" size="medium"></el-input>
-        </el-form-item> -->
+        <template v-if="!userInfo.verifyType">
+          <el-form-item label="真实姓名" prop="person.userName">
+            <el-input v-model="userInfo.userName" placeholder="请输入真实姓名" style="width:300px;" size="medium"></el-input>
+          </el-form-item>
+          <el-form-item label="身份证号" prop="person.idNumber">
+            <el-input v-model="userInfo.idNumber" placeholder="请输入身份证号" style="width:300px;" size="medium"></el-input>
+          </el-form-item>
+        </template>
 
         <!-- 企业信息 -->
-        <el-form-item label="企业名称" prop="enterpriseName">
-          <el-input v-model="baseForm.enterpriseName" placeholder="请填写企业名称" style="width:300px;" size="medium"></el-input>
-        </el-form-item>   
-        <el-form-item label="统一信用码" prop="unifiedCreditCode">
-          <el-input v-model="baseForm.unifiedCreditCode" placeholder="请输入统一信用码" style="width:300px;" size="medium"></el-input>
-        </el-form-item>
-        <el-form-item label="主营业务" prop="mainBusiness">
-          <el-input type="textarea" v-model="baseForm.subtitle" placeholder="请输入小标题，50字以内（非必填）" 
-                    style="width:500px;" resize="none" show-word-limit maxlength="50" rows="3">
-          </el-input>
-        </el-form-item>
-
-        <el-form-item prop="subtitle">
-          <el-input type="textarea" v-model="baseForm.subtitle" placeholder="请输入小标题，50字以内（非必填）" 
-                    style="width:500px;" resize="none" show-word-limit maxlength="50" rows="3">
-          </el-input>
-        </el-form-item>
+        <template v-else>
+          <el-form-item label="企业名称" prop="company.enterpriseName">
+            <el-input v-model="userInfo.enterpriseName" placeholder="请填写企业名称" style="width:300px;" size="medium"></el-input>
+          </el-form-item>   
+          <el-form-item label="统一社会信用代码" prop="company.certificateCode">
+            <el-input v-model="userInfo.certificateCode" placeholder="请输入统一信用码" style="width:300px;" size="medium"></el-input>
+          </el-form-item>
+          <el-form-item label="主营业务" prop="company.mainBusiness">
+            <el-input type="textarea" v-model="userInfo.enterpriseDesc" placeholder="请输入小标题，50字以内（非必填）" 
+                      style="width:500px;" resize="none" show-word-limit maxlength="50" rows="3">
+            </el-input>
+          </el-form-item>
+        </template>
         
         <el-form-item style="margin-left:-110px;text-align:center;">
          <el-button type="danger" size="medium" @click="submitForm('baseForm')">立即提交</el-button>
@@ -66,7 +62,7 @@
     </div>
 
     <!-- 企业介绍 -->
-    <div class="enterpriseInfo bg sell-padding mt30">
+    <!-- <div class="enterpriseInfo bg sell-padding mt30">
       <vnotes title="企业介绍"/>
 
       <el-form :model="enterpriseForm" :rules="enterpriseRules" ref="enterpriseForm" label-width="100px" class="demo-ruleForm mt20" :inline="true">
@@ -116,7 +112,7 @@
           <el-button type="danger" size="medium" @click="submitForm('enterpriseForm')">立即提交</el-button>
         </el-form-item>
       </el-form>    
-    </div>
+    </div> -->
 
     <!-- <el-row class="mt20">
       <el-col :span="24" align="center">        
@@ -137,13 +133,30 @@ export default {
     return { 
       title:"个人信息", //需要判断userType进行设置
       fileList: [],
+      userInfo: {},
       baseRules:{
-        enterpriseName:[
-          {required:true, message: '请输入企业名称', tigger:'blur'}
-        ],
-        banner:[
-          {required:true, message: '请输入大标题', tigger:'blur'}
-        ]
+        person: {
+          userName:[
+            {required:true, message: '请输入真实姓名', tigger:'blur'}
+          ],
+          idNumber:[
+            {required:true, message: '请输入身份证号', tigger:'blur'}
+          ],
+        },
+        company: {
+          enterpriseName:[
+            {required:true, message: '请输入企业名称', tigger:'blur'}
+          ],
+          certificateCode:[
+            {required:true, message: '请输入统一社会信用代码', tigger:'blur'}
+          ],
+          mainBusiness:[
+            {required:true, message: '请输入主营业务', tigger:'blur'}
+          ],
+        }
+        // banner:[
+        //   {required:true, message: '请输入大标题', tigger:'blur'}
+        // ]
       },
       baseForm:{
         noLogo: false,
@@ -274,6 +287,20 @@ export default {
       });
     },
 
+  },
+  mounted() {
+    const params = {
+      token: sessionStorage.getItem('token'),
+      userId: sessionStorage.getItem('userId')
+    }
+    this.$api.user.getUserInfo(params).then(res => {
+      this.userInfo = res.data
+      if(this.userInfo.verifyType) {
+        this.title = '企业信息'
+      } else {
+        this.title = '个人信息'
+      }
+    })
   }
 }
 </script>

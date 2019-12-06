@@ -29,6 +29,10 @@ const demand = {
     reqListNewDemand(params) {
         return axios.post(`${base.sq}/demand/listNewDemand`, params);
     },
+    // 立即投标
+    tenderDemand(params) {
+        return axios.post(`${base.sq}/demand/tenderDemand`, params);
+    },
 }
 
 export default demand;

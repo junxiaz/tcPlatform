@@ -5,31 +5,37 @@
       
       <el-col :span="12" align="left" class="logo">
         <img src="./logo.png">
-        <span style="margin-left:20px;">个人资料</span>
+        <span style="margin-left:20px;">基础资料</span>
       </el-col>
       <el-col :span="12" align="right">
         <span v-if="this.$route.name=='login'">
           <i class="el-icon-s-home"></i>
           首页
         </span>
-        <el-button v-else @click="signout" size="mini">免费发布需求</el-button>
+        <el-button v-else @click="signout" size="mini">退出登录</el-button>
       </el-col>
-      
+
     </el-row>
   </el-row>
 </template>
 
 <script>
-// import {handleConfirm} from '../../../public/js'
 export default {
   name:"v-header",
   methods:{
     signout(){
-      // handleConfirm('确认退出登录吗？','warning').then(res => {
-      //   this.$router.push('/login');
-      // }).catch(err =>{
-      //   console.log('err',err)
-      // })
+      this.$confirm('是否退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('userId')
+        sessionStorage.removeItem('account')
+        this.$router.push('/login');
+      }).catch(() => {
+                  
+      });
     }
 
   },

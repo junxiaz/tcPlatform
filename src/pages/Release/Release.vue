@@ -63,8 +63,8 @@
                 <div slot="tip" class="el-upload__tip">（支持的文件格式为doc、xls、jpg、png、pdf压缩文件，大小不超过50M）</div>
               </el-upload>
             </el-form-item>
-            <el-form-item label="联系方式" class="contact" prop="contact">
-              <el-input v-model="ruleForm.contact" placeholder="请输入联系方式"></el-input>
+            <el-form-item label="联系方式" class="mobile" prop="mobile">
+              <el-input v-model="ruleForm.mobile" placeholder="请输入联系方式"></el-input>
               <div class="el-upload__tip">信息保护中，仅官方可见</div>
             </el-form-item>
             <el-form-item>
@@ -96,7 +96,9 @@ export default {
         endDate: '',
         otherDesc: "",
         fileList: [],
-        contact: "",
+        mobile: "",
+        token: sessionStorage.getItem('token'),
+        userId: sessionStorage.getItem('userId'),
       },
       rules: {
         demandType: [
@@ -126,7 +128,7 @@ export default {
         otherDesc: [
           { required: true, message: '说明不能为空', trigger: 'blur'}
         ],
-        contact: [
+        mobile: [
           { required: true, message: "请输入联系方式", trigger: "blur" }
         ],
       },
@@ -135,8 +137,8 @@ export default {
     };
   },
   methods: {
-    submitForm(formcontact) {
-      this.$refs[formcontact].validate(valid => {
+    submitForm(formmobile) {
+      this.$refs[formmobile].validate(valid => {
         if (valid) {
           this.$api.demand.addDemand(this.ruleForm).then(res => {
             this.$message({
@@ -192,7 +194,7 @@ export default {
 .title-blue .el-form-item__label {
   color: #1e88e5;
 }
-.contact .el-form-item__label {
+.mobile .el-form-item__label {
   font-size: 18px;
   color: rgb(46, 46, 46);
   text-align: left;

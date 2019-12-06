@@ -57,7 +57,7 @@
                 <el-col :span="20">{{demand.demandTypeDesc}}</el-col>
               </el-row>
               <el-row class="row">
-                <el-button type="primary" plain>立即投标</el-button>
+                <el-button type="primary" plain @click="tenderDemand(demand.id)">立即投标</el-button>
                 <router-link to="/release">
                   <el-button type="primary" plain>我有类似需求</el-button>
                 </router-link>
@@ -79,7 +79,7 @@
           <el-divider></el-divider>
           <el-row class="desc-content">
             <i class="el-icon-phone"></i>
-            <span class="phone-desc">{{demand.winTenderTel}}</span>
+            <span class="phone-desc">{{demand.mobile}}</span>
             <i class="el-icon-s-custom"></i>
           </el-row>
           <p class="odfi-num">
@@ -112,6 +112,19 @@ export default {
       }
       this.$api.demand.reqDemand(data).then(res => {
         this.demand = res
+      })
+    },
+    tenderDemand(id) {
+      const params = {
+        userId: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token'),
+        demandId: id
+      }
+      this.$api.demand.tenderDemand(params).then(res => {
+        this.$message({
+          type: 'success',
+          message: "恭喜您，投标成功！"
+        });
       })
     }
   },
