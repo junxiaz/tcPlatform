@@ -37,7 +37,7 @@ export default {
     },
     {
       path: "enterpriseSet",
-      name:"企业设置",
+      name:"基本信息",
       meta:{
         icon:"el-icon-my-enterprise",
         hidden: false

@@ -89,7 +89,7 @@
                         <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
                         <li>需求地区：{{item.provinceName}}</li>
                         <li>截止时间：{{item.endTime}}</li>
-                        <li>投标状态：<el-progress :percentage="(item.tenderReal/item.tenderPlan).toFixed(2)*100" :stroke-width="12"></el-progress></li>
+                        <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li>
                         <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
@@ -101,7 +101,7 @@
                         <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
                         <li>需求地区：{{item.provinceName}}</li>
                         <li>截止时间：{{item.endTime}}</li>
-                        <li>投标状态：<el-progress :percentage="(item.tenderReal/item.tenderPlan).toFixed(2)*100" :stroke-width="12"></el-progress></li>
+                        <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li>
                         <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
@@ -187,10 +187,13 @@ export default {
     sortChange() {
       console.log("1");
     },
-    // format(percentage, per, pers) {
-    //   console.log(`${per}/${pers}`)
-    //   return percentage === 100 ? '投标结束' : `${per}/${pers}`;
-    // },
+    format(percentage) {
+      // console.log(`${per}/${pers}`)
+      // return percentage === 100 ? '投标结束' : `${per}/${pers}`;
+      let per = percentage.toFixed(2)*100
+      console.log(per)
+      return percentage === 100 ? '投标结束' : `${per}%`;
+    },
     reqListDemand() {
       this.$api.demand.reqListDemand(this.params).then(res => {
         this.listData = res.datas.records

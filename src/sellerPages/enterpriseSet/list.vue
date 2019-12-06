@@ -2,7 +2,7 @@
   <div id="enterpriseSet">
     <!-- 商家端 --- 企业设置 -->
     <div class="baseInfo bg sell-padding">
-      <vnotes title="基本信息"/>
+      <vnotes :title="title"/>
 
       <el-form :model="baseForm" :rules="baseRules" ref="baseForm" 
                 label-width="110px" class="demo-ruleForm mt30">
@@ -27,13 +27,32 @@
 
         </el-form-item>
 
-        <el-form-item prop="enterpriseName">
-          <el-input v-model="baseForm.enterpriseName" placeholder="请填写企业名称" style="width:300px;" size="medium"></el-input>
-        </el-form-item>        
         <el-form-item label="banner标语" prop="banner">
           <el-input v-model="baseForm.banner" maxlength="15" show-word-limit
                     placeholder="请输入大标题，15字以内" style="width:300px;" size="medium"></el-input>
         </el-form-item>
+          
+        <!-- 个人信息 -->
+        <!-- <el-form-item label="真实姓名" prop="userName">
+          <el-input v-model="baseForm.userName" placeholder="请输入真实姓名" style="width:300px;" size="medium"></el-input>
+        </el-form-item>
+        <el-form-item label="身份证号" prop="idNumber">
+          <el-input v-model="baseForm.idNumber" placeholder="请输入身份证号" style="width:300px;" size="medium"></el-input>
+        </el-form-item> -->
+
+        <!-- 企业信息 -->
+        <el-form-item label="企业名称" prop="enterpriseName">
+          <el-input v-model="baseForm.enterpriseName" placeholder="请填写企业名称" style="width:300px;" size="medium"></el-input>
+        </el-form-item>   
+        <el-form-item label="统一信用码" prop="unifiedCreditCode">
+          <el-input v-model="baseForm.unifiedCreditCode" placeholder="请输入统一信用码" style="width:300px;" size="medium"></el-input>
+        </el-form-item>
+        <el-form-item label="主营业务" prop="mainBusiness">
+          <el-input type="textarea" v-model="baseForm.subtitle" placeholder="请输入小标题，50字以内（非必填）" 
+                    style="width:500px;" resize="none" show-word-limit maxlength="50" rows="3">
+          </el-input>
+        </el-form-item>
+
         <el-form-item prop="subtitle">
           <el-input type="textarea" v-model="baseForm.subtitle" placeholder="请输入小标题，50字以内（非必填）" 
                     style="width:500px;" resize="none" show-word-limit maxlength="50" rows="3">
@@ -116,6 +135,7 @@ export default {
   },
   data(){
     return { 
+      title:"个人信息", //需要判断userType进行设置
       fileList: [],
       baseRules:{
         enterpriseName:[
@@ -129,7 +149,12 @@ export default {
         noLogo: false,
         enterpriseName:'',
         banner:'',
-        subtitle:''
+        subtitle:'',
+        userName:'',
+        idNumber:'',
+        enterpriseName:'',
+        unifiedCreditCode:'',
+        mainBusiness:''
       },
       enterpriseRules:{
         companyProfile:[

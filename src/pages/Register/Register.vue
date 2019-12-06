@@ -62,15 +62,15 @@ export default {
     return {
       form: {
         regType: 1,
-        name: "",
-        region: "",
-        pass: "",
-        checkPass: "",
         personForm: {
+          userId: sessionStorage.getItem('userId'),
+          token: sessionStorage.getItem('token'),
           userName: '',
           idNumber: ''
         },
         companyForm: {
+          userId: sessionStorage.getItem('userId'),
+          token: sessionStorage.getItem('token'),
           "enterpriseName": "", //企业名称
           "certificateCode": "",  //统一社会信用代码
           "enterpriseDesc": "",  //企业描述
@@ -107,7 +107,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if(!this.regType) {
+          if(!this.form.regType) {
             this.verifyUserByPerson()
           } else {
             this.verifyUserByEnterprise()
@@ -119,12 +119,12 @@ export default {
     },
     verifyUserByPerson() {
       this.$api.user.verifyUserByPerson(this.form.personForm).then(res => {
-        this.$router.push('/seller/homes')
+        this.$router.push('/seller/home')
       })
     },
     verifyUserByEnterprise() {
       this.$api.user.verifyUserByEnterprise(this.form.companyForm).then(res => {
-        this.$router.push('/seller/homes')
+        this.$router.push('/seller/home')
       })
     },
   },

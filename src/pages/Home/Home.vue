@@ -162,7 +162,7 @@
         </div>  
       </div>
       <div class="service-map">
-        <img src="./images/service_map.jpg" alt="">
+        <img src="./images/service_map.png" alt="">
       </div>
     </el-main>
     <FooterGuide />

@@ -2,7 +2,7 @@
   <el-container>
     <!-- 头部 -->
     <el-header>
-      <top></top>
+      <!-- <top></top> -->
       <vHeader/>
     </el-header>
 
@@ -55,7 +55,7 @@ export default {
   >section{
     background:#F6F6F6;
     >header.el-header{
-      height: 110px !important;
+      height: 70px !important;
       #top,#vheader{padding-left: calc(100vw - 100%);}
     }
 

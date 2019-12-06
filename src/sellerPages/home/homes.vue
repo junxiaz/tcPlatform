@@ -3,15 +3,13 @@
     <!-- 商家端----我的首页 -->
 
     <!-- 企业信息 -->
-    <div id="enterpriseInfo" class="bg sell-padding">
+    <!-- <div id="enterpriseInfo" class="bg sell-padding">
       <vnotes title="企业信息" subtitle="完善企业设置" color="#409efe" cursor="pointer"
               @toPath="handleToPath('/seller/enterpriseSet')"></vnotes>
-
       <div class="mt20 logoInfo clearfix">
         <div class="logo">
           <img src="./head_portrait.png" alt="">
         </div>
-
         <div class="logo-desc">
           <h4>天臣集团</h4>
           <p class="slogan over">banner标语：让天下没有假货</p>
@@ -21,7 +19,24 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
+    <el-row class="bg sell-padding" id="enterprise-top">
+      <el-col :span="12" class="logo clearfix">
+        <img :src="imgUrl.noImg" alt="暂无logo" srcset="">
+        <div>
+          <h3>欢迎您，150****7349</h3>
+          <p><span @click="$router.push('/seller/enterpriseSet')">完善信息</span>，可享受专属客服</p>
+        </div>
+      </el-col>
+      <el-col :span="12" class="otherInfo clearfix">
+        <i></i>
+        <div>
+          <h4>交易记录</h4>
+          <p><span>1</span>条</p>
+        </div>
+        <!-- <p>交易记录</p> -->
+      </el-col>
+    </el-row>
 
     <!-- 我的订单 -->
     <div class="myOrder bg sell-padding mt20">
@@ -77,7 +92,7 @@ export default {
         pageNo:1,
         pageSize:10
       },
-      currentPage:1,
+      total:0,
       // total:12,
       tableData:[
         {userName:"木木",realName:"李霞",userType:"终端客户",sex:0,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1},
@@ -87,6 +102,9 @@ export default {
         {userName:"木木",realName:"李霞",userType:"设计师",sex:1,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1},
         {userName:"木木",realName:"李霞",userType:"终端客户",sex:1,tel:"13412343568",email:"1234123@163.com",state:"状态一",platInfo:1}
       ],
+      imgUrl:{
+        noImg: require('./imgs/head_portrait.png')
+      }
     }
   },
   methods:{
@@ -109,37 +127,75 @@ export default {
 
 <style lang="scss" scoped>
   #seller-home{
-    #enterpriseInfo{
+    // #enterpriseInfo{
+    //   .logoInfo{        
+    //     .logo{
+    //       float: left;
+    //       width:125px;
+    //       img{          
+    //         display: block;
+    //         width:125px;height:126px;
+    //         object-fit: cover;
+    //       }
+    //     }
+    //     .logo-desc{
+    //       float: left;margin:18px 0 0 27px;
+    //       width:700px;color:#2E2E2E;
+    //       h4{margin:0;font:900 18px/1 "";}
+    //       p.slogan{
+    //         height:54px;
+    //         font: 14px/54px "";
+    //       }
+    //       p.address{
+    //         height:20px;
+    //         font:14px/20px "";
+    //         span{
+    //           margin-left:46px;
+    //         }
+    //       }
+    //     }
 
-      .logoInfo{        
-        .logo{
+    //   }
+
+    // }
+    #enterprise-top{      
+      .logo{
+        height:100px;
+        img{
+          height:100px;width: 100px;
+          display: inline-block;
+          object-fit: cover;
           float: left;
-          width:125px;
-          img{          
-            display: block;
-            width:125px;height:126px;
-            object-fit: cover;
-          }
         }
-        .logo-desc{
-          float: left;margin:18px 0 0 27px;
-          width:700px;color:#2E2E2E;
-          h4{margin:0;font:900 18px/1 "";}
-          p.slogan{
-            height:54px;
-            font: 14px/54px "";
-          }
-          p.address{
-            height:20px;
-            font:14px/20px "";
-            span{
-              margin-left:46px;
-            }
-          }
+        >div{
+          margin-left:10px;
+          float: left;
+          span{color:rgba(255, 136, 0, 0.877);cursor: pointer;}
         }
-
       }
 
+      .otherInfo{
+        height:80px;
+        margin-top:20px;
+        i{
+          background: url("./imgs/deposit_money.png") no-repeat center;
+          height: 66px;width:66px;
+          display: block;
+          float: left;
+        }
+        >div{
+          float:left;
+          margin-left: 20px;
+          h4{font:500 16px/1 "";margin:0;}
+          p{font: 14px/50px "";}
+          span{font-size:30px}
+        }
+        >p{
+          float: left;
+          font:500 16px/1 "";
+          margin:20px 0 0 20px;
+        }
+      }
     }
   }
 </style>

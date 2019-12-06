@@ -116,6 +116,9 @@ export default {
               registerData.pwd = pwd
               this.$api.user.register(registerData).then(res => {
                 this.$router.push('/register')
+                sessionStorage.setItem('account', registerData.account)
+                sessionStorage.setItem('userId', res.userId)
+                sessionStorage.setItem('token', res.token)
               })
             } else {
               this.$message({
@@ -129,13 +132,15 @@ export default {
             const loginData = JSON.parse(JSON.stringify(this.loginForm))
             loginData.pwd = pwd
             this.$api.user.login(loginData).then(res => {
-              this.$router.push('/seller/home')
-              // sessionStorage.setItem('userName', res.)
-              // if(res.checkStatus) {
-              //   this.$router.push('/seller/home')
-              // } else {
-              //   this.$router.push('/register')
-              // }
+              // this.$router.push('/seller/home')
+              sessionStorage.setItem('account', loginData.account)
+              sessionStorage.setItem('userId', res.userId)
+              sessionStorage.setItem('token', res.token)
+              if(res.checkStatus) {
+                this.$router.push('/seller/home')
+              } else {
+                this.$router.push('/register')
+              }
             })
           }
         }
