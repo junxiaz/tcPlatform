@@ -19,15 +19,15 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 
-if(sessionStorage.getItem('token')) {
-  const token = sessionStorage.getItem('token')
-}
-if(sessionStorage.getItem('userId')) {
-  const userId = sessionStorage.getItem('userId')
-}
-if(sessionStorage.getItem('account')) {
-  const account = sessionStorage.getItem('account')
-}
+// if(sessionStorage.getItem('token')) {
+//   const token = sessionStorage.getItem('token')
+// }
+// if(sessionStorage.getItem('userId')) {
+//   const userId = sessionStorage.getItem('userId')
+// }
+// if(sessionStorage.getItem('account')) {
+//   const account = sessionStorage.getItem('account')
+// }
 
 /*
 * v-has

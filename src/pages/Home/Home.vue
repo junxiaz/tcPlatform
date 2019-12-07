@@ -49,8 +49,7 @@
         <Title title="金牌合作商" titleColor="#1e88e5" subTitle="天臣互联网产业平台合作伙伴" subTitleColor="rgb(46,46,46)"></Title>
         <div class="gold-partner-items">
           <el-col :span="6" v-for="(item, index) in listPartner" :key="index" style="height:100%;">
-            <el-card @mouseenter.native="partnerInfo($event, index)" @mouseleave="isActive=false" ref="partnerInfo" :style="{backgroundImage: 'url(' + item.imgUrl + ')'}" class="partner-card" :body-style="{ padding: '0px', height: '100%'}">
-              <!-- <img style="height:100%; margin:0 auto;" :src="item.imgUrl" class="image"> -->
+            <el-card @mouseenter.native="partnerInfo($event, index)" @mouseleave.native="isActive = false;" ref="partnerInfo" :style="{backgroundImage: 'url(' + item.imgUrl + ')'}" class="partner-card" :body-style="{ padding: '0px', height: '100%'}">
               <div class="partner-info" :class="index===isActive?'show': 'hidden'">
                 <p>{{item.enterpriseName}}</p>
                 <p>{{item.enterpriseDesc}}</p>
@@ -104,7 +103,9 @@
               </el-row>
               <el-row>
                 <el-button class="service-more" type="primary">查看更多</el-button>
-                <el-button class="service-entering" type="primary">立即入驻</el-button>
+                <router-link to="/login/register">
+                  <el-button class="service-entering" type="primary">立即入驻</el-button>
+                </router-link>
               </el-row>
             </el-tab-pane>
             <el-tab-pane class="w1220" label="设计人员" name="second">
@@ -137,7 +138,7 @@
               <el-row>
                 <el-button class="service-more" type="primary">查看更多</el-button>
                 <el-button class="service-entering" type="primary">立即入驻</el-button>
-              </el-row>           
+              </el-row>
             </el-tab-pane>
             <el-tab-pane class="w1220" label="青年创客" name="third">
               <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
@@ -170,7 +171,7 @@
                 <el-button class="service-more" type="primary">查看更多</el-button>
                 <el-button class="service-entering" type="primary">立即入驻</el-button>
               </el-row>
-              
+
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -229,7 +230,7 @@
               </ul>
             </el-col>
           </el-row>
-        </div>  
+        </div>
       </div>
       <div class="service-map">
         <img src="./images/service_map.png" alt="">
@@ -252,18 +253,18 @@ export default {
       activeIndex2: '1',
       activeName: 'first',
       products: [  //特种材料
-        {icon: '/static/images/material_icon.png', title: '特种材料', list: [{title: '云膜'}, {title: '全印模'}, {title: '镭射'},]},
-        {icon: '/static/images/print_icon.png', title: '包装印刷', list: [{title: '酒类'}, {title: '烟类'}, {title: '化妆品'},]},
-        {icon: '/static/images/design_icon.png', title: '设计服务', list: [{title: 'LOGO设计'}, {title: '包装设计'}, {title: '产品效果图'},]},
+        {icon: require('./images/material_icon.png'), title: '特种材料', list: [{title: '云膜'}, {title: '全印模'}, {title: '镭射'},]},
+        {icon: require('./images/print_icon.png'), title: '包装印刷', list: [{title: '酒类'}, {title: '烟类'}, {title: '化妆品'},]},
+        {icon: require('./images/design_icon.png'), title: '设计服务', list: [{title: 'LOGO设计'}, {title: '包装设计'}, {title: '产品效果图'},]},
       ],
       nums: [],
       supports: [  //企业支持
-        {icon: '/static/images/support1.png', title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
-        {icon: '/static/images/support2.png', title: '费用可控', subTitle: '价格透明，费用清晰' },
-        {icon: '/static/images/support3.png', title: '品类齐全', subTitle: '超过1500余种云膜产品，包装耗材等订制品' },
-        {icon: '/static/images/support4.png', title: '全国服务', subTitle: '服务范围覆盖300多个城市和1600个县城' },
-        {icon: '/static/images/support5.png', title: '服务保障', subTitle: '先行赔付，仓储物流代运营' },
-        {icon: '/static/images/support6.png', title: '设计师团队', subTitle: '7*24小时服务不间断，专属团队低价护航' },
+        {icon: require('./images/support1.png'), title: '技术支持', subTitle: '提供互联网技术解决方案，订单全流程' },
+        {icon: require('./images/support2.png'), title: '费用可控', subTitle: '价格透明，费用清晰' },
+        {icon: require('./images/support3.png'), title: '品类齐全', subTitle: '超过1500余种云膜产品，包装耗材等订制品' },
+        {icon: require('./images/support4.png'), title: '全国服务', subTitle: '服务范围覆盖300多个城市和1600个县城' },
+        {icon: require('./images/support5.png'), title: '服务保障', subTitle: '先行赔付，仓储物流代运营' },
+        {icon: require('./images/support6.png'), title: '设计师团队', subTitle: '7*24小时服务不间断，专属团队低价护航' },
       ],
       demandParams: {
         demandStatus: 0,
@@ -289,6 +290,7 @@ export default {
     };
   },
   methods: {
+    // 金牌合作商翻页
     pageChange(ope) {
       if(ope == 'add') {
         if(this.partnerTotal > this.partnerParams.pageNum) {
@@ -315,6 +317,7 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
+    // 服务商tab切换
     handleClick(tab, event) {
       if(tab.name == 'first') {
         this.clientUserParams.userType = 1;
@@ -325,49 +328,52 @@ export default {
       } else if(tab.name == 'third') {
         this.clientUserParams.userType = 3;
         this.reqlistClientUser()
-      } 
+      }
     },
+    // 获取最新需求
     reqListNewDemand() {
       this.$api.demand.reqListNewDemand(this.demandParams).then(res => {
         this.listNewDemand = res.datas.records
       })
     },
+    // 获取服务商
     reqlistClientUser() {
       this.$api.user.listClientUser(this.clientUserParams).then(res => {
         this.listClientUser = res.datas.records
       })
     },
+    // 获取金牌合作商
     reqlistPartner() {
       this.$api.user.listClientUser(this.partnerParams).then(res => {
         this.listPartner = res.datas.records
         this.partnerTotal = Math.ceil(res.datas.total / this.partnerParams.pageSize)
       })
     },
+    // 统计数据显示
     reqStatistics() {
       this.$api.user.reqStatistics().then(res => {
         let data = res.statisticsDTO;
-        this.nums=[ //src: '/static/images/users.png'
-            {"title":"终端用户数",num:data.clientCount,src: '/static/images/endUser.png'},
-            {"title":"印刷企业数",num:data.printingCount,src: '/static/images/printingEnterprise.png'},
-            {"title":"青年创客数",num:data.entrepreneurCount,src: '/static/images/youngPioneer.png'},
-            {"title":"设计人员数",num:data.designerCount,src: '/static/images/designer.png'},
-            {"title":"发布需求数",num:data.releaseDemandCount,src: '/static/images/releaseDemand.png'},
-            {"title":"订单成交数",num:data.transactionOrderCount,src: '/static/images/orderTransaction.png'},
-            {"title":"成交金额",num:data.gmvCount,src: '/static/images/turnover.png'},
-            {"title":"托管金额",num:data.depositCount,src: '/static/images/escrow.png'}
+        this.nums=[
+            {"title":"终端用户数",num:data.clientCount,src: require('./images/endUser.png')},
+            {"title":"印刷企业数",num:data.printingCount,src: require('./images/printingEnterprise.png')},
+            {"title":"青年创客数",num:data.entrepreneurCount,src: require('./images/youngPioneer.png')},
+            {"title":"设计人员数",num:data.designerCount,src: require('./images/designer.png')},
+            {"title":"发布需求数",num:data.releaseDemandCount,src: require('./images/releaseDemand.png')},
+            {"title":"订单成交数",num:data.transactionOrderCount,src: require('./images/orderTransaction.png')},
+            {"title":"成交金额",num:data.gmvCount,src: require('./images/turnover.png')},
+            {"title":"托管金额",num:data.depositCount,src: require('./images/escrow.png')},
           ];
       })
     },
+    // 点击需求进入详情
     reqOrder(id) {
       this.$router.push({
         path: `/order/${id}`,
       })
     },
+    // 金牌合作商鼠标移入信息显示
     partnerInfo(event, index) {
       this.isActive = index;
-    },
-    partnerLeave() {
-      this.isActive = false
     }
   },
   mounted() {
@@ -489,15 +495,15 @@ export default {
         .el-col {
           position: relative;
           .partner-card {
-            height:100%; 
+            height:100%;
             text-align:center;
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
             padding: 0;
             margin: 0;
+            overflow: hidden;
             .partner-info {
-              display: none;
               width: 100%;
               height: 100%;
               position: absolute;
@@ -508,10 +514,12 @@ export default {
               padding-top: 140px;
               line-height: 3.5;
               &.show {
-                display: block;
+                transition: all .5s ease;
+                opacity: 1;
               }
               &.hidden {
-                display: none;
+                opacity: 0;
+                transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
               }
               .el-button {
                 background: rgba($color: #000000, $alpha: 0);
