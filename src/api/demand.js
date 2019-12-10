@@ -26,8 +26,17 @@ const demand = {
     reqDemand(params) {
         return axios.post(`${base.sq}/demand/getDemand`, params);
     },
+    // 获取最新8条需求--首页
     reqListNewDemand(params) {
         return axios.post(`${base.sq}/demand/listNewDemand`, params);
+    },
+    // 获取投标列表
+    reqListTenderDemand(params) {
+        return axios.post(`${base.sq}/demand/listTenderDemand`, params);
+    },
+    // 获取中标
+    winTenderDemand(params) {
+        return axios.post(`${base.sq}/demand/winTenderDemand`, params);
     },
     // 立即投标
     tenderDemand(params) {
