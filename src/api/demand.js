@@ -23,7 +23,7 @@ const demand = {
         return axios.post(`${base.sq}/demand/listDemand`, params);
     },
 
-    // 获取需求列表---需求大厅
+    // 获取需求详情--立即投标
     reqDemand(params) {
         return axios.post(`${base.sq}/demand/getDemand`, params);
     },
