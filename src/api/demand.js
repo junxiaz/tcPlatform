@@ -22,10 +22,12 @@ const demand = {
     reqListDemand(params) {
         return axios.post(`${base.sq}/demand/listDemand`, params);
     },
+
     // 获取需求列表---需求大厅
     reqDemand(params) {
         return axios.post(`${base.sq}/demand/getDemand`, params);
     },
+
     // 获取最新8条需求--首页
     reqListNewDemand(params) {
         return axios.post(`${base.sq}/demand/listNewDemand`, params);
