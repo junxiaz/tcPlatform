@@ -89,6 +89,25 @@
           </p>
           <p class="odfi-desc">违法违规类需求，如刷单、炒信、违规降权等将可能损害到您的合法权益，请拒绝参与。如发现类似问题，请向忽米网举报</p>
         </el-row>
+        <!-- 需求 -->
+        <div class="demands">
+          <div class="demand-item">
+            <el-row class="title">
+              <p>需求状态</p>
+            </el-row>
+            <el-divider></el-divider>
+            <div class="demand-steps">
+              <el-steps :active="demand.demandStatus == 0 || demand.demandStatus == 1? demand.demandStatus+1 : demand.demandStatus" finish-status="success" align-center>
+                <el-step title="需求发布"></el-step>
+                <el-step v-if="demand.demandStatus == 2" title="审核失败"></el-step>
+                <el-step v-else title="审核通过"></el-step>
+                <el-step title="需求招标"></el-step>
+                <el-step title="需求中标"></el-step>
+                <el-step title="需求结单"></el-step>
+              </el-steps>
+            </div>
+          </div>
+        </div>
       </div>
     </el-main>
     <FooterGuide />
@@ -137,6 +156,35 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.demands {
+  .el-step__head.is-success {
+    border-color: #ff6f00;
+    .el-step__icon.is-text {
+      background-color: #ff6f00;
+    }
+  }
+  .el-step__title {
+    line-height: 60px;
+  }
+  .el-step__title.is-success {
+    font-size: 16px;
+    color: #ef5350;
+  }
+  .el-step__icon-inner.is-status {
+    color: #fff;
+    font-size: 34px;
+  }
+  .el-step__icon {
+    width: 42px;
+    height: 42px;
+  }
+  .el-step.is-horizontal .el-step__line {
+    top: 21px;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 @import "@/assets/style/vars.scss";
@@ -205,7 +253,7 @@ export default {
     }
     .desc {
       background: #fff;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 26px 25px 36px 23px;
       min-height: 208px;
       box-sizing: border-box;
@@ -236,6 +284,34 @@ export default {
       }
       .odfi-desc {
         font-size: 14px;
+      }
+    }
+    .demands {
+      background: #fff;
+      margin-top: 10px;
+      padding: 26px 25px 36px 23px;
+      min-height: 208px;
+      box-sizing: border-box;
+      .demand-item {
+        // padding: 20px 34px;
+        // padding-right: 90px;
+        // margin-top: 35px;
+        .title {
+          line-height: 16px;
+          font-size: 16px;
+          color: #333;
+          p {
+            padding-left: 10px;
+            border-left: solid 2px $blue;
+          }
+        }
+        .demand-steps {
+          border: solid 1px #bfbfbf;
+          padding: 39px 44px 0;
+          height: 140px;
+          box-sizing: border-box;
+          margin-top: 9px;
+        }
       }
     }
   }

@@ -47,7 +47,8 @@
         <el-table-column prop="demandStatusDesc" label="状态" align="center" width="110"></el-table-column>       
         <el-table-column label="操作" align="center" width="180" fixed="right">
           <template slot-scope="scope">
-            <el-button type="success" v-show="scope.row.demandStatus === 3 ? true: false" size="mini" @click="checkData(scope.row.id)">选标</el-button>
+            <el-button type="success" v-if="scope.row.demandStatus === 3 ? true: false" size="mini" @click="checkData(scope.row.id)">选标</el-button>
+            <el-button type="success" v-else size="mini" disabled>选标</el-button>
             <el-button type="danger" size="mini" @click="checkData(scope.row.id)">结单</el-button>
           </template>
         </el-table-column>
@@ -176,7 +177,7 @@ export default {
         }
         this.$api.demand.winTenderDemand(params).then(res => {
           this.dialogTableVisible = false
-          $.message({
+          this.$message({
             type: 'success',
             message: '恭喜您，选标成功'
           })
