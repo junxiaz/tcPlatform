@@ -109,7 +109,7 @@
                   <el-pagination
                     background
                     layout="prev, pager, next"
-                    :page-size="params.pageSize"  
+                    :page-size="params.pageSize"
                     :total="total"
                     @current-change="handleCurrentChange">
                   </el-pagination>
@@ -192,8 +192,7 @@ export default {
     format(percentage) {
       // console.log(`${per}/${pers}`)
       // return percentage === 100 ? '投标结束' : `${per}/${pers}`;
-      let per = percentage.toFixed(2)*100
-      console.log(per)
+      // let per = percentage.toFixed(2)*100
       return percentage === 100 ? '投标结束' : `${per}%`;
     },
     reqListDemand() {
@@ -203,7 +202,6 @@ export default {
       })
     },
     reqOrder(id) {
-      console.log(id)
       this.$router.push({
         path: `/order/${id}`,
       })
