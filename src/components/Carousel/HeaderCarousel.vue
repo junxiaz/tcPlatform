@@ -33,10 +33,10 @@ export default {
     }
   },
   mounted() {
-    // this.imgLoad();
+    this.imgLoad();
     window.addEventListener('resize', () => {
-      // this.imgLoad()
-      this.bannerHeight = this.$refs.bannerHeight[0].height - 2
+      this.imgLoad()
+      // this.bannerHeight = this.$refs.bannerHeight[0].height - 2
     })
   }
 }
