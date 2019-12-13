@@ -19,7 +19,7 @@
           </el-col>
         </el-row>
       </div>
-      <!-- 数据展示 -->
+      <!-- 统计数据展示 -->
       <div class="nums-wrap">
         <div class="w1220">
           <el-row :gutter="33" type="flex" justify="center" class="nums-top">
