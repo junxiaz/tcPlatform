@@ -148,7 +148,7 @@ export default {
     }
   },
   mounted() {
-    this.reqDemand()
+    this.reqDemand();
   },
   components: {
     HeaderGuide,
