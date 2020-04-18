@@ -20,7 +20,7 @@
           <template v-if="menu.children">
             <el-submenu :key="index" :index="menu.path">
               <template slot="title">{{menu.name}}</template>
-              <el-menu-item v-for="(subMenu, i) in menu.children" :key="i" :index="subMenu.path">
+              <el-menu-item v-for="(subMenu, i) in menu.children" :key="i" :index="menu.path+'/'+subMenu.path">
                 {{subMenu.name}}
               </el-menu-item>
             </el-submenu>
@@ -93,7 +93,13 @@ export default {
     initMenu() {
       for(let i in headerMenus) {
         this.menuData.push(headerMenus[i])
+        // if(headerMenus[i].children) {
+        //   window.console.log(this.$router.options)
+        //   window.console.log(1)
+        // }
       }
+      this.$router.options.routes = this.$router.options.routes.concat(this.menuData);
+
     },
     logout() {
       this.$confirm('是否退出登录?', '提示', {
@@ -106,7 +112,7 @@ export default {
         sessionStorage.removeItem('account')
         this.$router.push('/login');
       }).catch(() => {
-                  
+
       });
     }
   },

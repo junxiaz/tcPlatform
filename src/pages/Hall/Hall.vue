@@ -90,6 +90,7 @@
                         <li>需求地区：{{item.provinceName}}</li>
                         <li>截止时间：{{item.endTime}}</li>
                         <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li>
+                        <!-- <li>投标状态：<el-progress :percentage="format(Math.floor(item.tenderReal/item.tenderPlan*100), item.tenderReal, item.tenderPlan)" :stroke-width="12"></el-progress></li> -->
                         <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
@@ -189,11 +190,13 @@ export default {
     sortChange() {
       console.log("1");
     },
-    format(percentage) {
+    format(per, tenderReal, tenderPlan) {
+      console.log(per, tenderReal, tenderPlan)
       // console.log(`${per}/${pers}`)
       // return percentage === 100 ? '投标结束' : `${per}/${pers}`;
       // let per = percentage.toFixed(2)*100
-      return percentage === 100 ? '投标结束' : `${per}%`;
+      // return percentage === 100 ? '满' : `${percentage}%`;
+      return per === 100 ? '投标结束' : `${per}`
     },
     reqListDemand() {
       this.$api.demand.reqListDemand(this.params).then(res => {

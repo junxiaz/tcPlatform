@@ -7,17 +7,11 @@ import axios from './https'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
 
 const user = {
-    // 注册用户类型   
+    // 注册用户类型
     userType() {
         return axios.post(`${base.sq}/user/listClientUserType`,{});
     },
-    // 新闻详情,演示    
-    // articleDetail(id, params) {
-    //     return axios.get(`${base.sq}/topic/${id}`, {
-    //         params: params
-    //     });
-    // },
-    // post提交    
+    // post提交
     login(params) {
         return axios.post(`${base.sq}/user/clientUserLogin`, params);
     },
@@ -29,6 +23,9 @@ const user = {
     },
     verifyUserByEnterprise(params) {
         return axios.post(`${base.sq}/user/verifyUserByEnterprise`, params);
+    },
+    logoUpload(params) {
+        return axios.post(`${base.sq}/user/uploadPic`, params);
     },
     // 首页 服务商
     listClientUser(params) {

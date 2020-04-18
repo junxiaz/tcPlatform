@@ -10,9 +10,7 @@
         <div class="order">
           <el-row class="title">{{demand.demand_title}}</el-row>
           <el-row class="content" :gutter="70">
-            <el-col class="order-img" :span="8">
-              <div></div>
-            </el-col>
+            <el-col class="order-img" :span="8"><img :src="demand.imgUrl" alt="图片加载失败"></el-col>
             <el-col class="order-items" :span="16">
               <el-row :gutter="10">
                 <el-col class="col" :span="6">
@@ -210,13 +208,12 @@ export default {
         height: 320px;
         .order-img {
           height: 100%;
-          div {
-            width: 100%;
+          overflow: hidden;
+          img {
+            display: block;
+            max-width: 100%;
             height: 100%;
-            background: url("/static/images/material_icon.png");
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
+            // max-height: 100%;
           }
         }
         .order-items {

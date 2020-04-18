@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css';
 import '../theme/index.css'
 import './assets/style/index.scss'
+import './assets/style/font/iconfont.css'
 import 'normalize.css' // a modern alternative to CSS resets
 import store from './store' // 导入vuex文件
 import api from './api' // 导入api接口

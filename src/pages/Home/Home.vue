@@ -8,12 +8,12 @@
         <el-row type="flex" class="products w1220" justify="center">
           <el-col :span="8" v-for="(product, index) in products" :key="index">
             <div class="product">
-              <a class="product-type" href="#">
+              <span class="product-type">
                 <img :src="product.icon" alt="">
                 <h1>{{product.title}} ></h1>
-              </a>
+              </span>
               <ul class="product-items">
-                <li v-for="(item, index) in product.list" :key="index">{{item.title}}</li>
+                <router-link tag="li" v-for="(item, index) in product.list" :key="index" :to="item.path">{{item.title}}</router-link>
               </ul>
             </div>
           </el-col>
@@ -53,7 +53,7 @@
               <div class="partner-info" :class="index===isActive?'show': 'hidden'">
                 <p>{{item.enterpriseName}}</p>
                 <p>{{item.enterpriseDesc}}</p>
-                <el-button plain>查看更多 ></el-button>
+                <a :href="item.enterpriseUrl"><el-button plain>查看更多 ></el-button></a>
               </div>
             </el-card>
           </el-col>
@@ -253,9 +253,9 @@ export default {
       activeIndex2: '1',
       activeName: 'first',
       products: [  //特种材料
-        {icon: require('./images/material_icon.png'), title: '特种材料', list: [{title: '云膜'}, {title: '全印模'}, {title: '镭射'},]},
-        {icon: require('./images/print_icon.png'), title: '包装印刷', list: [{title: '酒类'}, {title: '烟类'}, {title: '化妆品'},]},
-        {icon: require('./images/design_icon.png'), title: '设计服务', list: [{title: 'LOGO设计'}, {title: '包装设计'}, {title: '产品效果图'},]},
+        {icon: require('./images/material_icon.png'), title: '特种材料', list: [{title: '云膜', path: '/special/cloud'}, {title: '全印模', path: '/special/full'}, {title: '镭射', path: '/special/laser'},]},
+        {icon: require('./images/print_icon.png'), title: '包装印刷', list: [{title: '酒类', path: '/package/wine'}, {title: '烟类', path: '/package/smoke'}, {title: '化妆品', path: '/package/makeup'},]},
+        {icon: require('./images/design_icon.png'), title: '设计服务', list: [{title: 'LOGO设计', path: '/design/logo'}, {title: '包装设计', path: '/design/package'}, {title: '产品效果图', path: '/design/pro'},]},
       ],
       nums: [],
       supports: [  //企业支持
@@ -441,6 +441,7 @@ export default {
               font-size: 18px;
               color: $fontGray;
               line-height: 48px;
+              cursor: pointer;
             }
           }
         }
@@ -570,6 +571,10 @@ export default {
             padding: 60px 28px 25px;
             font-size: 18px;
             color: $fontGray;
+            li:first-child img {
+              height: 40px;
+              max-width: 100%;
+            }
             li:nth-of-type(2) {
               padding: 16px 0;
             }

@@ -53,15 +53,16 @@
             <el-form-item label="其他说明" class="i-need title-blue" prop="otherDesc">
               <el-input type="textarea" v-model="ruleForm.otherDesc"></el-input>
             </el-form-item>
-            <el-form-item label="添加附件" class="title-blue">
-              <el-upload
+            <el-form-item label="添加图片" class="title-blue">
+              <ImgUpload @takeUrl="takeUrlDemand" />
+              <!-- <el-upload
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :file-list="ruleForm.fileList"
                 class="annex"
               >
                 <el-button size="small" type="danger">点击上传</el-button>
                 <div slot="tip" class="el-upload__tip">（支持的文件格式为doc、xls、jpg、png、pdf压缩文件，大小不超过50M）</div>
-              </el-upload>
+              </el-upload> -->
             </el-form-item>
             <el-form-item label="联系方式" class="mobile" prop="mobile">
               <el-input v-model="ruleForm.mobile" placeholder="请输入联系方式"></el-input>
@@ -79,9 +80,13 @@
 </template>
 
 <script>
+import base from '@/api/base'; // 导入接口域名列表
+import axios from 'axios';
+import ImgUpload from "@/components/ImgUpload";
 import IndexHeader from "@/components/HeaderGuide/IndexHeader";
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
 import Top from "@/components/sellerPages/top";
+
 export default {
   name: "Release",
   data() {
@@ -95,7 +100,7 @@ export default {
         tenderPlan: '',
         endDate: '',
         otherDesc: "",
-        fileList: [],
+        file: "",
         mobile: "",
         token: sessionStorage.getItem('token'),
         userId: sessionStorage.getItem('userId'),
@@ -137,17 +142,45 @@ export default {
     };
   },
   methods: {
+    takeUrlDemand(param) {
+      this.ruleForm.file = param
+    },
     submitForm(formmobile) {
       this.$refs[formmobile].validate(valid => {
         if (valid) {
-          this.$api.demand.addDemand(this.ruleForm).then(res => {
-            this.$message({
-              message: '恭喜你，需求添加成功',
-              type: 'success'
-            });
-            setTimeout(() => {
-              window.history.back()
-            }, 1000);
+          // this.$api.demand.addDemand(this.ruleForm).then(res => {
+          //   this.$message({
+          //     message: '恭喜你，需求添加成功',
+          //     type: 'success'
+          //   });
+          //   setTimeout(() => {
+          //     window.history.back()
+          //   }, 1000);
+          // })
+          let formData = new FormData();
+          let params = this.ruleForm
+          Object.keys(params).forEach((key) => {
+            formData.append(key, params[key]);
+          });
+          axios({
+            url: base.sq + '/demand/addDemand',
+            type: FormData,
+            headers:{
+              'Content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'post',
+            data: formData,
+          }).then(res => {
+            console.log(res)
+            if(res.data.code == '0000') {
+              this.$message.success(res.data.msg)
+              setTimeout(() => {
+                window.history.back()
+              }, 1000);
+            } else {
+              this.$message.error(res.data.msg);
+              return false;
+            }
           })
         } else {
           console.log("error submit!!");
@@ -175,6 +208,7 @@ export default {
   components: {
     IndexHeader,
     FooterGuide,
+    ImgUpload,
     // Top
   }
 };

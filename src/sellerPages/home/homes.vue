@@ -22,7 +22,7 @@
     </div> -->
     <el-row class="bg sell-padding" id="enterprise-top">
       <el-col :span="10" class="logo clearfix">
-        <img :src="imgUrl.noImg" alt="暂无logo" srcset="">
+        <img :src="userInfo.logoUrl?userInfo.logUrl:userInfo.personLogo" alt="暂无logo" srcset="">
         <div>
           <h3>欢迎您，{{userInfo.account}}</h3>
           <p><span @click="$router.push('/seller/enterpriseSet')">完善信息</span>，可享受专属客服</p>
@@ -48,9 +48,9 @@
 
     <!-- 我的订单 -->
     <div class="myOrder bg sell-padding mt20">
-      <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer" 
+      <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer"
               @toPath="handleToPath('/seller/myOrder')"/>
-      
+
 
       <!-- <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="mt20 myTable"
                 :header-cell-style="{background:'#647787',color:'#fff'}">
@@ -59,7 +59,7 @@
         <el-table-column prop="userName" label="需求编号"  align="center"></el-table-column>
         <el-table-column prop="realName" label="需求预算" align="center"></el-table-column>
         <el-table-column prop="userType" label="发布时间"  align="center"></el-table-column>
-        <el-table-column label="订单状态" align="center">          
+        <el-table-column label="订单状态" align="center">
           <template slot-scope="scope">
             <span v-if="scope.row.sex == 0">已发货</span>
             <span v-else>未发货</span>
@@ -72,10 +72,10 @@
           </template>
         </el-table-column>
       </el-table> -->
-      
+
       <!-- 分页 -->
       <!-- <el-row class="mt20">
-        <el-col :span="24" align="right">        
+        <el-col :span="24" align="right">
           <el-pagination background class="myPagination"
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
@@ -114,7 +114,7 @@ export default {
     vnotes
   },
   data(){
-    return {      
+    return {
       params:{
         pageNo:1,
         pageSize:10
@@ -165,11 +165,11 @@ export default {
 <style lang="scss" scoped>
   #seller-home{
     // #enterpriseInfo{
-    //   .logoInfo{        
+    //   .logoInfo{
     //     .logo{
     //       float: left;
     //       width:125px;
-    //       img{          
+    //       img{
     //         display: block;
     //         width:125px;height:126px;
     //         object-fit: cover;
@@ -195,14 +195,16 @@ export default {
     //   }
 
     // }
-    #enterprise-top{      
+    #enterprise-top{
       .logo{
         height:100px;
         img{
-          height:100px;width: 100px;
+          height:100px;
+          width: 100px;
           display: inline-block;
           object-fit: cover;
           float: left;
+          border-radius: 50%;
         }
         >div{
           margin-left:10px;
