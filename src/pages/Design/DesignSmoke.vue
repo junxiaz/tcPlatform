@@ -43,7 +43,7 @@
                       <el-col :span="8"><img src="./imagesSmoke/pic2.png" alt=""></el-col>
                       <el-col :span="8"><img src="./imagesSmoke/pic3.png" alt=""></el-col>
                     </el-row>
-                    <el-button type="primary">立即咨询</el-button>
+                    <router-link to="/comment"><el-button type="primary">立即咨询</el-button></router-link>
                   </div>
                 </el-row>
                 <el-row class="service-process1">
