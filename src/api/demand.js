@@ -44,6 +44,11 @@ const demand = {
     tenderDemand(params) {
         return axios.post(`${base.sq}/demand/tenderDemand`, params);
     },
+
+    // 新增留言--用户留言
+    addMessage(params) {
+        return axios.post(`${base.sq}/other/addMessage`, params);
+    }
 }
 
 export default demand;

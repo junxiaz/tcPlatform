@@ -22,7 +22,7 @@
     </div> -->
     <el-row class="bg sell-padding" id="enterprise-top">
       <el-col :span="10" class="logo clearfix">
-        <img :src="userInfo.logoUrl?userInfo.logUrl:userInfo.personLogo" alt="暂无logo" srcset="">
+        <img :src="userInfo.logoUrl?userInfo.logoUrl:userInfo.personLogo" alt="暂无logo" srcset="">
         <div>
           <h3>欢迎您，{{userInfo.account}}</h3>
           <p><span @click="$router.push('/seller/enterpriseSet')">完善信息</span>，可享受专属客服</p>

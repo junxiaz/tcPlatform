@@ -12,17 +12,17 @@
                 <el-row type="flex" class="statu-row-items" justify="center">
                   <el-col :span="24">
                     <el-form ref="form" size="mini" :model="sizeForm" label-width="155px">
-                      <el-form-item label="活动性质">
+                      <el-form-item label="需求性质">
                         <el-checkbox-group v-model="sizeForm.type">
-                          <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
-                          <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
-                          <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
+                          <el-checkbox-button label="包装印刷" name="type"></el-checkbox-button>
+                          <el-checkbox-button label="特种材料" name="type"></el-checkbox-button>
+                          <el-checkbox-button label="设计服务" name="type"></el-checkbox-button>
                         </el-checkbox-group>
                       </el-form-item>
-                      <el-form-item label="特殊资源">
+                      <el-form-item label="需求状态">
                         <el-radio-group v-model="sizeForm.resource">
-                          <el-radio border label="线上品牌商赞助"></el-radio>
-                          <el-radio border label="线下场地免费"></el-radio>
+                          <el-radio border label="需求中标"></el-radio>
+                          <el-radio border label="需求发布"></el-radio>
                         </el-radio-group>
                       </el-form-item>
                     </el-form>
@@ -184,8 +184,8 @@ export default {
   methods: {
     //页码
     handleCurrentChange(val) {
-      this.params.pageNo = val;
-      this.initEasyTable();
+      this.params.pageNum = val;
+      this.reqListDemand();
     },
     sortChange() {
       console.log("1");

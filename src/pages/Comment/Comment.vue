@@ -2,13 +2,13 @@
   <div class="comment-wrap">
     <h1>请您留言</h1>
     <el-form ref="form" :model="form" size="small">
-      <el-input type="textarea" v-model="form.desc" placeholder="请再次输入浏览内容，我们会尽快与您联系。（必填）"></el-input>
-      <el-input placeholder="姓名" prefix-icon="el-icon-user-solid" v-model="input2"> </el-input>
-      <el-input placeholder="电话" prefix-icon="el-icon-phone" v-model="input2"> </el-input>
-      <el-input placeholder="公司电话" prefix-icon="el-icon-s-order" v-model="input2"> </el-input>
+      <el-input type="textarea" v-model="form.content" placeholder="请再次输入浏览内容，我们会尽快与您联系。（必填）"></el-input>
+      <el-input placeholder="姓名" prefix-icon="el-icon-user-solid" v-model="form.name"> </el-input>
+      <el-input placeholder="电话" prefix-icon="el-icon-phone" v-model="form.tel"> </el-input>
+      <el-input placeholder="公司电话" prefix-icon="el-icon-s-order" v-model="form.companyTel"> </el-input>
       <div class="captcha">
-        <el-input placeholder="验证码"></el-input>
-        <span>XXPP</span>
+        <el-input placeholder="验证码" v-model="validCode2"></el-input>
+        <validCode v-model="validCode" :refresh="refreshCode" @sendData="getCode"></validCode>
       </div>
       <el-form-item>
         <el-button type="primary" size="medium" @click="onSubmit">发送</el-button>
@@ -18,25 +18,45 @@
 </template>
 
 <script>
+  import validCode from '@/components/verificationCode';
   export default {
     data() {
       return {
+        validCode:"",
+        validCode2:"",
+        refreshCode:0,
         form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        }
+          "content": "",
+          "name": "",
+          "tel": "",
+          "companyTel": "",
+        },
       }
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
+        if(this.validCode2.toLowerCase() != this.validCode.toLowerCase()) {
+          this.$message.warning('验证码输入不正确！')
+        } else if(!this.form.content) {
+          this.$message.warning('留言内容不能为空！')
+        } else {
+          this.$api.demand.addMessage(this.form).then(res => {
+            if(res.code == '0000') {
+              this.$message.success('您已成功留言,请等待工作人员处理反馈！')
+            } else {
+              this.$message.error(res.msg)
+            }
+          })
+        }
+      },
+      //从子组件获取验证码，并将验证码返回到页面
+      getCode(data){
+        // console.log(data)
+        this.validCode = data;
       }
+    },
+    components: {
+      validCode
     }
   }
 </script>
