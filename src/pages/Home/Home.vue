@@ -2,7 +2,16 @@
   <el-container style="overflow:hidden" direction="vertical">
     <HeaderGuide />
     <el-main>
-      <HeaderCarousel />
+      <HeaderCarousel :bannerHeight="bannerHeight" :imgUrls="imgUrls">
+        <template slot="btns">
+          <div class="operate-btns">
+            <router-link to="/release">
+              <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
+            </router-link>
+            <el-button type="primary">服务商入驻</el-button>
+          </div>
+        </template>
+      </HeaderCarousel>
       <!-- 材料介绍 -->
       <div class="products-wrap">
         <el-row type="flex" class="products w1220" justify="center">
@@ -83,7 +92,9 @@
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <el-button type="primary">了解详情 ></el-button>
+                      <router-link :to="{path: '/service'}">
+                        <el-button type="primary">了解详情 ></el-button>
+                      </router-link>
                     </li>
                   </ul>
                 </el-col>
@@ -96,7 +107,9 @@
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <el-button type="primary">了解详情 ></el-button>
+                      <router-link :to="{path: '/service'}">
+                        <el-button type="primary">了解详情 ></el-button>
+                      </router-link>
                     </li>
                   </ul>
                 </el-col>
@@ -249,6 +262,13 @@ export default {
   name: "Home",
   data() {
     return {
+      // 轮播数据
+      bannerHeight: '620',
+      imgUrls: [
+        {id: 1, idView: require('./images/banner1.png')},
+        {id: 2, idView: require('./images/banner2.jpg')},
+        {id: 3, idView: require('./images/banner3.png')},
+      ],
       activeIndex: '1',
       activeIndex2: '1',
       activeName: 'first',
@@ -418,6 +438,21 @@ export default {
   // 中间内容
   .el-main {
     width: 100%;
+    // 轮播上的操作按钮
+    .operate-btns {
+      position: absolute;
+      bottom: 24%;
+      left: 50%;
+      transform: translateX(-50%);
+      .el-button {
+        width: 166px;
+        height: 50px;
+        background-color: #f85c5d;
+        border-color: #f85c5d;
+        border-radius: 25px;
+        font-size: 20px;
+      }
+    }
     // 产品介绍
     .products-wrap {
       width: 100%;

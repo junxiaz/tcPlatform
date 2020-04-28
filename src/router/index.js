@@ -10,7 +10,7 @@ let baseRoute = [
     path: '/401',
     name: '权限不足',
     component: rb => require(['../pages/Common/401.vue'], rb)
-  }, 
+  },
   {
     path: '/404',
     name: '找不到页面',
@@ -20,6 +20,7 @@ let baseRoute = [
 ];
 
 let router = new Router({
+  mode: "history",
   routes: baseRoute
 });
 

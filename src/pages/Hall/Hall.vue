@@ -112,7 +112,7 @@
                     layout="prev, pager, next"
                     :page-size="params.pageSize"
                     :total="total"
-                    @current-change="handleCurrentChange">
+                   >
                   </el-pagination>
                 </div>
               </div>
