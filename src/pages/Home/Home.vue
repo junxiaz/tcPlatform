@@ -92,7 +92,7 @@
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <router-link :to="{path: '/service'}">
+                      <router-link :to="{path: '/service/'}">
                         <el-button type="primary">了解详情 ></el-button>
                       </router-link>
                     </li>

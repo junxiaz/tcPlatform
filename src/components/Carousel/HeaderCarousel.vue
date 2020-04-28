@@ -1,7 +1,7 @@
 <template>
-  <el-carousel class="header-carousel" :interval="5000" arrow="always" :height="hei+ 'px'">
+  <el-carousel class="header-carousel" :interval="5000" arrow="always" :height="hei+'px'">
     <el-carousel-item v-for="item in imgUrls" :key="item.id">
-      <img :src="item.idView" alt @load="imgLoad" ref="bannerHeight"/>
+      <img :src="item.idView" @load="imgLoad" alt ref="image"/>
       <!-- <div class="operate-btns" v-if="item.id == 3">
         <router-link to="/release">
           <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
@@ -18,7 +18,10 @@
 export default {
   name: 'HeaderCarousel',
   props: {
-    bannerHeight: String,
+    bannerHeight: {
+      type: String,
+      default: 400
+    },
     imgUrls: Array
   },
   data() {
@@ -28,12 +31,12 @@ export default {
   },
   methods: {
     imgLoad() {
-      this.$nextTick(() => {
-        this.hei = this.$refs.bannerHeight[0].height - 2
-      })
+      // this.$nextTick(() => {
+        this.hei = this.$refs.image[0].height - 2
+      // })
     }
   },
-  created() {
+  mounted() {
     this.imgLoad()
     window.addEventListener('resize', () => {
       this.imgLoad()

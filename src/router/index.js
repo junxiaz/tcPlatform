@@ -20,7 +20,8 @@ let baseRoute = [
 ];
 
 let router = new Router({
-  mode: "history",
+  // mode: "history",
+  // base: '/tcPlatform/',
   routes: baseRoute
 });
 

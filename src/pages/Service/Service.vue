@@ -1,7 +1,8 @@
 <template>
   <el-container direction="vertical">
     <el-main>
-      <a class="afixed" href name="top"></a>
+      <!-- 首页 -->
+      <a class="afixed" href name="top" id="anchor-0"></a>
       <div style="height:152px;"></div>
       <div class="top-wrap">
         <el-row class="top">
@@ -11,10 +12,8 @@
         </el-row>
         <el-row class="menu">
           <ul class="w1220">
-            <li>
-              <a href="#top">首页</a>
-            </li>
-            <li>
+            <li v-for="(item, index) in navData" :key="index"><a href="javascript:void(0)"  @click="goAnchor('#anchor-'+index)">{{item}}</a></li>
+            <!-- <li>
               <a href="#profile">企业介绍</a>
             </li>
             <li>
@@ -28,7 +27,7 @@
             </li>
             <li>
               <a href="#evaluation">交易评价</a>
-            </li>
+            </li> -->
             <a>
               <i class="el-icon-star-off"></i>收藏服务商
             </a>
@@ -37,8 +36,9 @@
       </div>
       <!-- 轮播图 -->
       <HeaderCarousel :bannerHeight="bannerHeight" :imgUrls="imgUrls"></HeaderCarousel>
+      <!-- 企业介绍 -->
+      <a class="afixed" href name="profile" id="anchor-1"></a>
       <el-row class="profile-wrap">
-        <a class="afixed" href name="profile"></a>
         <TitleService title="企业介绍" />
         <el-row class="profile" :gutter="30">
           <el-col :span="11">
@@ -52,8 +52,9 @@
           </el-col>
         </el-row>
       </el-row>
+      <!-- 产品案例 -->
+      <a class="afixed" href name="proCase" id="anchor-2"></a>
       <div class="w1220">
-        <a class="afixed" href name="proCase"></a>
         <TitleService title="产品案例" />
         <el-row class="case-wrap" :gutter="20">
           <el-col :span="6">
@@ -86,9 +87,10 @@
           </el-col>
         </el-row>
       </div>
+      <!-- 资质荣誉 -->
+      <a class="afixed" href name="honor" id="anchor-3"></a>
       <div class="honor-wrap">
         <div>
-          <a class="afixed" href name="honor"></a>
           <TitleService title="资质荣誉" />
           <div class="honor-swiper">
             <ul class="honor" ref="carousel">
@@ -242,10 +244,10 @@
           </el-col>
         </el-row>
       </div>
-
+      <!-- 服务案例 -->
+      <a class="afixed" href name="serCase" id="anchor-4"></a>
       <div class="serCase-wrap">
         <div>
-          <a class="afixed" href name="serCase"></a>
           <TitleService title="服务案例" />
           <div class="swiper">
             <ul ref="carousel1">
@@ -315,9 +317,9 @@
           <i class="el-icon-arrow-right next" @click="carousel1('next')"></i>
         </div>
       </div>
-
+      <!-- 服务评价 -->
+      <a class="afixed" href name="evaluation" id="anchor-5"></a>
       <div class="evaluation-wrap w1220">
-        <a class="afixed" href name="evaluation"></a>
         <TitleService title="交易评价" />
 
         <div class="evaluation-box">
@@ -405,8 +407,8 @@
               background
               layout="prev, pager, next"
               :page-size="1"
-              :total="5"
-              @current-change="handleCurrentChange">
+              :total="5">
+              <!-- @current-change="handleCurrentChange"> -->
             </el-pagination>
           </div>
         </div>
@@ -414,92 +416,7 @@
 
       <div class="servier-wrap w1220">
         <TitleService title="推荐服务商" />
-        <el-row class="servier" :gutter="20">
-          <el-col class="servier-item" :span="6">
-            <div class="col-wrap">
-            <img src="./images/supplyer1.png" alt="">
-            <div>复旦大学</div>
-            <div>
-              <img src="./images/icon1.png" alt="">
-              <img src="./images/LV16.png" alt="">
-            </div>
-            <el-row type="flex" justify="center">
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-            </el-row>
-            <div>成交金额：<span>¥23455555</span></div>
-            <div>
-              <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-            </div>
-            </div>
-          </el-col>
-          <el-col class="servier-item" :span="6">
-            <div class="col-wrap">
-            <img src="./images/supplyer2.png" alt="">
-            <div>上海研发公共服务平台</div>
-            <div>
-              <img src="./images/icon1.png" alt="">
-              <img src="./images/LV16.png" alt="">
-            </div>
-            <el-row type="flex" justify="center">
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-            </el-row>
-            <div>成交金额：<span>¥23455555</span></div>
-            <div>
-              <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-            </div>
-            </div>
-          </el-col>
-          <el-col class="servier-item" :span="6">
-            <div class="col-wrap">
-            <img src="./images/supplyer3.png" alt="">
-            <div>中国防伪行业协会</div>
-            <div>
-              <img src="./images/icon1.png" alt="">
-              <img src="./images/LV16.png" alt="">
-            </div>
-            <el-row type="flex" justify="center">
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-            </el-row>
-            <div>成交金额：<span>¥23455555</span></div>
-            <div>
-              <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-            </div>
-            </div>
-          </el-col>
-          <el-col class="servier-item" :span="6">
-            <div class="col-wrap">
-            <img src="./images/supplyer4.png" alt="">
-            <div>天臣集团</div>
-            <div>
-              <img src="./images/icon1.png" alt="">
-              <img src="./images/LV16.png" alt="">
-            </div>
-            <el-row type="flex" justify="center">
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-              <el-col :span="8">速度:5.00</el-col>
-            </el-row>
-            <div>成交金额：<span>¥23455555</span></div>
-            <div>
-              <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-              <el-tag type="info">图标设计</el-tag>
-            </div>
-            </div>
-          </el-col>
-        </el-row>
+        <Servicer />
       </div>
     </el-main>
     <FooterGuide />
@@ -510,10 +427,12 @@
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
 import HeaderCarousel from "@/components/Carousel/HeaderCarousel";
 import TitleService from "@/components/Title/TitleService";
+import Servicer from '@/components/Servicer/Servicer';
 export default {
   name: "",
   data() {
     return {
+      navData: ['首页', '企业介绍', '产品案例', '资质荣誉', '服务案例', '交易评价'],
       value: 5,
       // 轮播数据
       bannerHeight: "460",
@@ -526,6 +445,10 @@ export default {
     };
   },
   methods: {
+    goAnchor(selector) {
+      var anchor = this.$el.querySelector(selector)
+      document.documentElement.scrollTop = anchor.offsetTop
+    },
     carousel(param) {
       if (param == "next") {
         if (this.$refs.carousel.children.length - 4 > this.honorTrans / -300) {
@@ -565,7 +488,8 @@ export default {
   components: {
     FooterGuide,
     HeaderCarousel,
-    TitleService
+    TitleService,
+    Servicer
   }
 };
 </script>
@@ -1039,56 +963,6 @@ export default {
     background-color: #f8f8f8;
     text-align: center;
     padding-bottom: 50px;
-    >img {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .servier {
-      .servier-item {
-        background-color: #f8f8f8;
-        .col-wrap {
-            background-color: #fff;
-            padding: 25px;
-            >img {
-            width: 115px;
-            height: 115px;
-            padding-bottom: 25px;
-            }
-            >div:nth-of-type(1) {
-            font-size: 18px;
-            font-weight: bold;
-            color: #4b4b4b;
-            padding-bottom: 8px;
-            }
-            .el-row {
-            .el-col {
-                font-size: 14px;
-                color: #8d8d8d;
-                padding: 10px 0;
-            }
-            }
-            div:nth-of-type(4) {
-            font-size: 16px;
-            color: #4b4b4b;
-            padding-bottom: 14px;
-            margin-bottom: 12px;
-            border-bottom: solid 1px #efefef;
-            span {
-                color: #F98D2D;
-            }
-            }
-            div:nth-of-type(5) {
-            .el-tag {
-                max-width: 30%;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                white-space:nowrap;
-            }
-            }
-        }
-      }
-    }
   }
 
 }

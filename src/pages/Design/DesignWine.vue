@@ -51,92 +51,7 @@
                     <TitleRed title="Service Process" subTitle="服务流程" />
                     <img src="./imagesWine/banner4.png" alt="">
                     <TitleRed title="supplyer" subTitle="推荐服务商" />
-                    <el-row class="servier" :gutter="20">
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap">
-                        <img src="./imagesSmoke/supplyer1.png" alt="">
-                        <div>复旦大学</div>
-                        <div>
-                          <img src="./imagesSmoke/icon1.png" alt="">
-                          <img src="./imagesSmoke/LV16.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap">
-                        <img src="./imagesSmoke/supplyer2.png" alt="">
-                        <div>上海研发公共服务平台</div>
-                        <div>
-                          <img src="./imagesSmoke/icon1.png" alt="">
-                          <img src="./imagesSmoke/LV16.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap">
-                        <img src="./imagesSmoke/supplyer3.png" alt="">
-                        <div>中国防伪行业协会</div>
-                        <div>
-                          <img src="./imagesSmoke/icon1.png" alt="">
-                          <img src="./imagesSmoke/LV16.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap">
-                        <img src="./imagesSmoke/supplyer4.png" alt="">
-                        <div>天臣集团</div>
-                        <div>
-                          <img src="./imagesSmoke/icon1.png" alt="">
-                          <img src="./imagesSmoke/LV16.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                    </el-row>
+                    <Servicer />
                   </div>
                 </el-row>
               </div>
@@ -155,6 +70,7 @@
 import HeaderGuide from "@/components/HeaderGuide/HeaderGuide";
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
 import TitleRed from "@/components/Title/TitleRed";
+import Servicer from '@/components/Servicer/Servicer';
 export default {
   data() {
     return {
@@ -165,7 +81,8 @@ export default {
   components: {
     HeaderGuide,
     FooterGuide,
-    TitleRed
+    TitleRed,
+    Servicer,
   }
 };
 </script>

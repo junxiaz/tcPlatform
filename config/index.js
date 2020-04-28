@@ -49,6 +49,7 @@ module.exports = {
     index: path.resolve(__dirname, '../tcPlatform/index.html'),
 
     // Paths
+    // 构建输出目录，也就是构建后的文件都放在这里
     assetsRoot: path.resolve(__dirname, '../tcPlatform'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',

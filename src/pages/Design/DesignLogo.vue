@@ -52,10 +52,10 @@
                   <TitleRed class="w1220" title="CLASSIC CASE" subTitle="精品案例展示" />
                   <div class="w1220">
                     <el-row :gutter="20">
-                        <el-col :span="12"><img src="./images/logocase1.png" alt=""></el-col>   
-                        <el-col :span="12"><img src="./images/logocase2.png" alt=""></el-col>   
-                        <el-col :span="12"><img src="./images/logocase3.png" alt=""></el-col>   
-                        <el-col :span="12"><img src="./images/logocase4.png" alt=""></el-col>   
+                        <el-col :span="12"><img src="./images/logocase1.png" alt=""></el-col>
+                        <el-col :span="12"><img src="./images/logocase2.png" alt=""></el-col>
+                        <el-col :span="12"><img src="./images/logocase3.png" alt=""></el-col>
+                        <el-col :span="12"><img src="./images/logocase4.png" alt=""></el-col>
                     </el-row>
                   </div>
                 </el-row>
@@ -70,99 +70,14 @@
                     <TitleRed title="COOPERATION" subTitle="合作商家" />
                     <img src="./images/cooperation.png" alt="">
                     <!-- <img src="./images/cooperation.png" alt=""> -->
-                  </div>  
+                  </div>
                 </el-row>
                 <el-row class="service-process1">
                   <div class="w1220">
                     <TitleRed title="Service Process" subTitle="服务流程" />
                     <img src="./images/banner4.png" alt="">
                     <TitleRed title="Supplyer" subTitle="推荐服务商" />
-                    <el-row class="servier" :gutter="20">
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
-                        <img src="./images/ISP.png" alt="">
-                        <div>天津艺点意创科技有限公司</div>
-                        <div>
-                          <img src="./images/icon1.png" alt="">
-                          <img src="./images/icon2.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
-                        <img src="./images/ISP.png" alt="">
-                        <div>天津艺点意创科技有限公司</div>
-                        <div>
-                          <img src="./images/icon1.png" alt="">
-                          <img src="./images/icon2.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
-                        <img src="./images/ISP.png" alt="">
-                        <div>天津艺点意创科技有限公司</div>
-                        <div>
-                          <img src="./images/icon1.png" alt="">
-                          <img src="./images/icon2.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                      <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
-                        <img src="./images/ISP.png" alt="">
-                        <div>天津艺点意创科技有限公司</div>
-                        <div>
-                          <img src="./images/icon1.png" alt="">
-                          <img src="./images/icon2.png" alt="">
-                        </div>
-                        <el-row type="flex" justify="center">
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                          <el-col :span="8">速度:5.00</el-col>
-                        </el-row>
-                        <div>成交金额：<span>¥23455555</span></div>
-                        <div>
-                          <el-tag type="info">图标设计签四签四签四签四签四</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                          <el-tag type="info">图标设计</el-tag>
-                        </div>
-                        </div>
-                      </el-col>
-                    </el-row>
+                    <Servicer />
                   </div>
                 </el-row>
               </div>
@@ -181,12 +96,14 @@
 import HeaderGuide from "@/components/HeaderGuide/HeaderGuide";
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
 import TitleRed from "@/components/Title/TitleRed";
+import Servicer from '@/components/Servicer/Servicer';
 export default {
   name: "",
   components: {
     HeaderGuide,
     FooterGuide,
-    TitleRed
+    TitleRed,
+    Servicer
   }
 };
 </script>
@@ -194,7 +111,7 @@ export default {
 .design-wrap {
   .el-tabs--border-card {
     box-shadow: none;
-    border: none;  
+    border: none;
     > .el-tabs__content {
       padding: 0;
     }
@@ -207,7 +124,7 @@ export default {
       & .el-tabs__item.is-active {
         background-color: #dfeefb;
         border-color: #dfeefb;
-        
+
       }
       .el-tabs__item {
         font-size: 18px;
@@ -217,7 +134,7 @@ export default {
         color: #424242;
       }
     }
-  } 
+  }
 }
 </style>
 <style lang="scss" scoped>
@@ -261,13 +178,13 @@ export default {
       }
       .classic-case {
         background-color: #f8f8f8;
-      } 
-      .service-process {  
+      }
+      .service-process {
         >img {
-          width: 100%;  
+          width: 100%;
           height: 100%;
-          display: block;  
-        }  
+          display: block;
+        }
       }
       .free-resolve {
         background-color: #F2F3FF;
@@ -310,60 +227,15 @@ export default {
             display: block;
           }
         }
-      } 
-      .service-process1 {  
+      }
+      .service-process1 {
         background-color: #f8f8f8;
         text-align: center;
         padding-bottom: 80px;
         >img {
-          width: 100%;  
+          width: 100%;
           height: 100%;
-          display: block;  
-        }  
-        .servier {
-          .servier-item {
-            background-color: #f8f8f8;
-            .col-wrap {    
-                background-color: #fff;
-                padding: 25px;
-                >img {
-                width: 115px;
-                height: 115px;
-                padding-bottom: 25px;
-                }
-                >div:nth-of-type(1) {
-                font-size: 18px;
-                font-weight: bold;
-                color: #4b4b4b;
-                padding-bottom: 8px;
-                }
-                .el-row {
-                .el-col {
-                    font-size: 14px;
-                    color: #8d8d8d;
-                    padding: 10px 0;
-                }  
-                }
-                div:nth-of-type(4) {
-                font-size: 16px;
-                color: #4b4b4b;
-                padding-bottom: 14px;
-                margin-bottom: 12px;
-                border-bottom: solid 1px #efefef;
-                span {
-                    color: #F98D2D;
-                }
-                }
-                div:nth-of-type(5) {
-                .el-tag {
-                    max-width: 30%;
-                    overflow:hidden; 
-                    text-overflow:ellipsis; 
-                    white-space:nowrap; 
-                }
-                }
-            }  
-          }  
+          display: block;
         }
       }
     }
