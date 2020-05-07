@@ -31,17 +31,23 @@ export default {
   },
   methods: {
     imgLoad() {
-      // this.$nextTick(() => {
-        this.hei = this.$refs.image[0].height - 2
-      // })
+      this.$nextTick(() => {
+        let isImg = this.$refs.image
+        if(isImg) {
+          this.hei = isImg[0].height - 2
+        }
+      })
     }
   },
   mounted() {
     this.imgLoad()
-    window.addEventListener('resize', () => {
-      this.imgLoad()
-    })
+    window.addEventListener('resize', this.imgLoad, false)
+  },
+
+  destroyed(){
+    window.removeEventListener("resize",this.imgLoad,false);
   }
+
 }
 </script>
 

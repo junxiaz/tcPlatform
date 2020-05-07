@@ -5,9 +5,9 @@
         <div class="design-wrap">
           <img src="./imagesSmoke/banner.png" alt="">
           <el-tabs type="border-card" v-model="activeName">
-            <el-tab-pane label="包装盒设计">印刷制作</el-tab-pane>
+            <!-- <el-tab-pane label="包装盒设计">印刷制作</el-tab-pane>
             <el-tab-pane label="包装袋设计">印刷制作</el-tab-pane>
-            <el-tab-pane label="礼盒设计">印刷制作</el-tab-pane>
+            <el-tab-pane label="礼盒设计">印刷制作</el-tab-pane> -->
             <el-tab-pane label="盒型设计" name="bottleDesign">
               <div class="bottle-wrap">
                 <el-row class="classic-case">
@@ -56,9 +56,9 @@
                 </el-row>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="产品包装设计">产品包装设计</el-tab-pane>
+            <!-- <el-tab-pane label="产品包装设计">产品包装设计</el-tab-pane>
             <el-tab-pane label="运输包装设计">运输包装设计</el-tab-pane>
-            <el-tab-pane label="印刷制作">印刷制作</el-tab-pane>
+            <el-tab-pane label="印刷制作">印刷制作</el-tab-pane> -->
           </el-tabs>
         </div>
     </el-main>

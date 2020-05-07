@@ -5,7 +5,7 @@
         <div class="design-wrap">
           <img src="./imagesPackage/banner.png" alt="">
           <el-tabs type="border-card" v-model="activeName">
-            <el-tab-pane label="酒水">酒水</el-tab-pane>
+            <!-- <el-tab-pane label="酒水">酒水</el-tab-pane> -->
             <el-tab-pane label="烟草" name="bottleDesign">
               <div class="bottle-wrap">
                 <el-row class="classic-case">
@@ -85,8 +85,8 @@
                 </el-row>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="食品/保健品">产品包装设计</el-tab-pane>
-            <el-tab-pane label="日化品">运输包装设计</el-tab-pane>
+            <!-- <el-tab-pane label="食品/保健品">产品包装设计</el-tab-pane>
+            <el-tab-pane label="日化品">运输包装设计</el-tab-pane> -->
           </el-tabs>
         </div>
     </el-main>

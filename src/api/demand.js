@@ -14,13 +14,25 @@ const demand = {
     reqDemandType() {
         return axios.post(`${base.sq}/demand/listDemandType`, {});
     },
-    // 获取需求范围
+    // 获得需求状态--需求大厅
+    reqWebDemandStatus() {
+        return axios.post(`${base.sq}/demand/listWebDemandStatus`, {});
+    },
+    // 获得需求状态--我的订单
+    reqDemandStatus() {
+        return axios.post(`${base.sq}/demand/listDemandStatus`, {});
+    },
+    // 获取需求范围--省份
     reqProvince() {
         return axios.post(`${base.sq}/demand/listProvince`, {});
     },
     // 获取需求列表---需求大厅
     reqListDemand(params) {
         return axios.post(`${base.sq}/demand/listDemand`, params);
+    },
+    // 获取省份列表---需求大厅----省份筛选
+    reqListDemandProvince() {
+        return axios.post(`${base.sq}/demand/listDemandProvince`);
     },
 
     // 获取需求详情--立即投标
@@ -39,6 +51,10 @@ const demand = {
     // 获取中标
     winTenderDemand(params) {
         return axios.post(`${base.sq}/demand/winTenderDemand`, params);
+    },
+    // 结单
+    finishDemand(params) {
+        return axios.post(`${base.sq}/demand/finisheDemand`, params);
     },
     // 立即投标
     tenderDemand(params) {

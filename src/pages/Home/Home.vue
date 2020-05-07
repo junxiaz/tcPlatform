@@ -92,9 +92,9 @@
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <router-link :to="{path: '/service/'}">
+                      <!-- <router-link :to="{path: '/service/'}"> -->
                         <el-button type="primary">了解详情 ></el-button>
-                      </router-link>
+                      <!-- </router-link> -->
                     </li>
                   </ul>
                 </el-col>
@@ -107,9 +107,9 @@
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <router-link :to="{path: '/service'}">
+                      <!-- <router-link :to="{path: '/service'}"> -->
                         <el-button type="primary">了解详情 ></el-button>
-                      </router-link>
+                      <!-- </router-link> -->
                     </li>
                   </ul>
                 </el-col>
@@ -557,6 +557,9 @@ export default {
                 opacity: 0;
                 transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
               }
+              P:nth-child(2) {
+                line-height: 1.5;
+              }
               .el-button {
                 background: rgba($color: #000000, $alpha: 0);
                 color: #fff;
@@ -612,6 +615,9 @@ export default {
             }
             li:nth-of-type(2) {
               padding: 16px 0;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             li:nth-of-type(3) {
               font-weight: 600;

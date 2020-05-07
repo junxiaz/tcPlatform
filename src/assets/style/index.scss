@@ -20,7 +20,7 @@ html {
 ul {
   padding: 0;
   margin: 0;
-} 
+}
 li { list-style: none;}
 
 #app {
@@ -112,7 +112,7 @@ div:focus { outline: none;}
       label.el-form-item__label{padding:0 16px 0 0;}
     }
     >div.el-form-item:not(.upload-item){
-      margin-bottom:30px;        
+      margin-bottom:30px;
     }
     >div.el-form-item:last-child{margin-bottom:0;}
 
@@ -138,9 +138,9 @@ div:focus { outline: none;}
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66FFFFFF,endColorstr=#66FFFFFF);
             }
           }
-        }        
+        }
       }
-    } 
+    }
 
   }
   // form.el-form.el-form--inline{

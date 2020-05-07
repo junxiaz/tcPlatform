@@ -5,21 +5,21 @@
         <div class="design-wrap">
           <img src="./images/banner.png" alt="">
           <el-tabs type="border-card" v-model="activeName">
-            <el-tab-pane label="包装盒设计">印刷制作</el-tab-pane>
+            <!-- <el-tab-pane label="包装盒设计">印刷制作</el-tab-pane>
             <el-tab-pane label="包装袋设计">印刷制作</el-tab-pane>
-            <el-tab-pane label="礼盒设计">印刷制作</el-tab-pane>
+            <el-tab-pane label="礼盒设计">印刷制作</el-tab-pane> -->
             <el-tab-pane label="瓶型设计" name="bottleDesign">
               <div class="bottle-wrap">
                 <el-row class="classic-case">
                   <TitleRed class="w1220" title="CLASSIC CASE" subTitle="精品案例展示" />
                   <div class="w1220">
                     <el-row :gutter="20">
-                        <el-col :span="8"><img src="./images/case1.png" alt=""></el-col>  
-                        <el-col :span="8"><img src="./images/case2.png" alt=""></el-col>  
-                        <el-col :span="8"><img src="./images/case3.png" alt=""></el-col>  
-                        <el-col :span="8"><img src="./images/case4.png" alt=""></el-col>  
-                        <el-col :span="8"><img src="./images/case5.png" alt=""></el-col>  
-                        <el-col :span="8"><img src="./images/case6.png" alt=""></el-col>  
+                        <el-col :span="8"><img src="./images/case1.png" alt=""></el-col>
+                        <el-col :span="8"><img src="./images/case2.png" alt=""></el-col>
+                        <el-col :span="8"><img src="./images/case3.png" alt=""></el-col>
+                        <el-col :span="8"><img src="./images/case4.png" alt=""></el-col>
+                        <el-col :span="8"><img src="./images/case5.png" alt=""></el-col>
+                        <el-col :span="8"><img src="./images/case6.png" alt=""></el-col>
                     </el-row>
                   </div>
                 </el-row>
@@ -29,7 +29,7 @@
                 </el-row>
                 <el-row class="free-resolve">
                   <div class="w1220">
-                    <div>免费帮您诊断企业设计问题</div>  
+                    <div>免费帮您诊断企业设计问题</div>
                     <div>专属顾问将根据您企业的具体情况免费进行诊断服务</div>
                     <img src="./images/banner3.png" alt="">
                   </div>
@@ -53,7 +53,7 @@
                     <TitleRed title="Supplyer" subTitle="推荐服务商" />
                     <el-row class="servier" :gutter="20">
                       <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
+                        <div class="col-wrap">
                         <img src="./images/ISP.png" alt="">
                         <div>天津艺点意创科技有限公司</div>
                         <div>
@@ -74,7 +74,7 @@
                         </div>
                       </el-col>
                       <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
+                        <div class="col-wrap">
                         <img src="./images/ISP.png" alt="">
                         <div>天津艺点意创科技有限公司</div>
                         <div>
@@ -95,7 +95,7 @@
                         </div>
                       </el-col>
                       <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
+                        <div class="col-wrap">
                         <img src="./images/ISP.png" alt="">
                         <div>天津艺点意创科技有限公司</div>
                         <div>
@@ -116,7 +116,7 @@
                         </div>
                       </el-col>
                       <el-col class="servier-item" :span="6">
-                        <div class="col-wrap"> 
+                        <div class="col-wrap">
                         <img src="./images/ISP.png" alt="">
                         <div>天津艺点意创科技有限公司</div>
                         <div>
@@ -141,10 +141,10 @@
                 </el-row>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="产品包装设计">产品包装设计</el-tab-pane>
+            <!-- <el-tab-pane label="产品包装设计">产品包装设计</el-tab-pane>
             <el-tab-pane label="运输包装设计">运输包装设计</el-tab-pane>
-            <el-tab-pane label="印刷制作">印刷制作</el-tab-pane>
-          </el-tabs>  
+            <el-tab-pane label="印刷制作">印刷制作</el-tab-pane> -->
+          </el-tabs>
         </div>
     </el-main>
     <!-- <FooterGuide /> -->
@@ -173,7 +173,7 @@ export default {
 .design-wrap {
   .el-tabs--border-card {
     box-shadow: none;
-    border: none;  
+    border: none;
     > .el-tabs__content {
       padding: 0;
     }
@@ -186,7 +186,7 @@ export default {
       & .el-tabs__item.is-active {
         background-color: #dfeefb;
         border-color: #dfeefb;
-        
+
       }
       .el-tabs__item {
         font-size: 18px;
@@ -196,7 +196,7 @@ export default {
         color: #424242;
       }
     }
-  } 
+  }
 }
 </style>
 <style lang="scss" scoped>
@@ -215,13 +215,13 @@ export default {
       }
       .classic-case {
         background-color: #f8f8f8;
-      } 
-      .service-process {  
+      }
+      .service-process {
         >img {
-          width: 100%;  
+          width: 100%;
           height: 100%;
-          display: block;  
-        }  
+          display: block;
+        }
       }
       .free-resolve {
         background-color: #F2F3FF;
@@ -264,20 +264,20 @@ export default {
             display: block;
           }
         }
-      } 
-      .service-process1 {  
+      }
+      .service-process1 {
         background-color: #f8f8f8;
         text-align: center;
         padding-bottom: 80px;
         >img {
-          width: 100%;  
+          width: 100%;
           height: 100%;
-          display: block;  
-        }  
+          display: block;
+        }
         .servier {
           .servier-item {
             background-color: #f8f8f8;
-            .col-wrap {    
+            .col-wrap {
                 background-color: #fff;
                 padding: 25px;
                 >img {
@@ -296,7 +296,7 @@ export default {
                     font-size: 14px;
                     color: #8d8d8d;
                     padding: 10px 0;
-                }  
+                }
                 }
                 div:nth-of-type(4) {
                 font-size: 16px;
@@ -311,13 +311,13 @@ export default {
                 div:nth-of-type(5) {
                 .el-tag {
                     max-width: 30%;
-                    overflow:hidden; 
-                    text-overflow:ellipsis; 
-                    white-space:nowrap; 
+                    overflow:hidden;
+                    text-overflow:ellipsis;
+                    white-space:nowrap;
                 }
                 }
-            }  
-          }  
+            }
+          }
         }
       }
     }

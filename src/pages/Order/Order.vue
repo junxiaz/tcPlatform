@@ -33,7 +33,7 @@
                 </el-col>
                 <el-col class="col" :span="5">
                   <div>
-                    <p>{{demand.tenderReal-0}}/{{demand.tenderPlan}}</p>
+                    <p>{{demand.tenderReal!=null?demand.tenderReal:0}}/{{demand.tenderPlan}}</p>
                     <p>已投标位</p>
                   </div>
                 </el-col>
@@ -55,7 +55,7 @@
                 <el-col :span="20">{{demand.demandTypeDesc}}</el-col>
               </el-row>
               <el-row class="row">
-                <el-button type="primary" plain @click="tenderDemand(demand.id)">立即投标</el-button>
+                <el-button type="primary" :disabled="demand.demandStatus!=3" plain @click="tenderDemand(demand.id)">立即投标</el-button>
                 <router-link to="/release">
                   <el-button type="primary" plain>我有类似需求</el-button>
                 </router-link>
@@ -85,7 +85,7 @@
             <span class="bwNumOne">{{demand.tenderPlan}}</span> 位服务商投标，目前还剩
             <span class="bwNumOne">{{demand.tenderPlan-demand.tenderReal}}</span> 个名额
           </p>
-          <p class="odfi-desc">违法违规类需求，如刷单、炒信、违规降权等将可能损害到您的合法权益，请拒绝参与。如发现类似问题，请向忽米网举报</p>
+          <p class="odfi-desc">违法违规类需求，如刷单、炒信、违规降权等将可能损害到您的合法权益，请拒绝参与。如发现类似问题，请向天臣互联网产业平台举报</p>
         </el-row>
         <!-- 需求 -->
         <div class="demands">
@@ -132,17 +132,26 @@ export default {
       })
     },
     tenderDemand(id) {
-      const params = {
-        userId: sessionStorage.getItem('userId'),
-        token: sessionStorage.getItem('token'),
-        demandId: id
+      if(sessionStorage.getItem('token')) {
+        if(sessionStorage.getItem('account')!=this.demand.mobile) {
+          const params = {
+            userId: sessionStorage.getItem('userId'),
+            token: sessionStorage.getItem('token'),
+            demandId: id
+          }
+          this.$api.demand.tenderDemand(params).then(res => {
+            this.$message({
+              type: 'success',
+              message: "恭喜您，投标成功！"
+            });
+          })
+        } else {
+          this.$message.warning('请勿投自己的标')
+        }
+      } else {
+        this.$message.warning('请先登录！');
+        this.$router.push('/login')
       }
-      this.$api.demand.tenderDemand(params).then(res => {
-        this.$message({
-          type: 'success',
-          message: "恭喜您，投标成功！"
-        });
-      })
     }
   },
   mounted() {

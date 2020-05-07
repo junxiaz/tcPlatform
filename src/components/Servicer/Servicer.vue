@@ -103,7 +103,7 @@
 export default {
   methods: {
     jump() {
-      this.$router.push({ path: "/service" });
+      // this.$router.push({ path: "/service" });
     }
   }
 };

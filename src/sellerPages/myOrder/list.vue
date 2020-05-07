@@ -5,7 +5,32 @@
 
       <el-form :inline="true" :model="searchForm" ref="searchForm"
                 class="demo-form-inline" style="margin-top:14px;">
-        <el-form-item label="需求编号">
+        <el-form-item label="需求标题">
+          <el-input v-model="params.desc" size="medium" class="nobr" style="width:140px;"></el-input>
+        </el-form-item>
+        <el-form-item label="需求性质">
+          <el-select v-model="params.demandType" placeholder="请选择" class="nobr" style="width:140px;">
+            <el-option label="请选择" value=""></el-option>
+            <el-option
+              v-for="item in demandType"
+              :key="item.demandType"
+              :label="item.demandTypeName"
+              :value="item.demandType">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="需求状态">
+          <el-select v-model="params.demandStatus" placeholder="请选择" class="nobr" style="width:140px;">
+            <el-option label="请选择" value=""></el-option>
+            <el-option
+              v-for="item in demandStatus"
+              :key="item.demandType"
+              :label="item.demandTypeName"
+              :value="item.demandType">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!-- <el-form-item label="需求编号">
           <el-input v-model="searchForm.id" size="medium" class="nobr" style="width:140px;"></el-input>
         </el-form-item>
         <el-form-item label="发布时间">
@@ -20,18 +45,18 @@
           <el-input v-model="searchForm.minMoney" size="medium" class="nobr" style="width:80px;"></el-input>
           <span style="color:#d2d2d2"> ~ </span>
           <el-input v-model="searchForm.maxMoney" size="medium" class="nobr" style="width:80px;"></el-input>
-        </el-form-item>
+        </el-form-item> -->
 
         <el-form-item>
           <el-button type="danger" size="medium" @click="searchBtn('searchForm')" style="width:90px;">查询</el-button>
         </el-form-item>
       </el-form>
 
-      <el-table :data="tableData" border style="width: 100%" 
-              :header-cell-style="{background:'#e0e9ff'}" class="myTable">
+      <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#e0e9ff'}" class="myTable">
 
         <el-table-column type="index" :index="indexMethod" width="50" label="序号" align="center" fixed="left"></el-table-column>
         <el-table-column prop="demandTitle" label="需求标题"  align="center" min-width="120"></el-table-column>
+        <el-table-column prop="demandTypeDesc" label="需求性质"  align="center"></el-table-column>
         <el-table-column prop="provinceName" label="需求范围"  align="center"></el-table-column>
         <el-table-column prop="capitalCount" label="项目预算"  align="center"></el-table-column>
         <!-- <el-table-column prop="demandType" label="需求类型" align="center"></el-table-column> -->
@@ -47,9 +72,8 @@
         <el-table-column prop="demandStatusDesc" label="状态" align="center" width="110"></el-table-column>       
         <el-table-column label="操作" align="center" width="180" fixed="right">
           <template slot-scope="scope">
-            <el-button type="success" v-if="scope.row.demandStatus === 3 ? true: false" size="mini" @click="checkData(scope.row.id)">选标</el-button>
-            <el-button type="success" v-else size="mini" disabled>选标</el-button>
-            <el-button type="danger" size="mini" @click="checkData(scope.row.id)">结单</el-button>
+            <el-button type="success" :disabled="scope.row.demandStatus != 3" size="mini" @click="checkData(scope.row.id)">选标</el-button>
+            <el-button type="danger" :disabled="scope.row.demandStatus == 5" size="mini" @click="finishData(scope.row.id)">结单</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -89,12 +113,16 @@ export default {
   data(){
     return {
       dialogTableVisible: false,
+      demandStatus: '',
+      demandType: '',
       params:{
         pageNum:1,
         pageSize:10,
         token: sessionStorage.getItem('token'),
         userId: sessionStorage.getItem('userId'),
-        demandStatus: 1
+        demandStatus: '',
+        demandType: '',
+        desc: ''
       },
       currentPage:1,
       total: 0,
@@ -123,7 +151,7 @@ export default {
 
     //搜索
     searchBtn(formName){
-      console.log(this.searchForm);
+      this.initDemand()
     },
 
     // 选标
@@ -137,6 +165,32 @@ export default {
       }
       this.$api.demand.reqListTenderDemand(params).then(res => {
         this.tenderDemand = res.list
+        this.initDemand()
+      })
+    },
+    // 结单
+    finishData(id) {
+      const params = {
+        token: sessionStorage.getItem('token'),
+        userId: sessionStorage.getItem('userId'),
+        demandId: id
+      }
+      this.$api.demand.finishDemand(params).then(res => {
+        this.$message.success('此订单已结束')
+        this.initDemand()
+      })
+    },
+
+    // 获取需求类型
+    reqDemandType() {
+      this.$api.demand.reqDemandType().then(res => {
+        this.demandType = res.list
+      })
+    },
+    // 获取需求状态
+    reqDemandStatus() {
+      this.$api.demand.reqDemandStatus().then(res => {
+        this.demandStatus = res.list
       })
     },
 
@@ -194,6 +248,8 @@ export default {
   },
   mounted() {
     this.initDemand()
+    this.reqDemandType()
+    this.reqDemandStatus()
   }
 
 }
@@ -201,7 +257,6 @@ export default {
 
 <style lang="scss" scoped>
   #myOrder{
-
     form.el-form{
       .el-form-item{
         margin-right:35px;

@@ -11,69 +11,41 @@
               <div class="w1220">
                 <el-row type="flex" class="statu-row-items" justify="center">
                   <el-col :span="24">
-                    <el-form ref="form" size="mini" :model="sizeForm" label-width="155px">
+                    <el-form ref="form" size="mini" :model="params" label-width="155px">
                       <el-form-item label="需求性质">
-                        <el-checkbox-group v-model="sizeForm.type">
-                          <el-checkbox-button label="包装印刷" name="type"></el-checkbox-button>
-                          <el-checkbox-button label="特种材料" name="type"></el-checkbox-button>
-                          <el-checkbox-button label="设计服务" name="type"></el-checkbox-button>
-                        </el-checkbox-group>
+                        <el-radio-group v-model="params.demandType">
+                          <el-radio border label="">无限制</el-radio>
+                          <template v-for="item in demandType">
+                            <el-radio border v-if="item.demandType!=2" :label="item.demandType" :key="item.demandType">{{item.demandTypeName}}</el-radio>
+                          </template>
+                        </el-radio-group>
                       </el-form-item>
                       <el-form-item label="需求状态">
-                        <el-radio-group v-model="sizeForm.resource">
-                          <el-radio border label="需求中标"></el-radio>
-                          <el-radio border label="需求发布"></el-radio>
+                        <el-radio-group v-model="params.demandStatus">
+                          <el-radio border label="">无限制</el-radio>
+                          <el-radio border :label="item.demandType" v-for="item in demandStatus" :key="item.demandType">{{item.demandTypeName}}</el-radio>
                         </el-radio-group>
                       </el-form-item>
                     </el-form>
                   </el-col>
                 </el-row>
                 <el-row type="flex" class="sort-row-items" justify="center">
-                  <el-col :span="24">
-                    <el-radio-group v-model="radio1" @change="sortChange" size="small">
-                      <el-radio-button label="上海">综合</el-radio-button>
-                      <el-radio-button label="北京">
-                        北京
-                        <i class="el-icon-arrow-down"></i>
-                      </el-radio-button>
-                      <el-radio-button label="广州">
-                        广州
-                        <i class="el-icon-arrow-down"></i>
-                      </el-radio-button>
-                    </el-radio-group>
-                    <!-- <el-select
-                      class="map-select"
-                      v-model="value"
-                      placeholder="全国"
-                      style="width:100px; margin-left:40px;"
-                      size="mini"
-                    >
-                      <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      ></el-option>
-                    </el-select> -->
+                  <el-col>
+                    <ul class="sorts" ref="sorts">
+                      <li @click="sortChange('all')">综合</li>
+                      <li :class="{ active: params.beginDesc }" @click="sortChange('begin')">发布时间<i class="el-icon-arrow-down"></i></li>
+                      <li :class="{ active: params.endDesc }" @click="sortChange('end')">截止时间<i class="el-icon-arrow-down"></i></li>
+                    </ul>
                     <div class="map">
-                        <img src="./images/map.png" alt="">
-                    <el-select
-                      class="map-select"
-                      v-model="value"
-                      placeholder="全国"
-                      size="small"
-                    >
-                      <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      ></el-option>
-                    </el-select>
+                        <!-- <img src="./images/map.png" alt=""> -->
+                      <el-select class="map-select" v-model="params.provinceName" size="small" >
+                        <el-option label="未选择" value="" ></el-option>
+                        <el-option v-for="(item,index) in provinces" :key="index" :label="item" :value="item" ></el-option>
+                      </el-select>
                     </div>
                     <div style="float:right;">
-                      <el-input placeholder="请输入内容" size="small" class="input-with-select">
-                          <el-button slot="append">搜索</el-button>
+                      <el-input placeholder="请输入内容" size="small" class="input-with-select" v-model="searchText">
+                          <el-button @click="search" slot="append">搜索</el-button>
                       </el-input>
                       </div>
                   </el-col>
@@ -82,36 +54,30 @@
 
               <div class="demand">
                 <div class="w1220">
-                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="left">
-                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id" v-if="index<4">
+                  <el-row class="demand-row-items" :gutter="20" justify="left">
+                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id">
                       <ul class="demand-items">
                         <li>{{item.demandTitle}}</li>
                         <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
                         <li>需求地区：{{item.provinceName}}</li>
                         <li>截止时间：{{item.endTime}}</li>
-                        <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li>
-                        <!-- <li>投标状态：<el-progress :percentage="format(Math.floor(item.tenderReal/item.tenderPlan*100), item.tenderReal, item.tenderPlan)" :stroke-width="12"></el-progress></li> -->
-                        <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
-                      </ul>
-                    </el-col>
-                  </el-row>
-                  <el-row type="flex" class="demand-row-items" :gutter="20" justify="left">
-                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id" v-if="index>=4">
-                      <ul class="demand-items">
-                        <li>{{item.demandTitle}}</li>
-                        <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
-                        <li>需求地区：{{item.provinceName}}</li>
-                        <li>截止时间：{{item.endTime}}</li>
-                        <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li>
+                        <!-- <li>投标状态：<el-progress :percentage="Math.floor(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress></li> -->
+                        <li>投标状态：
+                          <el-progress :percentage="Math.ceil(item.tenderReal/item.tenderPlan*100)" :stroke-width="12"></el-progress>
+                          <span class="progress-text-self">{{item.tenderReal==null?0:item.tenderReal}}/{{item.tenderPlan}}</span>
+                        </li>
                         <li><el-link type="primary" :underline="false" @click="reqOrder(item.id)">查看详情</el-link></li>
                       </ul>
                     </el-col>
                   </el-row>
                   <el-pagination
+                    v-if="pageshow"
                     background
                     layout="prev, pager, next"
                     :page-size="params.pageSize"
+                    :current-page.sync="params.pageNum"
                     :total="total"
+                    @current-change='handleCurrentChange'
                    >
                   </el-pagination>
                 </div>
@@ -133,47 +99,22 @@ export default {
   name: "Hall",
   data() {
     return {
-      activeIndex: "1",
-      activeIndex2: "1",
+      pageshow: true,
+      demandType: "",  //需求性质
+      demandStatus: "",  //需求状态
+      searchText: '',  //搜索文本
+      provinces: [],  //省份
       activeName: "first",
-      radio1: "上海",
-      tags: [
-        { name: "标签一" },
-        { name: "标签一" },
-        { name: "标签一" },
-        { name: "标签一" },
-        { name: "标签一" }
-      ],
-      sizeForm: {
-        type: [],
-        resource: ""
-      },
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭北京烤鸭"
-        }
-      ],
       value: "",
       params: {
         pageNum: 1,
         pageSize: 8,
+        demandType: "",
+        demandStatus: "",
+        beginDesc: '',
+        endDesc: '',
+        provinceName: '',
+        desc: '',
         token: sessionStorage.getItem('token'),
         userId: sessionStorage.getItem('userId')
       },
@@ -182,26 +123,51 @@ export default {
     };
   },
   methods: {
-    //页码
+    //切换页码
     handleCurrentChange(val) {
       this.params.pageNum = val;
-      this.reqListDemand();
     },
-    sortChange() {
-      console.log("1");
+    // 获取需求类型
+    reqDemandType() {
+      this.$api.demand.reqDemandType().then(res => {
+        this.demandType = res.list
+      })
     },
-    format(per, tenderReal, tenderPlan) {
-      console.log(per, tenderReal, tenderPlan)
-      // console.log(`${per}/${pers}`)
-      // return percentage === 100 ? '投标结束' : `${per}/${pers}`;
-      // let per = percentage.toFixed(2)*100
-      // return percentage === 100 ? '满' : `${percentage}%`;
-      return per === 100 ? '投标结束' : `${per}`
+    // 获取需求状态
+    reqDemandStatus() {
+      this.$api.demand.reqWebDemandStatus().then(res => {
+        this.demandStatus = res.list
+      })
     },
-    reqListDemand() {
-      this.$api.demand.reqListDemand(this.params).then(res => {
+    reqListDemand(params) {
+      this.$api.demand.reqListDemand(params).then(res => {
         this.listData = res.datas.records
         this.total = res.datas.total
+      })
+    },
+    // 点击排序
+    sortChange(param) {
+      if(param == 'all') {
+        this.params.beginDesc = '';
+        this.params.endDesc = '';
+      } else if(param == 'begin') {
+        this.params.isAll = '';
+        this.params.endDesc = '';
+        this.params.beginDesc = !this.params.beginDesc + 0;
+      } else if(param == 'end') {
+        this.params.isAll = '';
+        this.params.beginDesc = '';
+        this.params.endDesc = !this.params.endDesc + 0;
+      }
+    },
+    // 文本搜索
+    search() {
+      this.params.desc = this.searchText;
+    },
+    // 省份搜索
+    reqListDemandProvince() {
+      this.$api.demand.reqListDemandProvince().then(res => {
+        this.provinces = res.data
       })
     },
     reqOrder(id) {
@@ -210,8 +176,22 @@ export default {
       })
     }
   },
+  watch: {
+    params: {
+      handler(newValue, oldValue) {
+        this.reqListDemand(this.params)
+        this.$nextTick(() => {
+          this.pageshow = true
+        })
+      },
+      deep: true
+    }
+  },
   mounted() {
-    this.reqListDemand()
+    this.reqListDemand(this.params)
+    this.reqListDemandProvince()
+    this.reqDemandType()
+    this.reqDemandStatus()
   },
   components: {
     HeaderGuide,
@@ -235,6 +215,13 @@ export default {
       left: 50%;
     }
   }
+  .el-progress__text {
+    display:none;
+  }
+  .progress-text-self {
+    font-size: 16.8px;
+    margin-left: -40px;
+  }
   .el-form {
     border: solid 1px #c7d3de;
     .el-form-item {
@@ -257,16 +244,6 @@ export default {
       border-bottom: none;
     }
   }
-//   .map-select {
-//     .el-input__inner {
-//       background: #fff url(./images/map.png) no-repeat 20px center;
-//       text-align: center;
-//       padding: 0;
-//     }
-//     i {
-//       display: none;
-//     }
-//   }
   .input-with-select .el-input-group__append {
     background-color: rgb(30, 136, 229);
     color: #fff;
@@ -274,7 +251,7 @@ export default {
   .map {
     height: 32px;
     width: 95px;
-    padding-left: 5px;
+    // padding-left: 5px;
     border: 1px solid #e0e0e0;
     line-height: 32px;
     text-align: center;
@@ -299,9 +276,11 @@ export default {
         position: static;
         // width: 86px!important;
         .el-input__inner {
+            background: url(./images/map.png) no-repeat 5px;
             border: none;
             padding: 0;
             width: inherit;
+            text-indent: 20px;
         }
         i {
             display: none;
@@ -331,6 +310,30 @@ export default {
           .el-col {
             background-color: rgb(235, 238, 240);
             padding: 10px;
+            .sorts {
+              display: inline-block;
+              overflow: hidden;
+              li {
+                float: left;
+                line-height: 30px;
+                font-size: 13px;
+                color: #606266;
+                padding: 0 10px;
+                border: solid 1px #e0e0e0;
+                border-right: none;
+                background-color: #fff;
+                cursor: pointer;
+                &:last-child {
+                  border-right: solid 1px #e0e0e0;
+                }
+                &.active i {
+                  transform: rotate(180deg);
+                }
+              }
+            }
+            .el-radio-button__orig-radio:checked + .el-radio-button__inner i {
+              transform: rotate(180deg);
+            }
           }
         }
       }
@@ -418,6 +421,7 @@ export default {
       }
       .el-pagination {
         text-align: center;
+        margin-bottom: 20px;
       }
     }
   }

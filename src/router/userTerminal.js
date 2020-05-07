@@ -46,7 +46,7 @@ let userTerminal = [
     },
     { path: '/label', name: '提交需求', component: rb => require(['../pages/Label/Label.vue'], rb) },
     { path: '/demand', component: rb => require(['../pages/Demand/Demand.vue'], rb) },
-    { path: '/release', component: rb => require(['../pages/Release/Release.vue'], rb) },
+    { path: '/release', name: '发布需求', meta: {requireLogin: true}, component: rb => require(['../pages/Release/Release.vue'], rb) },
     { path: '/order/:id', component: rb => require(['../pages/Order/Order.vue'], rb) },
     { path: '/register', component: rb => require(['../pages/Register/Register.vue'], rb) },
     { path: '/comment', component: rb => require(['../pages/Comment/Comment.vue'], rb) },
