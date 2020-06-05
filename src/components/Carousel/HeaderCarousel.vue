@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-10-28 13:52:46
+ * @LastEditTime: 2020-05-18 15:54:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tc_platform\src\components\Carousel\HeaderCarousel.vue
+-->
 <template>
   <el-carousel class="header-carousel" :interval="5000" arrow="always" :height="hei+'px'">
     <el-carousel-item v-for="item in imgUrls" :key="item.id">
@@ -19,7 +27,7 @@ export default {
   name: 'HeaderCarousel',
   props: {
     bannerHeight: {
-      type: String,
+      type: Number,
       default: 400
     },
     imgUrls: Array

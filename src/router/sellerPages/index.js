@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-06 10:07:36
+ * @LastEditTime: 2020-05-14 10:18:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tc_platform\src\router\sellerPages\index.js
+ */
 export default {
   path:'/seller',
   redirect:'/seller/home',
@@ -28,12 +36,30 @@ export default {
     },
     {
       path: "myOrder",
-      name:"我的订单",
+      name:"我的发布",
       meta:{
         icon:"el-icon-my-order",
         hidden: false
       },
       component : ()=> import('@/sellerPages/myOrder/list.vue')
+    },
+    {
+      path: "myTender",
+      name:"我的投标",
+      meta:{
+        icon:"el-icon-my-order",
+        hidden: false
+      },
+      component : ()=> import('@/sellerPages/myTender/list.vue')
+    },
+    {
+      path: "myWinning",
+      name:"我的中标",
+      meta:{
+        icon:"el-icon-my-order",
+        hidden: false
+      },
+      component : ()=> import('@/sellerPages/myWinning/list.vue')
     },
     {
       path: "enterpriseSet",

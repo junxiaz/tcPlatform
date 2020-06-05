@@ -55,7 +55,7 @@
               <div class="demand">
                 <div class="w1220">
                   <el-row class="demand-row-items" :gutter="20" justify="left">
-                    <el-col :span="6" v-for="(item,index) in listData" :key="item.id">
+                    <el-col :span="6" v-for="item in listData" :key="item.id">
                       <ul class="demand-items">
                         <li>{{item.demandTitle}}</li>
                         <li>{{item.demandTypeDesc}}<span :class="item.demandStatus==0&&item.demandStatus!==5?'reviewing': 'audited' || item.demandStatus==5?'completed': 'audited'">{{item.demandStatusDesc}}</span></li>
@@ -116,7 +116,8 @@ export default {
         provinceName: '',
         desc: '',
         token: sessionStorage.getItem('token'),
-        userId: sessionStorage.getItem('userId')
+        userId: sessionStorage.getItem('userId'),
+        flag: 1,
       },
       total: 0,
       listData: []

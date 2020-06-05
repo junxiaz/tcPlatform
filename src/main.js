@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-03-06 09:16:49
+ * @LastEditTime: 2020-05-13 16:37:51
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \tc_platform\src\main.js
+ */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -48,3 +56,7 @@ new Vue({
   render: h => h(App),
   router,
 })
+
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
+});

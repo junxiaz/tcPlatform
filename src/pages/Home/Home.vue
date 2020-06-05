@@ -2,19 +2,21 @@
   <el-container style="overflow:hidden" direction="vertical">
     <HeaderGuide />
     <el-main>
-      <HeaderCarousel :bannerHeight="bannerHeight" :imgUrls="imgUrls">
+      <HeaderCarousel :imgUrls="imgUrls">
         <template slot="btns">
           <div class="operate-btns">
             <router-link to="/release">
               <el-button type="primary" style="margin-right:70px;">发布需求</el-button>
             </router-link>
-            <el-button type="primary">服务商入驻</el-button>
+            <router-link to="/login">
+              <el-button type="primary">服务商入驻</el-button>
+            </router-link>
           </div>
         </template>
       </HeaderCarousel>
       <!-- 材料介绍 -->
       <div class="products-wrap">
-        <el-row type="flex" class="products w1220" justify="center">
+        <el-row class="products w1220">
           <el-col :span="8" v-for="(product, index) in products" :key="index">
             <div class="product">
               <span class="product-type">
@@ -31,24 +33,28 @@
       <!-- 统计数据展示 -->
       <div class="nums-wrap">
         <div class="w1220">
-          <el-row :gutter="33" type="flex" justify="center" class="nums-top">
-            <el-col :span="4" v-for="(item, index) in nums" :key="index" v-if="index<6">
-              <div class="num">
-                <img :src="item.src" alt="">
-                <p>{{item.num}}</p>
-                <span>{{item.title}}</span>
-              </div>
+          <el-row :gutter="33" class="nums-top">
+            <el-col :span="4" v-for="(item, index) in nums" :key="index">
+              <template v-if="index<6">
+                <div class="num">
+                  <img :src="item.src" alt="">
+                  <p>{{item.num}}</p>
+                  <span>{{item.title}}</span>
+                </div>
+              </template>
             </el-col>
           </el-row>
           <el-row :gutter="33" class="nums-bottom">
-            <el-col :span="12"  v-for="(item, index) in nums" :key="index" v-if="index>=6">
-              <el-row class="num">
-                <el-col :span="10"><img :src="item.src" alt=""></el-col>
-                <el-col :span="14">
-                  <p>{{item.num}}</p>
-                  <span>{{item.title}}</span>
-                </el-col>
-              </el-row>
+            <el-col :span="12"  v-for="(item, index) in nums" :key="index">
+              <template v-if="index>=6">
+                <el-row class="num">
+                  <el-col :span="10"><img :src="item.src" alt=""></el-col>
+                  <el-col :span="14">
+                    <p>{{item.num}}</p>
+                    <span>{{item.title}}</span>
+                  </el-col>
+                </el-row>
+              </template>
             </el-col>
           </el-row>
         </div>
@@ -62,7 +68,9 @@
               <div class="partner-info" :class="index===isActive?'show': 'hidden'">
                 <p>{{item.enterpriseName}}</p>
                 <p>{{item.enterpriseDesc}}</p>
-                <a :href="item.enterpriseUrl"><el-button plain>查看更多 ></el-button></a>
+                <router-link :to="{path: '/service/'+item.id}">
+                  <el-button plain>查看更多 ></el-button>
+                </router-link>
               </div>
             </el-card>
           </el-col>
@@ -80,36 +88,21 @@
       </div>
       <!-- 服务商大厅 -->
       <div class="service-hall">
-        <Title title="服务商大厅 >" titleColor="#fff" subTitle="服务12000+客户，沉淀2500+案例" subTitleColor="#fff" link="/release"></Title>
+        <Title title="服务商大厅 >" titleColor="#fff" subTitle="服务12000+客户，沉淀2500+案例" subTitleColor="#fff"></Title>
         <div class="service-types">
           <el-tabs :stretch="true" v-model="activeName" @tab-click="handleClick">
             <el-tab-pane class="w1220" label="印刷企业" name="first">
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
+              <el-row  class="service-row-items" :gutter="20">
+                <el-col :span="8" v-for="item in listClientUser" :key="item.id">
                   <ul class="service-item">
                     <li><img :src="item.logoUrl" alt=""></li>
                     <li>{{item.enterpriseDesc}}</li>
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <!-- <router-link :to="{path: '/service/'}"> -->
+                      <router-link :to="{path: '/service/'+item.id}">
                         <el-button type="primary">了解详情 ></el-button>
-                      <!-- </router-link> -->
-                    </li>
-                  </ul>
-                </el-col>
-              </el-row>
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
-                  <ul class="service-item">
-                    <li><img :src="item.logoUrl" alt=""></li>
-                    <li>{{item.enterpriseDesc}}</li>
-                    <li>{{item.enterpriseName}}</li>
-                    <p class="line"></p>
-                    <li>
-                      <!-- <router-link :to="{path: '/service'}"> -->
-                        <el-button type="primary">了解详情 ></el-button>
-                      <!-- </router-link> -->
+                      </router-link>
                     </li>
                   </ul>
                 </el-col>
@@ -122,28 +115,17 @@
               </el-row>
             </el-tab-pane>
             <el-tab-pane class="w1220" label="设计人员" name="second">
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
+              <el-row class="service-row-items" :gutter="20">
+                <el-col :span="8" v-for="item in listClientUser" :key="item.id">
                   <ul class="service-item">
                     <li><img :src="item.logoUrl" alt=""></li>
                     <li>{{item.enterpriseDesc}}</li>
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-              </el-row>
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
-                  <ul class="service-item">
-                    <li><img :src="item.logoUrl" alt=""></li>
-                    <li>{{item.enterpriseDesc}}</li>
-                    <li>{{item.enterpriseName}}</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
+                      <router-link :to="{path: '/service/'+item.id}">
+                        <el-button type="primary">了解详情 ></el-button>
+                      </router-link>
                     </li>
                   </ul>
                 </el-col>
@@ -154,28 +136,17 @@
               </el-row>
             </el-tab-pane>
             <el-tab-pane class="w1220" label="青年创客" name="third">
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index < 3">
+              <el-row class="service-row-items" :gutter="20">
+                <el-col :span="8" v-for="item in listClientUser" :key="item.id">
                   <ul class="service-item">
                     <li><img :src="item.logoUrl" alt=""></li>
                     <li>{{item.enterpriseDesc}}</li>
                     <li>{{item.enterpriseName}}</li>
                     <p class="line"></p>
                     <li>
-                      <el-button type="primary">了解详情 ></el-button>
-                    </li>
-                  </ul>
-                </el-col>
-              </el-row>
-              <el-row type="flex" class="service-row-items" :gutter="20" justify="left">
-                <el-col :span="8" v-for="(item, index) in listClientUser" :key="item.index" v-if="index >= 3">
-                  <ul class="service-item">
-                    <li><img :src="item.logoUrl" alt=""></li>
-                    <li>{{item.enterpriseDesc}}</li>
-                    <li>{{item.enterpriseName}}</li>
-                    <p class="line"></p>
-                    <li>
-                      <el-button type="primary">了解详情 ></el-button>
+                      <router-link :to="{path: '/service/'+item.id}">
+                        <el-button type="primary">了解详情 ></el-button>
+                      </router-link>
                     </li>
                   </ul>
                 </el-col>
@@ -191,23 +162,10 @@
       </div>
       <!-- 需求动态 -->
       <div class="demand-dynamic">
-        <Title title="需求动态 >" titleColor="#4f69dd"></Title>
+        <Title title="需求动态 >" titleColor="#4f69dd" link="/hall"></Title>
         <div class="w1220">
-          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="left">
-            <el-col :span="6" v-for="(item,index) in listNewDemand" :key="item.id" v-if="index<4">
-              <ul class="dynamic-item">
-                <li>{{item.demandTitle}}</li>
-                <li><img src="./images/line_xuqiu.png" alt=""></li>
-                <li>{{item.demandTypeDesc}}</li>
-                <li>项目预算：<span class="red">{{item.capitalCount}}</span></li>
-                <li>
-                  <el-button type="primary" size="small"  @click="reqOrder(item.id)">了解详情</el-button>
-                </li>
-              </ul>
-            </el-col>
-          </el-row>
-          <el-row type="flex" class="dynamic-row-items" :gutter="20" justify="left">
-            <el-col :span="6" v-for="(item,index) in listNewDemand" :key="item.id" v-if="index>4">
+          <el-row class="dynamic-row-items" :gutter="20">
+            <el-col :span="6" v-for="item in listNewDemand" :key="item.id">
               <ul class="dynamic-item">
                 <li>{{item.demandTitle}}</li>
                 <li><img src="./images/line_xuqiu.png" alt=""></li>
@@ -225,17 +183,8 @@
       <div class="company-support">
         <Title title="企业支持 >" titleColor="#f85d5d" subTitle="帮助企业、印包厂降低采购及生产成本提升效率，为创业青年、设计师提供一片天地！" subTitleColor="#2e2e2e"></Title>
         <div class="w1220">
-          <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="8" v-if="index < 3" v-for="(support, index) in supports" :key="index">
-              <ul class="support-item">
-                <li><img :src="support.icon" alt=""></li>
-                <li>{{support.title}}</li>
-                <li>{{support.subTitle}}</li>
-              </ul>
-            </el-col>
-          </el-row>
-          <el-row type="flex" class="support-row-items" :gutter="20" justify="center">
-            <el-col :span="8" v-if="index >= 3" v-for="(support, index) in supports" :key="index">
+          <el-row class="support-row-items" :gutter="20">
+            <el-col :span="8" v-for="(support, index) in supports" :key="index">
               <ul class="support-item">
                 <li><img :src="support.icon" alt=""></li>
                 <li>{{support.title}}</li>
@@ -263,15 +212,12 @@ export default {
   data() {
     return {
       // 轮播数据
-      bannerHeight: '620',
       imgUrls: [
         {id: 1, idView: require('./images/banner1.png')},
         {id: 2, idView: require('./images/banner2.jpg')},
         {id: 3, idView: require('./images/banner3.png')},
       ],
-      activeIndex: '1',
-      activeIndex2: '1',
-      activeName: 'first',
+      activeName: 'first', //服务商大厅默认显示印刷企业
       products: [  //特种材料
         {icon: require('./images/material_icon.png'), title: '特种材料', list: [{title: '云膜', path: '/special/cloud'}, {title: '全印模', path: '/special/full'}, {title: '镭射', path: '/special/laser'},]},
         {icon: require('./images/print_icon.png'), title: '包装印刷', list: [{title: '酒类', path: '/package/wine'}, {title: '烟类', path: '/package/smoke'}, {title: '化妆品', path: '/package/makeup'},]},

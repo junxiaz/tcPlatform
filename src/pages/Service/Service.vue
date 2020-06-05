@@ -1,55 +1,59 @@
 <template>
   <el-container direction="vertical">
     <el-main>
+      <el-row id="top">
+        <!-- 顶部组件 -->
+        <el-row class="w1220">
+          <el-col :span="12" align="left">
+            <router-link :to="{ path: '/' }">
+              <i :style="{'backgroundImage':'url('+homeImg+')'}" class="el-icon-my-home" ></i>
+              <!-- <i class="el-icon-my-home"></i> -->
+              <span style="margin-left:1px;">Hello，欢迎来到天臣产业互联网平台！</span>
+            </router-link>
+          </el-col>
+
+          <!-- <el-col :span="12" align="right">
+            <el-link :underline="false" @click="signout">退出登录</el-link> |
+            <el-link :underline="false">网站导航 <i class="el-icon-arrow-right el-icon--right"></i></el-link>
+          </el-col> -->
+        </el-row>
+
+      </el-row>
       <!-- 首页 -->
       <a class="afixed" href name="top" id="anchor-0"></a>
-      <div style="height:152px;"></div>
+      <div style="height:182px;"></div>
       <div class="top-wrap">
         <el-row class="top">
           <div class="w1220">
-            <img src="./images/logo.png" alt />
+            <img v-if="serInfo.enterpriseInfo" :src="serInfo.topPic" alt />
           </div>
         </el-row>
         <el-row class="menu">
           <ul class="w1220">
             <li v-for="(item, index) in navData" :key="index"><a href="javascript:void(0)"  @click="goAnchor('#anchor-'+index)">{{item}}</a></li>
-            <!-- <li>
-              <a href="#profile">企业介绍</a>
-            </li>
-            <li>
-              <a href="#proCase">产品案例</a>
-            </li>
-            <li>
-              <a href="#honor">资质荣誉</a>
-            </li>
-            <li>
-              <a href="#serCase">服务案例</a>
-            </li>
-            <li>
-              <a href="#evaluation">交易评价</a>
-            </li> -->
-            <a>
+            <!-- <a>
               <i class="el-icon-star-off"></i>收藏服务商
-            </a>
+            </a> -->
           </ul>
         </el-row>
       </div>
       <!-- 轮播图 -->
-      <HeaderCarousel :bannerHeight="bannerHeight" :imgUrls="imgUrls"></HeaderCarousel>
+      <HeaderCarousel :imgUrls="serInfo.headPicList"></HeaderCarousel>
       <!-- 企业介绍 -->
       <a class="afixed" href name="profile" id="anchor-1"></a>
       <el-row class="profile-wrap">
         <TitleService title="企业介绍" />
         <el-row class="profile" :gutter="30">
-          <el-col :span="11">
-            <img src="./images/techsun.png" alt />
+          <img v-for="item in serInfo.introducePicList" :key="item.id" :src="item.idView" alt="">
+          <!-- <el-col :span="11">
+            <img :src="serInfo.introducePicList[0]" alt />
           </el-col>
           <el-col :span="13">
-            <h1>天臣集团</h1>
+            <h1>{{serInfo.enterpriseInfo.enterpriseName}}</h1>
             <p>天臣集团创立于1999年，由天臣防伪、天臣控股等8家公司组成，总部位于上海，产业布局跨北京、深圳、长沙、成都等地区，集团经营领域涉足防伪溯源、特种包装材料、人工智能和新能源四大高科技产业。其中，防伪产业历经20年专注发展，拥有国内外专利100多项，具有强大的防伪溯源解决方案能力，是国内防伪领域知名品牌企业。</p>
             <p>天臣集团致力于为客户提供特种包装和防伪溯源整体解决方案，是贵州茅台酒19年来三代防伪溯源系统供应商，是公安部居民身份证、公安部全国警官证、四川五粮液防伪溯源、法国轩尼诗防伪溯源、剑南春、广西中烟等诸多国内外著名品牌和机构的长期合作伙伴。</p>
             <p>一路风雨、一路艰辛、随客户同成长、用防伪正天下 !</p>
-          </el-col>
+          </el-col> -->
         </el-row>
       </el-row>
       <!-- 产品案例 -->
@@ -57,34 +61,7 @@
       <div class="w1220">
         <TitleService title="产品案例" />
         <el-row class="case-wrap" :gutter="20">
-          <el-col :span="6">
-            <div>
-              <img src="./images/case1.png" alt="产品案例" />
-              <p>贵州茅台酒防伪溯源</p>
-              <p>RFID方位胶帽</p>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div>
-              <img src="./images/case2.png" alt="产品案例" />
-              <p>法国轩尼诗防伪溯源</p>
-              <p>3D云膜+RFID+二维码标签</p>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div>
-              <img src="./images/case3.png" alt="产品案例" />
-              <p>金谷醇全印模包装</p>
-              <p>光刻猫眼+模压全息</p>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div>
-              <img src="./images/case4.png" alt="产品案例" />
-              <p>四川五粮液防伪标签</p>
-              <p>RFID防伪标签</p>
-            </div>
-          </el-col>
+          <img v-for="item in serInfo.productPicList" :key="item.id" :src="item.idView" alt="">
         </el-row>
       </div>
       <!-- 资质荣誉 -->
@@ -94,25 +71,9 @@
           <TitleService title="资质荣誉" />
           <div class="honor-swiper">
             <ul class="honor" ref="carousel">
-              <li>
-                <img src="./images/honour1.png" alt />
-                <p>茅台酒优秀供方</p>
-              </li>
-              <li>
-                <img src="./images/honour2.png" alt />
-                <p>2009福布斯中国潜力企业</p>
-              </li>
-              <li>
-                <img src="./images/honour3.png" alt />
-                <p>中国防伪行业协会常务理事单位</p>
-              </li>
-              <li>
-                <img src="./images/honour4.png" alt />
-                <p>国家高新企业</p>
-              </li>
-              <li>
-                <img src="./images/honour5.png" alt />
-                <p>中国防伪行业协会定点单位</p>
+              <li v-for="item in serInfo.honorPicList" :key="item.id">
+                <img :src="item.idView" alt="荣誉">
+                <!-- <p>{{item.title}}</p> -->
               </li>
             </ul>
           </div>
@@ -125,14 +86,30 @@
           <el-col :span="12">
             <el-row class="cn-top">
               <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>天臣集团</el-breadcrumb-item>
+                <el-breadcrumb-item style="cursor:pointer;" :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="serInfo.enterpriseInfo">{{serInfo.enterpriseInfo.enterpriseName}}</el-breadcrumb-item>
               </el-breadcrumb>
               <p>实力&amp;信用</p>
             </el-row>
             <el-row class="cn-main">
               <el-row class="nums">
                 <el-col :span="6">
+                  <p>{{serInfo.totalTransaction}}</p>
+                  <p>交易总额</p>
+                </el-col>
+                <el-col :span="6">
+                  <p>{{serInfo.transactionScore}}</p>
+                  <p>交易评分</p>
+                </el-col>
+                <el-col :span="6">
+                  <p>{{serInfo.winPercentage}}%</p>
+                  <p>中标转化率</p>
+                </el-col>
+                <el-col :span="6">
+                  <p>{{serInfo.winNums}}</p>
+                  <p>中标总次数</p>
+                </el-col>
+                <!-- <el-col :span="6">
                   <p>￥38499</p>
                   <p>交易</p>
                 </el-col>
@@ -147,23 +124,7 @@
                 <el-col :span="6">
                   <p>￥38499</p>
                   <p>交易</p>
-                </el-col>
-                <el-col :span="6">
-                  <p>￥38499</p>
-                  <p>交易</p>
-                </el-col>
-                <el-col :span="6">
-                  <p>￥38499</p>
-                  <p>交易</p>
-                </el-col>
-                <el-col :span="6">
-                  <p>￥38499</p>
-                  <p>交易</p>
-                </el-col>
-                <el-col :span="6">
-                  <p>￥38499</p>
-                  <p>交易</p>
-                </el-col>
+                </el-col> -->
               </el-row>
               <el-row class="txts">
                 <el-col :span="8">
@@ -178,31 +139,31 @@
                       <i class="el-icon-success"></i>企业认证
                     </span>
                     <span>
-                      <i class="el-icon-success"></i>企业认证
+                      <i class="el-icon-success"></i>资金账户
                     </span>
                   </div>
                   <div>
-                    <b>身份认证</b>
+                    <b>账号安全</b>
                     <span>
-                      <i class="el-icon-success"></i>企业认证
-                    </span>
-                    <span>
-                      <i class="el-icon-success"></i>企业认证
+                      <i class="el-icon-success"></i>手机绑定
                     </span>
                   </div>
                   <div>
-                    <b>身份认证</b>
+                    <b>诚信保证</b>
                     <span>
-                      <i class="el-icon-success"></i>企业认证
+                      <i class="el-icon-success"></i>保证完成
                     </span>
                     <span>
-                      <i class="el-icon-success"></i>企业认证
+                      <i class="el-icon-success"></i>保证售后
+                    </span>
+                    <span>
+                      <i class="el-icon-success"></i>保证原创
                     </span>
                   </div>
-                  <p>
+                  <!-- <p>
                     近一个月退款率：
                     <span>0.00%</span>
-                  </p>
+                  </p> -->
                 </el-col>
               </el-row>
             </el-row>
@@ -215,30 +176,33 @@
               <el-col class="cn-left" :span="9">
                 <div>
                   <div>
-                    <img src="./images/logo1.png" alt />
+                    <img v-if="serInfo.enterpriseInfo" :src="serInfo.enterpriseInfo.logoUrl" alt />
                   </div>
-                  <el-button type="primary">雇佣TA为我服务</el-button>
-                  <br />
-                  <el-button type="primary" plain>雇佣TA为我服务</el-button>
+                  <router-link :to="{ path: '/release' }">
+                    <el-button type="primary">立即发布</el-button>
+                  </router-link>
+                  <!-- <br />
+                  <el-button type="primary" plain>雇佣TA为我服务</el-button> -->
                 </div>
               </el-col>
               <el-col class="cn-right" :span="15">
-                <h1>上海天臣集团</h1>
+                <h1 v-if="serInfo.enterpriseInfo">{{serInfo.enterpriseInfo.enterpriseName}}</h1>
                 <div class="rating">
                   <b>服务等级</b>
                   <span>
                     <i class="el-icon-star-on"></i>
                     <i class="el-icon-star-on"></i>
                     <i class="el-icon-star-on"></i>
+                    <i class="el-icon-star-on"></i>
+                    <i class="el-icon-star-on"></i>
                   </span>
                 </div>
                 <div class="label">
-                  <b>技能标签</b>
-                  <span>包装设计</span>
-                  <span>标签设计</span>
+                  <b>企业类型</b>
+                  <span v-if="serInfo.clientUserDTO">{{serInfo.clientUserDTO.userTypeName}}</span>
                 </div>
-                <p class="address">上海市松江区光华路509号</p>
-                <p class="slogan">成为全球防伪智能包装引领者</p>
+                <p class="address" v-if="serInfo.enterpriseInfo">{{serInfo.enterpriseInfo.enterpriseAddress}}</p>
+                <p class="slogan" v-if="serInfo.enterpriseInfo">{{serInfo.enterpriseInfo.enterpriseDesc}}</p>
               </el-col>
             </el-row>
           </el-col>
@@ -251,64 +215,17 @@
           <TitleService title="服务案例" />
           <div class="swiper">
             <ul ref="carousel1">
-              <li>
-                <img src="./images/service1.png" alt />
+              <li v-for="item in serCase" :key="item.id">
+                <img :src="item.imgUrl" alt />
                 <div class="infos">
-                  <h1>云膜包装</h1>
-                  <p>服务类型：3D云膜防伪包装</p>
-                  <p>服务客户：九和堂</p>
+                  <h1>{{item.demandTitle}}</h1>
+                  <p>服务类型：{{item.demandTypeDesc}}</p>
+                  <p>服务客户：{{item.custName}}</p>
                 </div>
                 <div class="price">
-                  <img src="./images/logo2.png" alt />天臣集团
-                  <span>￥38499</span>
-                </div>
-              </li>
-              <li>
-                <img src="./images/service2.png" alt />
-                <div class="infos">
-                  <h1>云膜包装</h1>
-                  <p>服务类型：3D云膜防伪包装</p>
-                  <p>服务客户：九和堂</p>
-                </div>
-                <div class="price">
-                  <img src="./images/logo2.png" alt />天臣集团
-                  <span>￥38499</span>
-                </div>
-              </li>
-              <li>
-                <img src="./images/service3.png" alt />
-                <div class="infos">
-                  <h1>云膜包装</h1>
-                  <p>服务类型：3D云膜防伪包装</p>
-                  <p>服务客户：九和堂</p>
-                </div>
-                <div class="price">
-                  <img src="./images/logo2.png" alt />天臣集团
-                  <span>￥38499</span>
-                </div>
-              </li>
-              <li>
-                <img src="./images/service4.png" alt />
-                <div class="infos">
-                  <h1>云膜包装</h1>
-                  <p>服务类型：3D云膜防伪包装</p>
-                  <p>服务客户：九和堂</p>
-                </div>
-                <div class="price">
-                  <img src="./images/logo2.png" alt />天臣集团
-                  <span>￥38499</span>
-                </div>
-              </li>
-              <li>
-                <img src="./images/service5.png" alt />
-                <div class="infos">
-                  <h1>云膜包装</h1>
-                  <p>服务类型：3D云膜防伪包装</p>
-                  <p>服务客户：九和堂</p>
-                </div>
-                <div class="price">
-                  <img src="./images/logo2.png" alt />天臣集团
-                  <span>￥38499</span>
+                  <img v-if="serInfo.enterpriseInfo" :src="serInfo.enterpriseInfo.logoUrl" alt="公司图片" />
+                  <p v-if="serInfo.enterpriseInfo">{{serInfo.enterpriseInfo.enterpriseName}}</p>
+                  <span>￥{{item.capitalCount}}</span>
                 </div>
               </li>
             </ul>
@@ -327,18 +244,16 @@
             <table>
               <tbody>
                 <tr>
+                  <td><img class="icon" src="./images/appraise_icon.png" alt/>评论</td>
                   <td>
-                    <img class="icon" src="./images/appraise_icon.png" alt/>评分
+                    <b>平均好评率：<span>{{serScores.goodPercentage}}%</span></b>
+                    <div class="pt5">共有{{total}}个任务被评价</div>
                   </td>
-                  <td>
-                    <b>平均好评率：<span>100.00%</span></b>
-                    <div class="pt5">共有1个任务被评价</div>
-                  </td>
-                  <td>
+                  <td v-if="serScores">
                     <b>平均任务质量</b>
                     <div>
                       <el-rate
-                        v-model="value"
+                        v-model="serScores.quality"
                         disabled
                         show-score
                         text-color="#ff9900"
@@ -346,11 +261,11 @@
                       </el-rate>
                     </div>
                   </td>
-                  <td>
+                  <td v-if="serScores">
                     <b>平均响应速度</b>
                     <div>
                       <el-rate
-                        v-model="value"
+                        v-model="serScores.speed"
                         disabled
                         show-score
                         text-color="#ff9900"
@@ -358,11 +273,11 @@
                       </el-rate>
                     </div>
                   </td>
-                  <td>
+                  <td v-if="serScores">
                     <b>平均服务态度</b>
                     <div>
                       <el-rate
-                        v-model="value"
+                        v-model="serScores.service"
                         disabled
                         show-score
                         text-color="#ff9900"
@@ -377,28 +292,29 @@
           <div class="e-body">
             <table>
               <tbody>
-                <tr>
+                <tr v-for="item in serComment" :key="item.id">
                   <td>
                     <div class="r1 clearfix">
                       <div class="fl">
+                        <template ></template>
                         <el-rate
-                          v-model="value"
+                          :value= "Number(((item.quality+item.speed+item.service)/3).toFixed(2))"
                           disabled
                           show-score
                           text-color="#ff9900"
                           score-template="{value}分">
                         </el-rate>
                       </div>
-                      <div class="fr money">￥20000.00</div>
+                      <div class="fr money">￥{{item.capitalCount}}</div>
                     </div>
                     <div class="r1 clearfix">
                       <div class="fl username"></div>
                     </div>
                     <div class="r1 clearfix">
-                      <div class="fl time">2019-06-06 14:26:31</div>
-                      <div class="fr cat">保温杯外观设计</div>
+                      <div class="fl time">{{item.createTime}}</div>
+                      <div class="fr cat">{{item.demandTitle}}</div>
                     </div>
-                    <p>久形团队在外观设计方面水平极高，初稿出得很快，也不需要修改什么，工作效率高，领导很满意，感谢！</p>
+                    <p>{{item.comment}}</p>
                   </td>
                 </tr>
               </tbody>
@@ -406,9 +322,10 @@
             <el-pagination
               background
               layout="prev, pager, next"
-              :page-size="1"
-              :total="5">
-              <!-- @current-change="handleCurrentChange"> -->
+              :page-size="serCaseParams.pageSize"
+              :current-page.sync="serCaseParams.pageNum"
+              :total="total"
+              @current-change='handleCurrentChange'>
             </el-pagination>
           </div>
         </div>
@@ -432,19 +349,30 @@ export default {
   name: "",
   data() {
     return {
+      homeImg: require('@/assets/images/home_nor.png'),
       navData: ['首页', '企业介绍', '产品案例', '资质荣誉', '服务案例', '交易评价'],
-      value: 5,
       // 轮播数据
-      bannerHeight: "460",
-      imgUrls: [
-        { id: 1, idView: require("./images/banner1.png") },
-        { id: 2, idView: require("./images/banner2.png") }
-      ],
       honorTrans: 0, //资质荣誉位移距离
-      serCaseTrans: 0 //服务案例位移距离
+      serCaseTrans: 0, //服务案例位移距离
+      serInfo: '', //服务商信息
+      serCase: '', //服务案例信息
+      serComments: '', //服务评价
+      serScores: '', //服务评分
+      serComment: '', //服务评价
+      total: 0, //评论总条数
+      serCaseParams: {
+        pageNum: 1,
+        pageSize: 5,
+        userId: this.$route.params.id,
+      }
     };
   },
   methods: {
+    //切换页码
+    handleCurrentChange(val) {
+      this.serCaseParams.pageNum = val;
+      this.reqServiceComment()
+    },
     goAnchor(selector) {
       var anchor = this.$el.querySelector(selector)
       document.documentElement.scrollTop = anchor.offsetTop
@@ -483,13 +411,42 @@ export default {
             "translateX(" + this.serCaseTrans + "px)";
         }
       }
-    }
+    },
+    reqService() {
+      const data = {
+        userId: this.$route.params.id
+      }
+      this.$api.demand.reqService(data).then(res => {
+        this.serInfo = res
+      })
+    },
+    reqServiceCase() {
+      const data = {
+        userId: this.$route.params.id
+      }
+      this.$api.demand.reqServiceCase(data).then(res => {
+        this.serCase = res.datas.records
+      })
+    },
+    reqServiceComment() {
+      this.$api.demand.reqServiceComment(this.serCaseParams).then(res => {
+        this.serComment = res.datas.records
+        this.serComments = res.datas
+        this.total = res.datas.total
+        this.serScores = res.demandCommentDTO
+      })
+    },
+  },
+  mounted() {
+    this.reqService();
+    this.reqServiceCase();
+    this.reqServiceComment();
   },
   components: {
     FooterGuide,
     HeaderCarousel,
     TitleService,
-    Servicer
+    Servicer,
   }
 };
 </script>
@@ -514,17 +471,39 @@ export default {
 @import "@/assets/style/vars.scss";
 .el-main {
   background-color: #f8f8f8;
+  #top{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height:30px;
+    z-index: 99;
+    background:#eee;
+    color:#666;
+    font:12px/30px "";
+    .el-icon-my-home{
+      width:14px;
+      height:14px;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-position: center 0;
+      background-size:100%;
+      line-height:30px;
+      vertical-align:text-bottom;
+    }
+    a{font:12px/30px "";vertical-align: baseline;}
+  }
   .afixed {
     position: relative;
-    top: -120px;
+    top: -150px;
     height: 0;
     display: block;
   }
   .top-wrap {
     position: fixed;
     left: 0;
-    top: 0;
-    z-index: 9;
+    top: 30px;
+    z-index: 99;
     width: 100%;
     .top {
       background: linear-gradient(
@@ -567,11 +546,16 @@ export default {
     }
   }
   .profile-wrap {
-    padding: 0 10% 70px;
+    // padding: 0 10% 70px;
     margin: 0 auto;
     background-color: #f5f5f5;
+    overflow: hidden;
     .profile {
-      padding-top: 50px;
+      // padding-top: 50px;
+      >img {
+        display: block;
+        margin: 0 auto;
+      }
       .el-col {
         overflow: hidden;
         img {
@@ -595,6 +579,11 @@ export default {
   }
   .case-wrap {
     margin-bottom: 70px;
+    overflow: hidden;
+    >img {
+      display: block;
+      margin: 0 auto;
+    }
     .el-col {
       > div {
         padding: 9px;
@@ -683,13 +672,15 @@ export default {
       min-height: 350px;
       .nums {
         .el-col {
-          padding-bottom: 25px;
+          padding-top: 20px;
+          padding-bottom: 40px;
           text-align: center;
           font-size: 14px;
           color: #464646;
           p:first-child {
             font-size: 18px;
             color: #4830fc;
+            line-height: 2;
           }
         }
       }
@@ -713,18 +704,18 @@ export default {
             padding-bottom: 20px;
             b {
               display: inline-block;
-              width: 80px;
+              width: 70px;
               font-size: 14px;
               font-weight: normal;
             }
             span {
               display: inline-block;
-              padding: 3px 10px;
+              padding: 3px 8px;
               width: 88px;
               background: rgba(248, 250, 254, 1);
               border: 1px solid rgba(3, 155, 229, 1);
               border-radius: 6px;
-              margin-right: 5px;
+              margin-right: 3px;
               i {
                 font-size: 12px;
                 color: rgba(3, 155, 229, 1);
@@ -750,8 +741,10 @@ export default {
             height: 168px;
             line-height: 168px;
             border: solid 1px #dcdcdc;
+            overflow: hidden;
             img {
               vertical-align: middle;
+              max-width: 100%;
             }
           }
         }
@@ -828,7 +821,7 @@ export default {
         position: relative;
         box-sizing: border-box;
         li {
-          text-align: left;
+          text-align: center;
           float: left;
           width: 290px;
           // height: 380px;
@@ -839,9 +832,12 @@ export default {
           box-shadow: 2px 2px 5px 0px rgba(107, 107, 107, 0.3);
           img {
             height: 214px;
+            max-width: 100%;
+            width: 100%;
           }
           .infos {
             padding-left: 20px;
+            text-align: left;
             h1 {
               font-size: 18px;
               font-weight: normal;
@@ -851,9 +847,13 @@ export default {
               font-size: 12px;
               color: #7e7e7e;
               padding-bottom: 13px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
           }
           .price {
+            text-align: left;
             border-top: solid 1px #e9e9e9;
             padding-left: 22px;
             font-size: 12px;
@@ -862,10 +862,18 @@ export default {
             line-height: 50px;
             position: relative;
             img {
-              vertical-align: middle;
+              vertical-align: top;
               width: 22px;
               height: 22px;
               margin-right: 9px;
+              margin-top: 14px;
+            }
+            p {
+              display: inline-block;
+              width: 60%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
             span {
               font-size: 18px;

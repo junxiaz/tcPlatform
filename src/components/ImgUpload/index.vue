@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-11 17:08:27
+ * @LastEditTime: 2020-05-12 13:13:00
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \tc_platform\src\components\ImgUpload\index1.vue
+ -->
 <template>
   <div class="imgUpload">
     <el-upload
@@ -46,18 +54,6 @@ export default {
           this.$emit('takeUrl', this.resUrl)
         }
       }
-    },
-    // 将base64格式转成二进制流
-    dataURItoBlob(dataURI) {
-      var byteString = atob(dataURI.split(',')[1]);
-      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-      }
-      console.log(ab)
-      return new Blob([ab], {type: mimeString});
     },
   },
   watch:{

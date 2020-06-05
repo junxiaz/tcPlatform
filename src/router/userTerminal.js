@@ -50,7 +50,7 @@ let userTerminal = [
     { path: '/order/:id', component: rb => require(['../pages/Order/Order.vue'], rb) },
     { path: '/register', component: rb => require(['../pages/Register/Register.vue'], rb) },
     { path: '/comment', component: rb => require(['../pages/Comment/Comment.vue'], rb) },
-    { path: '/service', component: rb => require(['../pages/Service/Service.vue'], rb) },
+    { path: '/service/:id', component: rb => require(['../pages/Service/Service.vue'], rb) },
 ]
 
 export {

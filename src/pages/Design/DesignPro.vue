@@ -1,6 +1,6 @@
 <template>
   <el-container direction="vertical">
-    <HeaderGuide />
+    <!-- <HeaderGuide /> -->
     <el-main>
       <div class="design-detail-wrap">
         <div class="w1220">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </el-main>
-    <FooterGuide />
+    <!-- <FooterGuide /> -->
   </el-container>
 </template>
 

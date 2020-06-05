@@ -35,15 +35,15 @@
             <el-form-item>
               <el-button type="text">忘记密码？</el-button>
             </el-form-item>
-            <el-form-item>
+            <!-- <el-form-item>
               <el-checkbox ref="checkRule" v-model="registerForm.checkRule">我已阅读并同意</el-checkbox>
               <el-button type="text" id="tips">《天臣产业互联网平台》</el-button>
-            </el-form-item>
-            <el-form-item>
+            </el-form-item> -->
+            <el-form-item style="margin-top:56px">
               <el-button type="primary" @click="loginOrRegister('registerForm')">提交</el-button>
             </el-form-item>
           </el-form>
-        </el-tab-pane> 
+        </el-tab-pane>
       </el-tabs>
     </div>
 </template>
@@ -76,7 +76,8 @@ export default {
         account: '',
         pwd: '',
         userType: '',
-        checkRule: false,
+        // checkRule: false,
+        checkRule: true,
       },
       rules: {
         account: [
@@ -92,10 +93,10 @@ export default {
       },
     };
   },
-  methods: {   
+  methods: {
     initActive() {
       this.activeName = this.$route.name
-    }, 
+    },
     handleClick(tab, event) {
       this.$router.replace('/login/'+ this.activeName)
     },

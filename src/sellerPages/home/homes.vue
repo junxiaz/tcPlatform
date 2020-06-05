@@ -48,8 +48,9 @@
 
     <!-- 我的订单 -->
     <div class="myOrder bg sell-padding mt20">
-      <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer"
-              @toPath="handleToPath('/seller/myOrder')"/>
+      <!-- <vnotes title="我的订单" subtitle="全部订单 >" color="#409efe" cursor="pointer"
+              @toPath="handleToPath('/seller/myOrder')"/> -->
+      <vnotes title="我的订单"/>
 
 
       <!-- <el-table :data="tableData.slice((currentPage-1)*params.pageSize,currentPage*params.pageSize)" border style="width: 100%"  class="mt20 myTable"
@@ -85,21 +86,17 @@
         </el-col>
       </el-row>       -->
       <el-row class="order-items">
-        <el-col :span="6" align="center">
-          <p>{{userInfo.checkDemandCount}}</p>
-          <p>审核中</p>
+        <el-col :span="8" align="center">
+          <p>{{userInfo.totalDemandCount}}</p>
+          <p>发布总数</p>
         </el-col>
-        <el-col :span="6" align="center">
+        <el-col :span="8" align="center">
           <p>{{userInfo.tenderDemandCount}}</p>
-          <p>投标中</p>
+          <p>投标总数</p>
         </el-col>
-        <el-col :span="6" align="center">
-          <p>{{userInfo.selectDemandCount}}</p>
-          <p>选标中</p>
-        </el-col>
-        <el-col :span="6" align="center">
-          <p>{{userInfo.produceDemandCount}}</p>
-          <p>工作中</p>
+        <el-col :span="8" align="center">
+          <p>{{userInfo.winCount}}</p>
+          <p>中标总数</p>
         </el-col>
       </el-row>
     </div>

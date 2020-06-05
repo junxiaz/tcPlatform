@@ -16,11 +16,11 @@
                       <el-col :span="16">
                         <el-row class="adv">
                           <el-col :span="24">
-                            <div><span class="font_family icon-goutong"></span>沟通</div>
+                            <div><span class="font_family icon-goutong"></span>3D云膜</div>
                             <p>3D云膜是天臣研发的一种集微光学、微纳米加工及微缩印刷于一体，兼具包装和防伪功能的全视裸眼3D薄膜，通过在薄膜上形成微光学陈列结构，实现动态、立体图文效果。视觉冲击力强，效果新颖独特，易于识别，防伪难度高，具有自主知识产权。</p>
                           </el-col>
                           <el-col :span="24">
-                            <div><span class="font_family icon-fuwubaozhang"></span>服务保障</div>
+                            <div><span class="font_family icon-fuwubaozhang"></span>云膜技术参数</div>
                             <p>材料厚度：50-100μm<br/>立体景深：0-15mm<br/>材料底色：可根据客户需求定制<br/>底部图文：可定制成各种LOGO、汉字、英文、数字等。</p>
                           </el-col>
                         </el-row>
@@ -158,6 +158,7 @@ export default {
         .advs {
           .adv {
             .el-col {
+              margin-top: 10px;
               min-height: 107px;
               div {
                 font-size: 20px;
@@ -173,6 +174,7 @@ export default {
                 width: 678px;
                 font-size: 16px;
                 color: #474747;
+                line-height: 2;
               }
             }
           }

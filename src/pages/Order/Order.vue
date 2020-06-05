@@ -55,7 +55,7 @@
                 <el-col :span="20">{{demand.demandTypeDesc}}</el-col>
               </el-row>
               <el-row class="row">
-                <el-button type="primary" :disabled="demand.demandStatus!=3" plain @click="tenderDemand(demand.id)">立即投标</el-button>
+                <el-button type="primary" :disabled="demand.demandStatus!=3 && demand.demandStatus!=1" plain @click="tenderDemand(demand.id)">立即投标</el-button>
                 <router-link to="/release">
                   <el-button type="primary" plain>我有类似需求</el-button>
                 </router-link>
@@ -144,6 +144,7 @@ export default {
               type: 'success',
               message: "恭喜您，投标成功！"
             });
+            this.reqDemand();
           })
         } else {
           this.$message.warning('请勿投自己的标')

@@ -4,10 +4,11 @@
     <el-main>
       <div class="w1220">
         <el-row v-if="form.userType == 2" class="title">设计人员</el-row>
-        <el-row v-else class="title">企业/终端客户/创客认证</el-row>
+        <el-row v-if="form.userType == 3" class="title">青年创客</el-row>
+        <el-row v-else class="title">终端客户/企业认证</el-row>
         <el-divider></el-divider>
         <el-form ref="form" class="register" :rules="rules" :model="form" label-width="140px">
-          <el-form-item v-if="form.userType == 2" label="认证类型">
+          <el-form-item v-if="form.userType == 2 || form.userType == 3" label="认证类型">
             <el-radio-group v-model="form.regType">
               <el-radio :label="0">个人认证</el-radio>
               <el-radio :label="1">企业认证</el-radio>
@@ -20,8 +21,16 @@
             <el-form-item label="身份证号码" prop="personForm.idNumber">
               <el-input v-model="form.personForm.idNumber"></el-input>
             </el-form-item>
-            <el-form-item label="个人头像">
+            <!-- <el-form-item label="个人头像">
               <ImgUpload @takeUrl="takeUrlPerson"></ImgUpload>
+            </el-form-item> -->
+            <el-form-item label="个人LOGO">
+              <ele-upload-image
+                :action="imgUploadUrl"
+                v-model="form.personForm.personLogo"
+                :responseFn="handleResponse"
+                :size="100"
+              ></ele-upload-image>
             </el-form-item>
           </template>
           <template v-else>
@@ -34,11 +43,28 @@
             <el-form-item label="企业描述" prop="companyForm.enterpriseDesc">
               <el-input v-model="form.companyForm.enterpriseDesc"></el-input>
             </el-form-item>
-            <el-form-item label="企业logo">
+            <!-- <el-form-item label="企业logo">
               <ImgUpload @takeUrl="takeUrlLogo"></ImgUpload>
             </el-form-item>
             <el-form-item label="企业图片">
               <ImgUpload @takeUrl="takeUrlImg"></ImgUpload>
+            </el-form-item> -->
+
+            <el-form-item label="企业LOGO">
+              <ele-upload-image
+                :action="imgUploadUrl"
+                v-model="form.companyForm.logoUrl"
+                :responseFn="handleResponse"
+                :size="100"
+              ></ele-upload-image>
+            </el-form-item>
+            <el-form-item label="企业图片">
+              <ele-upload-image
+                :action="imgUploadUrl"
+                v-model="form.companyForm.imgUrl"
+                :responseFn="handleResponse"
+                :size="100"
+              ></ele-upload-image>
             </el-form-item>
             <el-form-item label="企业地址">
               <el-input v-model="form.companyForm.enterpriseAddress"></el-input>
@@ -66,13 +92,14 @@
 <script>
 import base from '@/api/base'; // 导入接口域名列表
 import axios from 'axios';
-import ImgUpload from "@/components/ImgUpload";
+import EleUploadImage from 'vue-ele-upload-image'
 import FooterGuide from "@/components/FooterGuide/FooterGuide";
 import IndexHeader from "@/components/HeaderGuide/IndexHeader";
 export default {
   name: "Register",
   data() {
     return {
+      imgUploadUrl: base.sq+'/upload/uploadPic',
       form: {
         userType: '',
         regType: 1,
@@ -81,7 +108,7 @@ export default {
           token: sessionStorage.getItem('token'),
           userName: '',
           idNumber: '',
-          file: '',
+          personLogo: '',
         },
         companyForm: {
           userId: sessionStorage.getItem('userId'),
@@ -93,8 +120,8 @@ export default {
           "enterpriseContecter": "", //联系人
           "enterpriseTel": "",  //联系方式
           "enterpriseUrl": "",  //企业官网
-          "file": "", //企业图片
-          "logoFile": "" //企业Logo
+          "imgUrl": "", //企业图片
+          "logoUrl": "" //企业Logo
         },
       },
       rules: {
@@ -121,6 +148,10 @@ export default {
     };
   },
   methods: {
+    handleResponse(response, file, fileList) {
+      // 根据响应结果, 设置 URL
+      return response.picUrl
+    },
     // 接收个人Logo
     takeUrlPerson(param) {
       this.form.personForm.file = param
@@ -211,7 +242,7 @@ export default {
   components: {
     IndexHeader,
     FooterGuide,
-    ImgUpload
+    EleUploadImage
   }
 };
 </script>

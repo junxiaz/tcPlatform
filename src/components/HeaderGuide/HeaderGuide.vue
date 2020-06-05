@@ -132,7 +132,7 @@ export default {
   width:100%;
   overflow: hidden;
   background-color: #424242;
-  opacity: .9;
+  // opacity: .9;
   line-height: 60px;
   position: fixed;
   top: 0;
@@ -142,7 +142,8 @@ export default {
     height: 100%;
     display: inline-block;
     padding: 0 20px;
-    background-color: rgb(255, 249, 250);
+    // background-color: rgb(255, 249, 250);
+    background-color: #fff;
     img {
       vertical-align: middle;
     }

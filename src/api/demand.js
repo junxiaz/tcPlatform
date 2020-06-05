@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-04 15:40:39
+ * @LastEditTime: 2020-05-14 10:29:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tc_platform\src\api\demand.js
+ */
 /**
  * 用户模块接口列表
  */
@@ -64,7 +72,34 @@ const demand = {
     // 新增留言--用户留言
     addMessage(params) {
         return axios.post(`${base.sq}/other/addMessage`, params);
-    }
+    },
+
+    // 获取服务商详情
+    reqService(params) {
+      return axios.post(`${base.sq}/enterpeiseDetail/detail`, params);
+    },
+
+    // 获取服务商详情--服务案例
+    reqServiceCase(params) {
+      return axios.post(`${base.sq}/enterpeiseDetail/demandList`, params);
+    },
+
+    // 获取服务商详情--服务评价
+    reqServiceComment(params) {
+      return axios.post(`${base.sq}/enterpeiseDetail/commentList`, params);
+    },
+    // 获取服务商详情--推荐服务商
+    reqRecommendList(params) {
+      return axios.post(`${base.sq}/enterpeiseDetail/recommendList`, params);
+    },
+    //商家端-添加评论
+    addDemandComment(params) {
+      return axios.post(`${base.sq}/demandComment/add`, params);
+    },
+    // 商家端--获取我的投标列表
+    reqMyListTenderDemand(params) {
+      return axios.post(`${base.sq}/tenderDemand/listTendDemand`, params);
+    },
 }
 
 export default demand;

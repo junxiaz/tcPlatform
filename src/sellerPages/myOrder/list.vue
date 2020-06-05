@@ -55,7 +55,7 @@
       <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#e0e9ff'}" class="myTable">
 
         <el-table-column type="index" :index="indexMethod" width="50" label="序号" align="center" fixed="left"></el-table-column>
-        <el-table-column prop="demandTitle" label="需求标题"  align="center" min-width="120"></el-table-column>
+        <el-table-column prop="demandTitle" label="需求标题"  align="center" min-width="220"></el-table-column>
         <el-table-column prop="demandTypeDesc" label="需求性质"  align="center"></el-table-column>
         <el-table-column prop="provinceName" label="需求范围"  align="center"></el-table-column>
         <el-table-column prop="capitalCount" label="项目预算"  align="center"></el-table-column>
@@ -63,17 +63,18 @@
         <el-table-column prop="depositCount" label="托管资金"  align="center"></el-table-column>
         <el-table-column prop="tenderPlan" label="投标数目" align="center" width="110"></el-table-column>  
         <!-- <el-table-column prop="filUrl" label="filUrl"  align="center"></el-table-column> -->
-        <el-table-column prop="originatorId" label="发起人"  align="center"></el-table-column>
+        <el-table-column prop="originatorName" label="发起人"  align="center" min-width="300"></el-table-column>
         <!-- <el-table-column prop="otherDesc" label="其他说明"  align="center"></el-table-column> -->
         <el-table-column prop="tenderReal" label="已投标数"  align="center"></el-table-column>
-        <el-table-column prop="winTenderId" label="中标人"  align="center"></el-table-column>
+        <el-table-column prop="winTenderName" label="中标人"  align="center" min-width="300"></el-table-column>
         <el-table-column prop="startTime" label="创建时间"  align="center" min-width="110"></el-table-column>
         <el-table-column prop="endTime" label="项目周期" align="center" min-width="110"></el-table-column>  
         <el-table-column prop="demandStatusDesc" label="状态" align="center" width="110"></el-table-column>       
-        <el-table-column label="操作" align="center" width="180" fixed="right">
+        <el-table-column label="操作" align="center" width="220" fixed="right">
           <template slot-scope="scope">
             <el-button type="success" :disabled="scope.row.demandStatus != 3" size="mini" @click="checkData(scope.row.id)">选标</el-button>
-            <el-button type="danger" :disabled="scope.row.demandStatus == 5" size="mini" @click="finishData(scope.row.id)">结单</el-button>
+            <el-button type="danger" :disabled="scope.row.demandStatus == 5 || scope.row.demandStatus == 6" size="mini" @click="finishData(scope.row.id)">结单</el-button>
+            <el-button type="danger" :disabled="scope.row.demandStatus == 5?false:true" size="mini" @click="evaluateData(scope.row.id)">评价</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -84,13 +85,14 @@
           <el-pagination background class="myPagination"
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="params.pageSize" :current-page.sync="currentPage"
-            :total="tableData.length">
+            :page-size="params.pageSize" :current-page.sync="params.pageNum"
+            :total="total">
           </el-pagination>
         </el-col>
       </el-row>
 
-      <el-dialog title="投标列表" :visible.sync="dialogTableVisible">
+      <!-- 选标弹框 -->
+      <el-dialog class="dialogTable" title="投标列表" :visible.sync="dialogTableVisible">
         <el-button type="primary" style="margin-bottom: 10px;" size="small" @click="winTenderDemand">选标</el-button>
         <el-table :data="tenderDemand" @selection-change="handleSelectionChange" :header-cell-style="{background:'#e0e9ff'}" :row-style="{background:'#fcfbf7'}">
           <el-table-column type="selection" width="88" align="center"></el-table-column>
@@ -98,6 +100,27 @@
           <el-table-column property="mobile" label="联系电话" width="120"></el-table-column>
           <el-table-column property="userTypeName" label="用户类型"></el-table-column>
         </el-table>
+      </el-dialog>
+
+      <!-- 评价弹框 -->
+      <el-dialog title="发表评价" :visible.sync="evaluateDialogVisible">
+        <el-form :model="evaluateForm" :rules="rulesEvaluate" ref="evaluateForm" label-width="100px">
+          <el-form-item label="评价内容" prop="comment">
+            <el-input type="textarea" v-model="evaluateForm.comment" placeholder="从多个角度评价订单，可以帮助更多需要的人" style="width:450px;"></el-input>
+          </el-form-item>
+          <el-form-item label="任务质量" prop="quality">
+            <el-rate v-model="evaluateForm.quality"></el-rate>
+          </el-form-item>
+          <el-form-item label="响应速度" prop="speed">
+            <el-rate v-model="evaluateForm.speed"></el-rate>
+          </el-form-item>
+          <el-form-item label="服务态度" prop="service">
+            <el-rate v-model="evaluateForm.service"></el-rate>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="danger" size="medium" @click="evaluateSubmit('evaluateForm')">发布</el-button>
+          </el-form-item>
+        </el-form>
       </el-dialog>
     </div>
 </template>
@@ -112,6 +135,7 @@ export default {
   },
   data(){
     return {
+      evaluateDialogVisible: false,//评价弹框
       dialogTableVisible: false,
       demandStatus: '',
       demandType: '',
@@ -120,6 +144,7 @@ export default {
         pageSize:10,
         token: sessionStorage.getItem('token'),
         userId: sessionStorage.getItem('userId'),
+        flag: 2,
         demandStatus: '',
         demandType: '',
         desc: ''
@@ -130,10 +155,35 @@ export default {
       checkDemand: '',
       moreSelect: [], //多选的数据
       searchForm:{},
-      tenderDemand: []
+      tenderDemand: [],
+      evaluateForm: {},
+      evaluateId: '',
+      rulesEvaluate: {
+        comment: [{ required: true, message: '请输入评价内容', trigger: 'blur' },]
+      }
     }
   },
   methods:{
+    evaluateData(id) {
+      this.evaluateDialogVisible = true;
+      this.evaluateForm.demandId = id;
+    },
+
+    evaluateSubmit(formName) {
+      this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$api.demand.addDemandComment(this.evaluateForm).then(res => {
+              this.evaluateDialogVisible = false;
+              this.$message.success('感谢您的评论！')
+              this.initDemand();
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+    },
+
     //表格自定义序号
     indexMethod(index) {
       return (this.currentPage-1)*this.params.pageSize +(index+1) ;
@@ -146,7 +196,8 @@ export default {
 
     //分页
     handleCurrentChange(val){
-      this.currentPage = val;
+      this.params.pageNum = val;
+      this.initDemand()
     },
 
     //搜索
@@ -198,7 +249,7 @@ export default {
     initDemand() {
       this.$api.demand.reqListDemand(this.params).then(res => {
         this.tableData = res.datas.records
-        this.total = res.total
+        this.total = res.datas.total
       })
     },
 
@@ -257,7 +308,7 @@ export default {
 
 <style lang="scss" scoped>
   #myOrder{
-    form.el-form{
+    .el-form.dialogTable{
       .el-form-item{
         margin-right:35px;
 
@@ -265,6 +316,9 @@ export default {
       .el-form-item:last-child{
         margin-right:0px;
       }
+    }
+    .el-rate {
+      margin-top: 10px;
     }
 
   }

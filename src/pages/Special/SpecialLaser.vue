@@ -11,32 +11,11 @@
                   <div class="w1220">
                     <TitleRed title="OUR ADVANTAGE" subTitle="我们的优势" />
                     <el-row :gutter="10">
-                      <el-col :span="6">
-                        <div class="adv-item">
-                          <img src="./imagesLaser/adv_nor1.png" alt="高科技">
-                          <p>高科技</p>
-                          <p>可实现全透明材质，不覆盖底纹</p>
-                        </div>
-                      </el-col>
-                      <el-col :span="6">
-                        <div class="adv-item">
-                          <img src="./imagesLaser/adv_nor2.png" alt="防转移">
-                          <p>高科技</p>
-                          <p>可实现全透明材质，不覆盖底纹</p>
-                        </div>
-                      </el-col>
-                      <el-col :span="6">
-                        <div class="adv-item">
-                          <img src="./imagesLaser/adv_nor3.png" alt="">
-                          <p>高科技</p>
-                          <p>可实现全透明材质，不覆盖底纹</p>
-                        </div>
-                      </el-col>
-                      <el-col :span="6">
-                        <div class="adv-item">
-                          <img src="./imagesLaser/adv_nor4.png" alt="">
-                          <p>高科技</p>
-                          <p>可实现全透明材质，不覆盖底纹</p>
+                      <el-col :span="6" v-for="(item, index) in advs" :key="index">
+                        <div class="adv-item" @mouseover="changeIndex(index)" @mouseleave="changeBackIndex()">
+                          <img :src="hoverIndex == index ? item.hoverSrc : item.src" :alt="item.title">
+                          <p>{{item.title}}</p>
+                          <p>{{item.subTitle}}</p>
                         </div>
                       </el-col>
                     </el-row>
@@ -119,6 +98,25 @@ import Title from "@/components/Title/Title";
 import Servicer from '@/components/Servicer/Servicer';
 export default {
   name: "",
+  data() {
+    return {
+      hoverIndex: 99,
+      advs: [
+        {src: require('./imagesLaser/adv_nor1.png'), hoverSrc: require('./imagesLaser/adv_pre1.png'), title: '高科技', subTitle:'可实现全透明材质，不覆盖底纹'},
+        {src: require('./imagesLaser/adv_nor2.png'), hoverSrc: require('./imagesLaser/adv_pre2.png'), title: '防转移', subTitle:'采用防转移技术，防止被应用于假冒商品'},
+        {src: require('./imagesLaser/adv_nor3.png'), hoverSrc: require('./imagesLaser/adv_pre3.png'), title: '易识别', subTitle:'明显的变色效果，易于真假识别'},
+        {src: require('./imagesLaser/adv_nor4.png'), hoverSrc: require('./imagesLaser/adv_pre4.png'), title: '低成本', subTitle:'明显的变色效果，易于真假识别'},
+      ]
+    }
+  },
+  methods: {
+    changeIndex(index) {
+      this.hoverIndex = index
+    },
+    changeBackIndex() {
+      this.hoverIndex = 99
+    }
+  },
   components: {
     HeaderGuide,
     FooterGuide,
@@ -179,7 +177,13 @@ export default {
         .adv-item {
           background-color: #C8F8F8;
           padding-top: 60px;
-          padding-bottom: 70px;
+          height: 298px;
+          &:hover {
+            background-color: #1BACBD;
+            P {
+              color: #fff!important;
+            }
+          }
           img {
             width: auto;
             height: 90px;
@@ -196,7 +200,7 @@ export default {
             font-size:15px;
             font-weight:bold;
             color:#6C6C6C;
-            line-height:2;
+            line-height:1.5;
           }
         }
       }

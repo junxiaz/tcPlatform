@@ -47,6 +47,7 @@
                 v-model="ruleForm.endDate"
                 type="date"
                 value-format="yyyy-MM-dd"
+                :picker-options="pickerOptions"
                 placeholder="结束日期">
               </el-date-picker>
             </el-form-item>
@@ -91,6 +92,11 @@ export default {
   name: "Release",
   data() {
     return {
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;//如果没有后面的-8.64e7就是不可以选择今天的
+        }
+      },
       ruleForm: {
         demandType: "",
         demandTitle: "",
